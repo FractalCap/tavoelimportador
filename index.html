@@ -32,6 +32,7 @@
     --ok:#1c7a52;
     --warn:#946300;
     --lim:#b3401a;
+    --hot:#d42a1d;--hot-text:#c0261a;--hot-wash:#fff1ef;
     --shadow:0 1px 2px rgba(12,12,13,.04),0 8px 24px -12px rgba(12,12,13,.10);
   }
   @media (prefers-color-scheme:dark){
@@ -43,6 +44,7 @@
       --hair:#232326;--hair-2:#313135;
       --accent:#ffd400;--accent-ink:#0c0c0d;--accent-deep:#d6b53a;--accent-wash:#1e1a05;
       --ok:#4faa7c;--warn:#e0ad3e;--lim:#ef8a5c;
+      --hot:#d42a1d;--hot-text:#ff6b5b;--hot-wash:#2a0f0c;
       --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
     }
   }
@@ -54,6 +56,7 @@
     --hair:#232326;--hair-2:#313135;
     --accent:#ffd400;--accent-ink:#0c0c0d;--accent-deep:#d6b53a;--accent-wash:#1e1a05;
     --ok:#4faa7c;--warn:#e0ad3e;--lim:#ef8a5c;
+    --hot:#d42a1d;--hot-text:#ff6b5b;--hot-wash:#2a0f0c;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
   }
 
@@ -185,8 +188,10 @@
   .hero .veil{position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(100deg,rgba(7,7,8,.94) 0%,rgba(7,7,8,.72) 46%,rgba(7,7,8,.86) 100%)}
   .hero .wrap{position:relative;z-index:2}
-  .hero-inner{padding:104px 0 0}
-  @media(max-width:760px){.hero-inner{padding:64px 0 0}}
+  .hero-inner{padding:104px 32px 0}
+  @media(max-width:760px){.hero-inner{padding:64px 20px 0}}
+  @media(max-width:360px){.hero-inner{padding:64px 14px 0}}
+
   .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.8fr);gap:64px;align-items:center}
   @media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:44px}}
   .hero .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;
@@ -279,6 +284,75 @@
   .st.lim{color:var(--lim);border-color:color-mix(in srgb,var(--lim) 38%,transparent)}
   @keyframes pulse{70%{box-shadow:0 0 0 6px transparent}100%{box-shadow:0 0 0 0 transparent}}
   .hm .in{padding:30px 32px 28px;min-width:0;display:flex;flex-direction:column}
+
+  /* ===== Urgencia: pocas unidades (tarjeta .hm.hot) ===== */
+  .hm.hot{border:2px solid var(--hot);box-shadow:0 24px 60px -30px color-mix(in srgb,var(--hot) 70%,transparent)}
+  .hm.hot::before{background:var(--hot);height:4px;transform:none}
+  .st.hot{top:0;left:0;right:0;border-radius:0;border:0;justify-content:center;padding:11px 12px;gap:10px;
+    background:var(--hot);color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.08em}
+  .st.hot::before{width:8px;height:8px;background:#fff;animation:pulseHot 1.4s infinite}
+  @keyframes pulseHot{0%{box-shadow:0 0 0 0 rgba(255,255,255,.8)}70%{box-shadow:0 0 0 9px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+  .urg{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 18px;padding:14px 16px;
+    background:var(--hot-wash);border:1px solid color-mix(in srgb,var(--hot) 45%,transparent);border-left:5px solid var(--hot)}
+  .urg .ut{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1 1 220px}
+  .urg .ut b{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:var(--hot-text);line-height:1.2;text-transform:uppercase}
+  .urg .ut span{font-size:.9rem;color:var(--text);line-height:1.35}
+  .urg .units{display:flex;gap:5px;flex:none}
+  .urg .units i{width:14px;height:26px;background:var(--hot);display:block;animation:unitBlink 2.6s infinite}
+  .urg .units i:nth-child(2){animation-delay:.15s}.urg .units i:nth-child(3){animation-delay:.3s}
+  .urg .units i:nth-child(4){animation-delay:.45s}.urg .units i:nth-child(5){animation-delay:.6s}
+  @keyframes unitBlink{0%,80%,100%{opacity:1}90%{opacity:.35}}
+  .hm .buy{border:2px solid var(--accent);background:var(--accent-wash);border-top-width:2px}
+  .hm.hot .buy{margin-top:22px;padding:20px}
+  .hm.hot .prices .pl{color:var(--text);font-weight:700;font-size:.72rem}
+  .hm.hot .prices .pp:not(.alt) b{font-size:clamp(2.2rem,4.4vw,2.9rem);font-weight:800;letter-spacing:-.045em;color:var(--text)}
+  .hm.hot .prices .pp:not(.alt) span{font-size:.95rem;font-weight:600}
+  .price-flag{display:inline-flex;align-items:center;gap:6px;flex-basis:100%;width:max-content;max-width:100%;
+    background:var(--accent);color:var(--accent-ink);font-size:.78rem;font-weight:700;padding:5px 10px;letter-spacing:.01em;text-transform:uppercase}
+  .hm.hot .row .q[href*="wa.me"]{padding:15px 22px;font-size:1rem;animation:ctaNudge 3s infinite}
+  .hm.hot .row .q .icon.wa-ic{width:20px;height:20px}
+  @keyframes ctaNudge{0%,86%,100%{transform:none}90%{transform:scale(1.05)}94%{transform:scale(.98)}}
+  .spec-card.hm-feat dt .hot-mini,.hot-mini{display:inline-block;margin-left:8px;background:var(--hot);color:#fff;
+    font-size:.6rem;font-weight:700;letter-spacing:.04em;padding:2px 6px;text-transform:uppercase;vertical-align:1px}
+  .spec-card.hm-feat dd.row-hot{color:var(--accent);font-weight:700}
+  .tag.hot{color:#fff;background:var(--hot);border-color:var(--hot);font-weight:700}
+  @media (prefers-reduced-motion:reduce){.urg .units i,.hm.hot .row .q,.st.hot::before{animation:none}}
+
+  /* Tarjetas de martillo compactas y todas del mismo tamaño en computador */
+  @media(min-width:901px){
+    .hm-list{grid-auto-rows:1fr}
+    .hm{grid-template-columns:minmax(0,.42fr) minmax(0,1.58fr);scroll-margin-top:76px}
+    .hm .ph{min-height:0}
+    .hm .st.hot{font-size:.66rem;letter-spacing:.03em;padding:10px 8px;gap:8px;white-space:nowrap}
+    .hm .ph img{padding:44px 14px 14px}
+    .hm .in{padding:12px 22px 12px}
+    .hm .urg{margin:0 0 8px;padding:6px 12px;gap:12px;border-left-width:4px}
+    .hm .urg .units{gap:4px}
+    .hm .urg .units i{width:9px;height:18px}
+    .hm .urg .ut{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:2px 12px}
+    .hm .urg .ut b{font-size:1rem}
+    .hm .urg .ut span{font-size:.84rem}
+    .hm .kicker{margin-bottom:4px}
+    .hm h3{font-size:1.42rem;line-height:1.15}
+    .hm .subt{margin-top:3px;font-size:.92rem}
+    .hm .desc{margin-top:5px;font-size:.81rem;line-height:1.4;max-width:none}
+    .hm .cols{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:22px;margin-top:10px}
+    .hm .inc{display:block;font-size:.82rem}
+    .hm .inc li{padding:3px 0;gap:7px;line-height:1.3}
+    .hm .inc li .icon{margin-top:2px}
+    .hm .blk-h{margin-bottom:4px}
+    .hm .specs{font-size:.7rem}
+    .hm .specs dt{padding:2px 12px 2px 0}
+    .hm .specs dd{padding:2px 0;line-height:1.28}
+    .hm .buy{margin-top:auto;padding:10px 16px;align-items:center;gap:10px 20px;flex-wrap:nowrap}
+    .hm .prices{gap:2px 18px;flex:1 1 auto;min-width:0}
+    .hm .price-flag{padding:3px 8px;font-size:.7rem;margin-bottom:4px}
+    .hm .prices .pl{display:none}
+    .hm.hot .prices .pp:not(.alt) b{font-size:2.3rem}
+    .hm .prices .pp.alt{padding-left:0;border-left:0}
+    .hm .buy .row{flex-direction:row;align-items:center;gap:8px 14px;flex:none}
+    .hm .row .q[href*="wa.me"]{padding:13px 20px;justify-content:center}
+  }
   @media(max-width:560px){.hm .in{padding:22px 20px 24px}}
   .kicker{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:.64rem;
     letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:10px}
@@ -307,7 +381,7 @@
   .prices{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px}
   .prices .pl{flex-basis:100%;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
   .prices .pp{display:flex;align-items:baseline;gap:7px;line-height:1.1}
-  .prices .pp b{font-size:1.6rem;font-weight:600;letter-spacing:-.035em;color:var(--text);font-variant-numeric:tabular-nums}
+  .prices .pp b{font-size:1.85rem;font-weight:700;letter-spacing:-.035em;color:var(--text);font-variant-numeric:tabular-nums}
   .prices .pp span{font-size:.84rem;color:var(--text-2)}
   .prices .pp.alt{padding-left:24px;border-left:1px solid var(--hair-2)}
   .prices .pp.alt b{font-size:1.2rem;font-weight:500;color:var(--text-2)}
@@ -338,6 +412,22 @@
   th:first-child{position:sticky;left:0;z-index:1;background:var(--surface-2);box-shadow:inset -1px 0 0 var(--hair)}
   thead th:first-child{background:var(--surface);z-index:2}
   td .tag{white-space:normal}
+  .tbl-cards{display:none}
+  @media(max-width:980px){
+    .tbl-wrap{display:none}
+    .tbl-cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+    .tbl-cards article{border:1px solid var(--hair);background:var(--surface-2)}
+    .tbl-cards h4{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin:0;padding:12px 16px;
+      border-bottom:1px solid var(--hair-2);background:var(--surface);font-family:"IBM Plex Mono",monospace;
+      font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+    .tbl-cards h4 a{color:var(--text);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:5px}
+    .tbl-cards dl{margin:0;padding:6px 16px 14px}
+    .tbl-cards dt{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--text-3);padding-top:10px}
+    .tbl-cards dd{margin:3px 0 0;font-size:.9rem;color:var(--text);line-height:1.45;font-variant-numeric:tabular-nums}
+    .tbl-cards dd.destacado{font-weight:700;font-size:1rem;color:var(--text)}
+    .tbl-cards dd .tag{white-space:normal}
+  }
   .tbl-note{margin-top:14px;font-size:.86rem;color:var(--text-3)}
   .tbl-note b{color:var(--text-2);font-weight:600}
   .tag{display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;font-size:.62rem;
@@ -407,10 +497,50 @@
   .warranty .icon{width:16px;height:16px;color:var(--accent-deep);flex:none}
   .exc .buy{margin-top:auto}
 
+  /* galería de fotos en la tarjeta de excavadora */
+  .exc-gal{padding:12px 12px 0}
+  .exc-gal .main{display:block;position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--hair);background:#111}
+  .exc-gal .main img{width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+  .exc-gal .cnt{position:absolute;left:10px;bottom:10px;z-index:2;font-family:"IBM Plex Mono",monospace;font-size:.7rem;
+    letter-spacing:.08em;text-transform:uppercase;color:#f4f4f2;background:rgba(7,7,8,.78);padding:5px 9px}
+  .exc-gal .cnt b{color:var(--accent);font-weight:600}
+  .exc-gal .thumbs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:6px}
+  .exc-gal .thumbs a{display:block;aspect-ratio:1/1;overflow:hidden;border:2px solid transparent;background:#111;opacity:.72;transition:opacity .2s,border-color .2s}
+  .exc-gal .thumbs a:hover{opacity:1}
+  .exc-gal .thumbs a[aria-current="true"]{border-color:var(--accent);opacity:1}
+  .exc-gal .thumbs img{width:100%;height:100%;object-fit:cover}
+  @media(max-width:480px){.exc-gal .thumbs{grid-template-columns:repeat(5,1fr)}}
+
   /* extras de la retroexcavadora y el hero */
   .detail .blk-h{color:var(--panel-dim);margin-bottom:10px}
   .rbuy .sv{display:block;font-size:.84rem;color:var(--panel-dim);margin-top:5px}
   .spec-card .sc-sub{margin-top:6px;font-size:.8rem;color:#a8a8a3;line-height:1.45}
+
+  /* hero: martillos primero, retroexcavadora debajo */
+  .hero-stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+  .spec-card.hm-feat .ph{aspect-ratio:2/1;background:#f7f7f7}
+  .spec-card.hm-feat .ph img{object-fit:contain;padding:10px 0}
+  .spec-card.hm-feat dt a{color:#e4e4e0;text-decoration:none}
+  .spec-card.hm-feat dt a:hover{color:var(--accent)}
+  .spec-card.hm-feat dt small{color:#85857f;font-size:.7rem;margin-left:6px}
+  .spec-card.hm-feat dd small{display:block;color:#85857f;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase}
+  .spec-card.retro-mini{display:grid;grid-template-columns:132px minmax(0,1fr)}
+  .spec-card.retro-mini .ph{aspect-ratio:auto;height:100%;min-height:112px;border-bottom:0;border-right:1px solid #1e1e21}
+  .spec-card.retro-mini .body{padding:14px 18px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+  .spec-card.retro-mini .mdl{margin-bottom:5px;font-size:.64rem}
+  .spec-card.retro-mini .sc-sub{margin-top:3px;font-size:.76rem}
+  .spec-card.retro-mini .rm-foot{margin-top:10px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px}
+  .spec-card.retro-mini .rm-foot b{font-size:1.05rem;font-weight:600;letter-spacing:-.03em;color:#f4f4f2;font-variant-numeric:tabular-nums}
+  .spec-card.retro-mini .rm-foot b small{font-family:"IBM Plex Mono",monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#85857f;font-weight:400;margin-left:6px}
+  .spec-card.retro-mini .rm-foot a{font-size:.8rem;font-weight:500;text-decoration:none;color:var(--accent);white-space:nowrap;
+    border-bottom:1px solid rgba(255,212,0,.34);padding-bottom:2px}
+  .spec-card.retro-mini .rm-foot a:hover{border-bottom-color:var(--accent)}
+  .spec-card.retro-mini .zoomable::after{display:none}
+  @media(max-width:560px){
+    .spec-card.retro-mini{grid-template-columns:minmax(0,1fr)}
+    .spec-card.retro-mini .ph{aspect-ratio:16/9;height:auto;min-height:0;border-right:0;border-bottom:1px solid #1e1e21}
+    .spec-card.retro-mini .body{padding:14px 18px 16px}
+  }
 
   /* ================= RETROEXCAVADORA (dark) ================= */
   .detail{background:var(--panel);color:var(--panel-text)}
@@ -597,6 +727,147 @@
   .fab .icon{width:20px;height:20px;stroke-width:1.8}
   @media(max-width:520px){.fab{padding:13px}.fab span{display:none}}
 
+  /* WhatsApp: todo lo que abre WhatsApp va en verde, para reconocerlo de un vistazo */
+  :root{--wa:#15803d;--wa-hover:#116932}
+  .btn[href*="wa.me"],.hero .btn[href*="wa.me"],.detail .btn[href*="wa.me"],.row .q[href*="wa.me"],#fq button[type=submit],.fab{
+    background:var(--wa);border-color:var(--wa);color:#fff;font-weight:600}
+  .btn[href*="wa.me"]:hover,.hero .btn[href*="wa.me"]:hover,.detail .btn[href*="wa.me"]:hover,.row .q[href*="wa.me"]:hover,#fq button[type=submit]:hover,.fab:hover{
+    background:var(--wa-hover);border-color:var(--wa-hover);color:#fff;box-shadow:0 10px 22px -12px rgba(21,128,61,.9)}
+  .foot a[href*="wa.me"]{color:#4ade80}
+  .icon.wa-ic{width:19px;height:19px;flex:none}
+  .row .q .icon.wa-ic{width:17px;height:17px}
+  .fab .icon.wa-ic{width:24px;height:24px}
+  .foot a.wa-link{display:flex;align-items:center;gap:8px}
+  .foot a.wa-link .icon.wa-ic{width:16px;height:16px}
+  .foot a[href*="wa.me"]:hover{color:#86efac}
+
+  /* En computador la portada completa cabe en la ventana */
+  @media(min-width:981px){
+    .hero{min-height:100vh;display:flex;align-items:center;padding:0}
+    .hero-inner{width:100%;padding:clamp(76px,11vh,112px) 32px clamp(18px,3vh,40px)}
+    .hero h1{font-size:clamp(2.2rem,min(4.6vw,6.4vh),3.9rem)}
+    .hero .lead{margin-top:clamp(12px,2.2vh,24px);font-size:clamp(.98rem,1.7vh,1.1rem)}
+    .hero .acts{margin-top:clamp(18px,3.4vh,36px)}
+    .trust{margin-top:clamp(18px,3.6vh,42px);padding-top:clamp(14px,2.4vh,26px);gap:10px clamp(18px,2.4vw,30px)}
+    .hero-grid{gap:clamp(28px,3.4vw,64px)}
+    .hero-stack{gap:clamp(10px,1.6vh,16px)}
+    .spec-card.hm-feat .ph{aspect-ratio:auto;height:clamp(96px,19vh,210px)}
+    .spec-card.hm-feat .ph img{padding:6px 0}
+    .spec-card .body{padding:clamp(12px,1.8vh,20px) 22px clamp(10px,1.6vh,18px)}
+    .spec-card .sc-sub{margin-top:4px;font-size:clamp(.72rem,1.3vh,.8rem)}
+    .spec-card dl{margin-top:clamp(8px,1.4vh,16px);font-size:clamp(.72rem,1.3vh,.78rem)}
+    .spec-card dt{padding:clamp(3px,.72vh,7px) 0}
+    .spec-card dd{padding:clamp(3px,.72vh,7px) 0}
+    .spec-card .sfoot{padding:clamp(9px,1.4vh,14px) 22px clamp(12px,1.8vh,20px)}
+    .spec-card.retro-mini .ph{min-height:clamp(78px,11vh,112px)}
+    .spec-card.retro-mini .body{padding:clamp(9px,1.4vh,14px) 18px}
+    .hero-bay{margin-top:clamp(20px,4.2vh,84px)}
+    .hero-bay>div{padding:clamp(14px,2.4vh,28px) 20px clamp(16px,2.8vh,32px) 0}
+    .hero-bay>div+div{padding-left:24px}
+    .hero-bay .n{font-size:clamp(1.5rem,3vh,2rem)}
+    .hero-bay .k{margin-top:clamp(6px,1.2vh,12px)}
+  }
+  /* Pantallas de computador angostas: el precio puede bajar a otra línea */
+  @media(min-width:901px) and (max-width:1120px){
+    .hm .buy{flex-wrap:wrap}
+    .hm .prices{flex-wrap:wrap}
+    .hm .prices .pp:not(.alt) b{font-size:2rem}
+  }
+  /* Pantallas de computador bajitas (laptops de 768 px): portada aún más compacta */
+  @media(min-width:981px) and (max-height:880px){
+    .hero-inner{padding:72px 32px 14px}
+    .hero h1{font-size:clamp(2rem,3.4vw,2.9rem)}
+    .hero .lead{margin-top:10px;font-size:.98rem;line-height:1.5}
+    .hero .acts{margin-top:16px}
+    .hero .acts .btn{padding:11px 18px}
+    .trust{margin-top:16px;padding-top:12px;gap:8px 22px;font-size:.8rem}
+    .trust div{font-size:.8rem}
+    .hero-stack{gap:10px}
+    .spec-card.hm-feat .ph{height:92px}
+    .spec-card .body{padding:10px 18px 8px}
+    .spec-card h3{font-size:.96rem}
+    .spec-card dl{margin-top:8px}
+    .spec-card dt,.spec-card dd{padding:3px 0}
+    .spec-card .sfoot{padding:8px 18px 10px}
+    .spec-card .sfoot .pr{font-size:1.15rem}
+    .spec-card.retro-mini{grid-template-columns:104px minmax(0,1fr)}
+    .spec-card.retro-mini .ph{min-height:76px}
+    .spec-card.retro-mini .body{padding:8px 14px}
+    .spec-card.retro-mini .rm-foot{margin-top:6px}
+    .hero-bay{margin-top:16px}
+    .hero-bay>div{padding:12px 16px 14px 0}
+    .hero-bay .n{font-size:1.4rem}
+    .hero-bay .k{margin-top:6px;font-size:.62rem}
+    .spec-card.hm-feat .ph{display:none}
+    .spec-card.hm-feat dt{white-space:nowrap}
+    .spec-card.hm-feat dt small{margin-left:5px}
+    .spec-card.hm-feat .hot-mini{margin-left:5px;font-size:.56rem;padding:1px 5px}
+    .spec-card.hm-feat dd{white-space:nowrap}
+    .spec-card.retro-mini .sc-sub{font-size:.74rem}
+    .spec-card.retro-mini .rm-foot{gap:4px 10px;margin-top:5px}
+  }
+
+  /* ===== Ajustes para celular: texto legible y botones grandes ===== */
+  @media(max-width:760px){
+    /* nada de texto por debajo de 12 px */
+    .kicker{font-size:.72rem}
+    .st,.tag,.spec-card .flag,.spec-card .mdl,.hero-bay .k,.blk-h,.prices .pl,.rbuy .pl,
+    .spec-card .sfoot .pr small,.retro-mini .rm-foot b small,.exc-gal .cnt,.price-flag{font-size:.72rem}
+    .hot-mini{font-size:.68rem;padding:3px 7px}
+    .specs{font-size:.8rem}
+    .hm .desc,.exc .desc{font-size:.92rem}
+    .urg .ut b{font-size:1.05rem}
+    .urg .ut span{font-size:.88rem}
+    /* zonas de toque de al menos 44 px */
+    .head-cta .tel{min-width:44px;min-height:44px;justify-content:center;margin-right:2px}
+    .head-cta .tel .icon{width:18px;height:18px}
+    .burger{width:44px;height:44px}
+    .row .w,.spec-card .sfoot a,.retro-mini .rm-foot a,.link,.cinfo .vl a,.foot a,.tt,thead th a{
+      min-height:44px;display:inline-flex;align-items:center}
+    .row{gap:10px 14px}
+    .row .w{padding:0 2px}
+    .foot a{padding:10px 0}
+    .gal figcaption{font-size:.84rem}
+    /* los globos de la barra de toneladas no se salen de la pantalla */
+    .bar-row .tip{max-width:calc(100vw - 40px);left:0;right:auto;white-space:normal}
+    /* tarjeta de la portada: letra y filas más grandes en celular */
+    .spec-card.hm-feat dl,.spec-card.hm-feat dd{font-size:.78rem}
+    .spec-card.hm-feat dt a{font-size:.82rem;min-height:36px;display:inline-flex;align-items:center}
+    .spec-card.hm-feat dt small{font-size:.74rem}
+    .spec-card.hm-feat dt .hot-mini{font-size:.7rem;padding:3px 7px}
+    .spec-card.retro-mini .mdl{font-size:.72rem}
+    .spec-card.retro-mini .sc-sub{font-size:.82rem}
+    /* tabla comparativa (se desliza a lo ancho): letra legible */
+    .tbl-wrap th,.tbl-wrap td{font-size:.78rem}
+    .tbl-wrap td .tag,.tbl-wrap th a{font-size:.74rem}
+    .tbl-wrap thead th,.tbl-wrap tbody th{font-size:.76rem}
+    .spec-card.hm-feat dt .hot-mini{font-size:.74rem}
+    .spec-card.hm-feat dd small{font-size:.72rem}
+    .spec-card.retro-mini .rm-foot b small{font-size:.72rem}
+    .idx,.idx b{font-size:.78rem}
+    .bar-row .lb,.bar-row .val{font-size:.78rem}
+    .comp .n{font-size:.72rem}
+    .bar-row .lb small{font-size:.74rem}
+    .gal-note,.record .cap,.gal figcaption b{font-size:.78rem}
+    .cinfo .lb{font-size:.76rem}
+    .brand{min-height:44px}
+  }
+  /* celulares muy angostos (320 px) */
+  @media(max-width:360px){
+    .bar{padding:9px 8px 9px 12px}
+    .btn{padding:12px 14px;font-size:.85rem}
+    .row .q{padding:11px 12px;font-size:.84rem}
+    .hm .buy,.exc .buy{padding:12px}
+    .urg{padding:6px 10px}
+    .wrap{padding:0 14px}
+    .price-flag{width:auto;white-space:normal;font-size:.7rem;line-height:1.3}
+    .prices{min-width:0}
+    .prices .pp b{font-size:1.5rem}
+    .prices .pp.alt b{font-size:1.05rem}
+    .prices .pp{flex-wrap:wrap;min-width:0}
+    .hm .buy,.exc .buy{padding:10px}
+    .row .q{flex:1 1 100%}
+  }
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 
   /* ================= PRELOADER ================= */
@@ -664,7 +935,7 @@
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9.5 9.5c0 2.5 2.5 5 5 5l1-1.4-1.8-.9-.8.8a4 4 0 0 1-1.9-1.9l.8-.8-.9-1.8z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path style="fill:currentColor;stroke:none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
   <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></symbol>
   <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 10v10h16V10M3 10l2-6h14l2 6zM9 20v-5h6v5"/></symbol>
@@ -701,8 +972,8 @@
     <nav>
       <a href="#martillos">Martillos</a>
       <a href="#guia">Guía</a>
-      <a href="#excavadoras">Excavadoras</a>
       <a href="#retro">Retroexcavadora</a>
+      <a href="#excavadoras">Excavadoras</a>
       <a href="#obra">En obra</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -717,8 +988,8 @@
   <div class="mnav" id="mnav" hidden>
     <a href="#martillos"><span>Martillos hidráulicos</span><i>01</i></a>
     <a href="#guia"><span>Guía para elegir martillo</span><i>02</i></a>
-    <a href="#excavadoras"><span>Excavadoras</span><i>03</i></a>
-    <a href="#retro"><span>Retroexcavadora RE4CX</span><i>04</i></a>
+    <a href="#retro"><span>Retroexcavadora RE4CX</span><i>03</i></a>
+    <a href="#excavadoras"><span>Excavadoras</span><i>04</i></a>
     <a href="#obra"><span>En obra</span><i>05</i></a>
     <a href="#porque"><span>Por qué Tavo</span><i>06</i></a>
     <a href="#contacto"><span>Contacto y cotización</span><i>07</i></a>
@@ -740,7 +1011,7 @@
           <h1>Maquinaria pesada <em>nueva e importada</em></h1>
           <p class="lead">Martillos hidráulicos, excavadoras y retroexcavadoras nuevas e importadas, con garantía real y entrega inmediata en Colombia.</p>
           <div class="acts">
-            <a class="btn primary" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar por WhatsApp</a>
+            <a class="btn primary" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
             <a class="btn" href="#martillos">Ver equipos y precios</a>
           </div>
           <div class="trust">
@@ -750,27 +1021,43 @@
             <div><svg class="icon"><use href="#i-tag"/></svg>Precios publicados sin IVA</div>
           </div>
         </div>
-        <div class="spec-card">
-          <a class="ph zoomable" href="imagen%20cliente%2012.jpg" target="_blank" rel="noopener" aria-label="Ver foto de la retroexcavadora TALA RE4CX">
-            <img src="imagen%20cliente%2012.jpg" alt="Retroexcavadora TALA RE4CX 4x4 nueva" width="1387" height="773" decoding="async">
-            <span class="flag">Lanzamiento</span>
-          </a>
-          <div class="body">
-            <p class="mdl">Línea propia · Nueva</p>
-            <h3>Retroexcavadora TALA RE4CX</h3>
-            <p class="sc-sub">4x4 — Dirección en las 4 ruedas + modo cangrejo — Nueva</p>
-            <dl>
-              <dt>Motor</dt><dd>Turbocargado, 75 kW (~102 HP)</dd>
-              <dt>Peso de la máquina</dt><dd>9.200 kg</dd>
-              <dt>Balde frontal</dt><dd>1.2 m³</dd>
-              <dt>Balde trasero (excavación)</dt><dd>0.3 m³</dd>
-              <dt>Velocidad máxima</dt><dd>38 km/h</dd>
-              <dt>Garantía</dt><dd>1 año contra defecto de fábrica</dd>
-            </dl>
+        <div class="hero-stack">
+          <div class="spec-card hm-feat">
+            <a class="ph zoomable" href="martillo2.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo hidráulico TALA 1400">
+              <img src="martillo2.jpg" alt="Martillo hidráulico TALA 1400 nuevo" width="1080" height="1350" decoding="async">
+              <span class="flag">Nuevos · Garantía 6 meses</span>
+            </a>
+            <div class="body">
+              <p class="mdl">Línea TALA · 5 modelos</p>
+              <h3>Martillos hidráulicos TALA</h3>
+              <p class="sc-sub">Del minicargador / Bobcat de 2.5 toneladas a la retroexcavadora / excavadora de 36 toneladas</p>
+              <dl>
+                <dt class="row-hot"><a href="#tala-530">TALA 530</a><small>2.5 – 4.5 t</small><span class="hot-mini">Solo 3</span></dt><dd>$15.600.000</dd>
+                <dt class="row-hot"><a href="#tala-680">TALA 680</a><small>4 – 7 t</small><span class="hot-mini">Solo 5</span></dt><dd class="row-hot">$11.700.000</dd>
+                <dt><a href="#tala-1000">TALA 1000</a><small>12 – 15 t</small></dt><dd>$18.500.000<small>Bajo pedido</small></dd>
+                <dt class="row-hot"><a href="#tala-1400">TALA 1400</a><small>20 – 25 t</small><span class="hot-mini">Solo 7</span></dt><dd>$31.600.000</dd>
+                <dt class="row-hot"><a href="#tala-1550">TALA 1550</a><small>27 – 36 t</small><span class="hot-mini">Solo 3</span></dt><dd>$77.000.000</dd>
+              </dl>
+            </div>
+            <div class="sfoot">
+              <span class="pr num"><small>Desde · sin IVA</small>$11.700.000</span>
+              <a href="#martillos">Ver los 5 modelos →</a>
+            </div>
           </div>
-          <div class="sfoot">
-            <span class="pr num"><small>Precio · sin IVA</small>$420.000.000</span>
-            <a href="#retro">Ver detalles →</a>
+
+          <div class="spec-card retro-mini">
+            <a class="ph zoomable" href="imagen%20cliente%2012.jpg" target="_blank" rel="noopener" aria-label="Ver foto de la retroexcavadora TALA RE4CX">
+              <img src="imagen%20cliente%2012.jpg" alt="Retroexcavadora TALA RE4CX 4x4 nueva" width="1387" height="773" decoding="async">
+            </a>
+            <div class="body">
+              <p class="mdl">Lanzamiento · Nueva</p>
+              <h3>Retroexcavadora TALA RE4CX</h3>
+              <p class="sc-sub">4x4 · Garantía de 1 año contra defecto de fábrica</p>
+              <div class="rm-foot">
+                <b class="num">$420.000.000<small>sin IVA</small></b>
+                <a href="#retro">Ver detalles →</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -796,12 +1083,16 @@
       <p class="iva-note"><svg class="icon"><use href="#i-tag"/></svg><span>Todos los precios publicados son <b>SIN IVA</b>. Si el cliente requiere factura con IVA (19%), se suma al valor final.</span></p>
       <div class="hm-list">
 
-        <article class="hm" id="tala-530">
+        <article class="hm hot" id="tala-530">
           <a class="ph zoomable" href="martillo4.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 530">
             <img src="martillo4.jpg" alt="Martillo hidráulico TALA 530 con base de acople para minicargador" width="1080" height="1350" loading="lazy" decoding="async">
-            <span class="st">Disponible</span>
+            <span class="st hot">¡Solo 3 unidades disponibles!</span>
           </a>
           <div class="in">
+            <div class="urg" role="note">
+              <span class="units" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ut"><b>Solo 3 unidades disponibles</b><span>El más compacto y rápido de la línea, para minicargador / Bobcat.</span></span>
+            </div>
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 530</h3>
             <p class="subt">Para minicargador / Bobcat — 2.5 a 4.5 toneladas</p>
@@ -810,7 +1101,7 @@
               <div>
                 <p class="blk-h">Especificaciones principales</p>
                 <dl class="specs">
-                  <dt>Peso operativo</dt><dd>138 kg (side/top)<br>152 kg (box)</dd>
+                  <dt>Peso operativo</dt><dd>138 kg (side/top) · 152 kg (box)</dd>
                   <dt>Diámetro del cincel</dt><dd>53 mm</dd>
                   <dt>Frecuencia de impacto</dt><dd>600 – 1000 golpes por minuto</dd>
                   <dt>Flujo de aceite</dt><dd>25 – 50 l/min</dd>
@@ -833,24 +1124,29 @@
             </div>
             <div class="buy">
               <div class="prices">
+                <span class="price-flag">★ Entrega inmediata en Colombia</span>
                 <span class="pl">Precio</span>
                 <div class="pp"><b>$15.600.000</b><span>sin IVA</span></div>
                 <div class="pp alt"><b>$18.564.000</b><span>con IVA</span></div>
               </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 530" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 530 (quiero separar una de las 3 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
                 <a class="w" href="image_b00e9eac5d19e4939eceaf236d0c0caa.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="hm" id="tala-680">
+        <article class="hm hot" id="tala-680">
           <a class="ph zoomable" href="martillo1.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 680">
             <img src="martillo1.jpg" alt="Martillo hidráulico TALA 680" width="1080" height="1350" loading="lazy" decoding="async">
-            <span class="st">Disponible</span>
+            <span class="st hot">¡Solo 5 unidades disponibles!</span>
           </a>
           <div class="in">
+            <div class="urg" role="note">
+              <span class="units" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="ut"><b>Solo 5 unidades disponibles</b><span>El precio más bajo de toda la línea TALA.</span></span>
+            </div>
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 680</h3>
             <p class="subt">Para pajarita / miniretroexcavadora — 4 a 7 toneladas</p>
@@ -859,7 +1155,7 @@
               <div>
                 <p class="blk-h">Especificaciones principales</p>
                 <dl class="specs">
-                  <dt>Peso operativo</dt><dd>263 kg (side/top)<br>299 kg (box)</dd>
+                  <dt>Peso operativo</dt><dd>263 kg (side/top) · 299 kg (box)</dd>
                   <dt>Diámetro del cincel</dt><dd>68 mm</dd>
                   <dt>Frecuencia de impacto</dt><dd>500 – 900 golpes por minuto</dd>
                   <dt>Flujo de aceite</dt><dd>40 – 70 l/min</dd>
@@ -882,12 +1178,13 @@
             </div>
             <div class="buy">
               <div class="prices">
+                <span class="price-flag">★ Precio más bajo de la línea</span>
                 <span class="pl">Precio</span>
                 <div class="pp"><b>$11.700.000</b><span>sin IVA</span></div>
                 <div class="pp alt"><b>$13.923.000</b><span>con IVA</span></div>
               </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 680" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 680 (quiero separar una de las 5 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
                 <a class="w" href="image_a4a4286ec42523ea6e5447acf784ba63.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
@@ -908,7 +1205,7 @@
               <div>
                 <p class="blk-h">Especificaciones principales</p>
                 <dl class="specs">
-                  <dt>Peso operativo</dt><dd>761 kg (side)<br>866 kg (top)</dd>
+                  <dt>Peso operativo</dt><dd>761 kg (side) · 866 kg (top)</dd>
                   <dt>Diámetro del cincel</dt><dd>100 mm</dd>
                   <dt>Frecuencia de impacto</dt><dd>400 – 650 golpes por minuto</dd>
                   <dt>Flujo de aceite</dt><dd>80 – 110 l/min</dd>
@@ -936,19 +1233,23 @@
                 <div class="pp alt"><b>$22.015.000</b><span>con IVA</span></div>
               </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1000 (disponible bajo pedido)" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Pedir bajo pedido</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1000 (disponible bajo pedido)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Pedir bajo pedido</a>
                 <a class="w" href="523b3932f4c490fa7e7bfa47a5fc93a0_1_1778681504_3755.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="hm" id="tala-1400">
+        <article class="hm hot" id="tala-1400">
           <a class="ph zoomable" href="martillo2.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 1400">
             <img src="martillo2.jpg" alt="Martillo hidráulico TALA 1400" width="1080" height="1350" loading="lazy" decoding="async">
-            <span class="st">Disponible</span>
+            <span class="st hot">¡Solo 7 unidades disponibles!</span>
           </a>
           <div class="in">
+            <div class="urg" role="note">
+              <span class="units" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="ut"><b>Solo 7 unidades disponibles</b><span>Para excavadoras de 20 a 25 toneladas, con entrega inmediata.</span></span>
+            </div>
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 1400</h3>
             <p class="subt">Para excavadora — 20 a 25 toneladas</p>
@@ -957,7 +1258,7 @@
               <div>
                 <p class="blk-h">Especificaciones principales</p>
                 <dl class="specs">
-                  <dt>Peso operativo</dt><dd>1.774 kg (side)<br>2.059 kg (top)<br>1.866 kg (box)</dd>
+                  <dt>Peso operativo</dt><dd>1.774 kg (side) · 2.059 kg (top) · 1.866 kg (box)</dd>
                   <dt>Diámetro del cincel</dt><dd>140 mm</dd>
                   <dt>Frecuencia de impacto</dt><dd>350 – 500 golpes por minuto</dd>
                   <dt>Flujo de aceite</dt><dd>120 – 180 l/min</dd>
@@ -980,24 +1281,29 @@
             </div>
             <div class="buy">
               <div class="prices">
+                <span class="price-flag">★ Entrega inmediata en Colombia</span>
                 <span class="pl">Precio</span>
                 <div class="pp"><b>$31.600.000</b><span>sin IVA</span></div>
                 <div class="pp alt"><b>$37.604.000</b><span>con IVA</span></div>
               </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1400" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1400 (quiero separar una de las 7 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
                 <a class="w" href="7fb544a84ebf3e6606e246bc0898699d_1_1778681701_4459.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="hm" id="tala-1550">
+        <article class="hm hot" id="tala-1550">
           <a class="ph dk zoomable" href="martillo5.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 1550">
             <img src="martillo5.jpg" alt="Martillo hidráulico TALA 1550, el más grande de la línea" width="1288" height="1600" loading="lazy" decoding="async">
-            <span class="st lim">Disponibilidad limitada</span>
+            <span class="st hot">¡Solo 3 unidades disponibles!</span>
           </a>
           <div class="in">
+            <div class="urg" role="note">
+              <span class="units" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ut"><b>Solo 3 unidades disponibles</b><span>El más grande y potente de la línea, de 27 a 36 toneladas.</span></span>
+            </div>
             <p class="kicker">Martillo hidráulico · Nuevo · El más grande de la línea</p>
             <h3>Martillo hidráulico TALA 1550</h3>
             <p class="subt">Para retroexcavadora / excavadora — 27 a 36 toneladas (el más grande de la línea)</p>
@@ -1006,7 +1312,7 @@
               <div>
                 <p class="blk-h">Especificaciones principales</p>
                 <dl class="specs">
-                  <dt>Peso operativo</dt><dd>2.577 kg (side)<br>2.745 kg (top)<br>2.968 kg (box)</dd>
+                  <dt>Peso operativo</dt><dd>2.577 kg (side) · 2.745 kg (top) · 2.968 kg (box)</dd>
                   <dt>Diámetro del cincel</dt><dd>155 mm</dd>
                   <dt>Frecuencia de impacto</dt><dd>300 – 450 golpes por minuto</dd>
                   <dt>Flujo de aceite</dt><dd>180 – 240 l/min</dd>
@@ -1030,11 +1336,12 @@
             <div class="buy">
               <div class="prices">
                 <span class="pl">Precio · disponibilidad limitada</span>
+                <span class="price-flag">★ El más potente de la línea</span>
                 <div class="pp"><b>$77.000.000</b><span>sin IVA</span></div>
                 <div class="pp alt"><b>$91.630.000</b><span>con IVA</span></div>
               </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1550" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1550 (quiero separar una de las 3 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
                 <a class="w" href="image_d5c163bd06bf25e62ba40924513c99e6.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
@@ -1071,7 +1378,7 @@
             <tr class="pr"><th scope="row">Precio sin IVA</th><td>$15.600.000</td><td>$11.700.000</td><td>$18.500.000</td><td>$31.600.000</td><td>$77.000.000</td></tr>
             <tr><th scope="row">Precio con IVA</th><td>$18.564.000</td><td>$13.923.000</td><td>$22.015.000</td><td>$37.604.000</td><td>$91.630.000</td></tr>
             <tr><th scope="row">Incluye</th><td colspan="5">Base de acople, 2 puntas de cincel, 2 mangueras hidráulicas, caja de herramientas, pipeta de gas y garantía real de 6 meses.</td></tr>
-            <tr><th scope="row">Disponibilidad</th><td><span class="tag ok">Disponible</span></td><td><span class="tag ok">Disponible</span></td><td><span class="tag wait">Disponible bajo pedido</span></td><td><span class="tag ok">Disponible</span></td><td><span class="tag lim">Disponibilidad limitada</span></td></tr>
+            <tr><th scope="row">Disponibilidad</th><td><span class="tag hot">Solo 3 unidades disponibles</span></td><td><span class="tag hot">Solo 5 unidades disponibles</span></td><td><span class="tag wait">Disponible bajo pedido</span></td><td><span class="tag hot">Solo 7 unidades disponibles</span></td><td><span class="tag hot">Solo 3 unidades disponibles</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1089,110 +1396,12 @@
     </div>
   </section>
 
-  <!-- ══════════ EXCAVADORAS ══════════ -->
-  <section id="excavadoras">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <p class="idx"><b>03</b> Excavadoras</p>
-          <h2>Excavadoras Caterpillar con horas reales</h2>
-        </div>
-        <p class="sub">En excelente estado, con horas de uso reales y verificadas. Ambas incluyen línea húmeda instalada (lista para martillo hidráulico sin costo adicional), garra, cuchilla y balde estándar, GPS y garantía real de 3 meses en motor y sistema hidráulico.</p>
-      </div>
-      <p class="iva-note"><svg class="icon"><use href="#i-tag"/></svg><span>Todos los precios publicados son <b>SIN IVA</b>. Si el cliente requiere factura con IVA (19%), se suma al valor final.</span></p>
-      <div class="exc-grid">
-
-        <article class="exc" id="cat-305">
-          <div class="top">
-            <span class="glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#i-excavator"/></svg></span>
-            <div>
-              <div class="tags"><span class="tag ok">Disponible</span><span class="tag neu">Usada · excelente estado</span></div>
-              <h3>Excavadora Caterpillar 305.5E2</h3>
-              <p class="subt">5.38 toneladas — Año 2018 — 4.700 horas reales</p>
-            </div>
-          </div>
-          <div class="in">
-            <p class="desc">Excavadora usada en excelente estado, con horas de uso reales y verificadas. Ideal para obra civil, movimiento de tierra, excavación de zanjas, instalación de tubería, redes de acueducto/alcantarillado y construcción de vías.</p>
-            <p class="blk-h">Especificaciones principales</p>
-            <dl class="specs">
-              <dt>Año</dt><dd>2018</dd>
-              <dt>Horas de uso</dt><dd>4.700 horas reales</dd>
-              <dt>Motor</dt><dd>Caterpillar — origen japonés</dd>
-              <dt>Peso operativo</dt><dd>5.38 toneladas</dd>
-              <dt>Capacidad de balde</dt><dd>0.27 m³</dd>
-              <dt>Profundidad de excavación</dt><dd>3.47 m</dd>
-              <dt>Alcance máximo</dt><dd>5.63 m</dd>
-            </dl>
-            <p class="blk-h">Incluye</p>
-            <ul class="inc">
-              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Línea húmeda instalada</b> (lista para martillo hidráulico sin costo adicional)</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b> (valorada en ~$7.000.000 en Colombia)</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span>Cuchilla y balde estándar incluidos</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span>Aire acondicionado</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span>Documentos al día</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span>GPS instalado</span></li>
-            </ul>
-            <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
-            <div class="buy">
-              <div class="prices">
-                <span class="pl">Precio</span>
-                <div class="pp"><b>$190.000.000</b><span>sin IVA</span></div>
-              </div>
-              <div class="row"><a class="q" href="https://wa.me/573136763895" data-wa="Excavadora Caterpillar 305.5E2 (año 2018)" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar por WhatsApp</a></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="exc" id="cat-308">
-          <div class="top">
-            <span class="glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#i-excavator"/></svg></span>
-            <div>
-              <div class="tags"><span class="tag lim">Última unidad · disponibilidad limitada</span><span class="tag neu">Excelente estado</span></div>
-              <h3>Excavadora Caterpillar 308.5E2</h3>
-              <p class="subt">8 toneladas — Año 2019, nacionalizada en Colombia en 2023 — 4.152 horas reales</p>
-            </div>
-          </div>
-          <div class="in">
-            <p class="desc">Excavadora en excelente estado, con horas de uso reales y verificadas mediante registro de mantenimiento del importador. Última unidad disponible de este lote. Ideal para obra civil, ingeniería y proyectos que requieren mayor capacidad que una mini excavadora.</p>
-            <p class="blk-h">Especificaciones principales</p>
-            <dl class="specs">
-              <dt>Año de fabricación</dt><dd>2019</dd>
-              <dt>Nacionalización en Colombia</dt><dd>2023</dd>
-              <dt>Horas de uso</dt><dd>4.152 horas reales, verificadas</dd>
-              <dt>Motor</dt><dd>Caterpillar C3.3B — 56.8 HP<br>origen japonés</dd>
-              <dt>Peso operativo</dt><dd>8.2 toneladas</dd>
-              <dt>Profundidad de excavación</dt><dd>4.15 m (brazo estándar)<br>4.69 m (brazo largo)</dd>
-              <dt>Alcance horizontal máximo</dt><dd>6.93 m</dd>
-            </dl>
-            <p class="blk-h">Incluye</p>
-            <ul class="inc">
-              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Línea húmeda instalada</b> (lista para martillo hidráulico sin costo adicional)</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b> (valorada en ~$7.000.000 en Colombia)</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span>Cuchilla y balde estándar incluidos</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span>Documentos al día</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span>GPS instalado</span></li>
-            </ul>
-            <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
-            <div class="buy">
-              <div class="prices">
-                <span class="pl">Precio · última unidad</span>
-                <div class="pp"><b>$259.000.000</b><span>sin IVA</span></div>
-              </div>
-              <div class="row"><a class="q" href="https://wa.me/573136763895" data-wa="Excavadora Caterpillar 308.5E2 (año 2019, última unidad)" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar por WhatsApp</a></div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
   <!-- ══════════ RETROEXCAVADORA ══════════ -->
   <section class="detail" id="retro">
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <p class="idx"><b>04</b> Retroexcavadora · Línea propia</p>
+          <p class="idx"><b>03</b> Retroexcavadora · Línea propia</p>
           <h2>Retroexcavadora TALA RE4CX</h2>
         </div>
         <p class="sub">4x4 — Dirección en las 4 ruedas + modo cangrejo — Nueva. Cuesta menos que una Caterpillar 420F usada.</p>
@@ -1226,7 +1435,7 @@
           <div class="rbuy">
             <div><span class="pl">Precio</span><b>$420.000.000</b><span class="sv">sin IVA · Si requiere factura con IVA (19%), se suma al valor final.</span></div>
             <div class="acts">
-              <a class="btn primary" href="https://wa.me/573136763895" data-wa="Retroexcavadora TALA RE4CX" target="_blank" rel="noopener"><svg class="icon"><use href="#i-chat"/></svg>Cotizar</a>
+              <a class="btn primary" href="https://wa.me/573136763895" data-wa="Retroexcavadora TALA RE4CX" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar</a>
               <a class="btn" href="tel:+573136763895"><svg class="icon"><use href="#i-phone"/></svg>Llamar</a>
             </div>
           </div>
@@ -1240,6 +1449,138 @@
         <div class="bar-row" tabindex="0"><span class="lb">CAT 420F usada<small>Modelo 2020</small></span><span class="bar-track"><span class="bar-fill neu" data-w="71.9"></span></span><span class="val">≈ $460 M</span><span class="tip">Alrededor de $460.000.000</span></div>
         <div class="bar-row us" tabindex="0"><span class="lb">TALA RE4CX nueva<small>Tavo El Importador</small></span><span class="bar-track"><span class="bar-fill" data-w="65.6"></span></span><span class="val">$420 M</span><span class="tip">$420.000.000</span></div>
         <p class="verdict">La TALA RE4CX nueva cuesta menos que una CAT 420F usada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ EXCAVADORAS ══════════ -->
+  <section id="excavadoras">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="idx"><b>04</b> Excavadoras</p>
+          <h2>Excavadoras Caterpillar con horas reales</h2>
+        </div>
+        <p class="sub">En excelente estado, con horas de uso reales y verificadas. Ambas incluyen línea húmeda instalada (lista para martillo hidráulico sin costo adicional), garra, cuchilla y balde estándar, GPS y garantía real de 3 meses en motor y sistema hidráulico.</p>
+      </div>
+      <p class="iva-note"><svg class="icon"><use href="#i-tag"/></svg><span>Todos los precios publicados son <b>SIN IVA</b>. Si el cliente requiere factura con IVA (19%), se suma al valor final.</span></p>
+      <div class="exc-grid">
+
+        <article class="exc" id="cat-305">
+          <div class="exc-gal" data-gal>
+            <a class="main zoomable" href="cat305-1.jpg" target="_blank" rel="noopener" aria-label="Ver foto en tamaño completo">
+              <img src="cat305-1.jpg" alt="Excavadora Caterpillar 305.5E2 trabajando con el brazo extendido" width="900" height="1200" loading="lazy" decoding="async">
+              <span class="cnt"><b>1</b> / 7 fotos</span>
+            </a>
+            <div class="thumbs">
+              <a href="cat305-1.jpg" target="_blank" rel="noopener" data-alt="Excavadora Caterpillar 305.5E2 trabajando con el brazo extendido" aria-current="true" aria-label="Ver foto 1 de 7"><img src="cat305-1.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat305-2.jpg" target="_blank" rel="noopener" data-alt="Excavadora Caterpillar 305.5E2 vista lateral completa con cuchilla" aria-label="Ver foto 2 de 7"><img src="cat305-2.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat305-3.jpg" target="_blank" rel="noopener" data-alt="Excavadora Caterpillar 305.5E2 vista trasera lateral con balde" aria-label="Ver foto 3 de 7"><img src="cat305-3.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat305-4.jpg" target="_blank" rel="noopener" data-alt="Brazo y balde de la excavadora Caterpillar 305.5E2" aria-label="Ver foto 4 de 7"><img src="cat305-4.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat305-5.jpg" target="_blank" rel="noopener" data-alt="Cabina y contrapeso de la excavadora Caterpillar 305.5E2" aria-label="Ver foto 5 de 7"><img src="cat305-5.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat305-6.jpg" target="_blank" rel="noopener" data-alt="Costado de la excavadora Caterpillar 305.5E2 con orugas" aria-label="Ver foto 6 de 7"><img src="cat305-6.jpg" alt="" width="675" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat305-7.jpg" target="_blank" rel="noopener" data-alt="Compartimiento de batería e hidráulico de la excavadora Caterpillar 305.5E2" aria-label="Ver foto 7 de 7"><img src="cat305-7.jpg" alt="" width="675" height="1200" loading="lazy" decoding="async"></a>
+            </div>
+          </div>
+          <div class="top">
+            <div>
+              <div class="tags"><span class="tag ok">Disponible</span><span class="tag neu">Usada · excelente estado</span></div>
+              <h3>Excavadora Caterpillar 305.5E2</h3>
+              <p class="subt">5.38 toneladas — Año 2018 — 4.700 horas reales</p>
+            </div>
+          </div>
+          <div class="in">
+            <p class="desc">Excavadora usada en excelente estado, con horas de uso reales y verificadas. Ideal para obra civil, movimiento de tierra, excavación de zanjas, instalación de tubería, redes de acueducto/alcantarillado y construcción de vías.</p>
+            <p class="blk-h">Especificaciones principales</p>
+            <dl class="specs">
+              <dt>Año</dt><dd>2018</dd>
+              <dt>Horas de uso</dt><dd>4.700 horas reales</dd>
+              <dt>Motor</dt><dd>Caterpillar — origen japonés</dd>
+              <dt>Peso operativo</dt><dd>5.38 toneladas</dd>
+              <dt>Capacidad de balde</dt><dd>0.27 m³</dd>
+              <dt>Profundidad de excavación</dt><dd>3.47 m</dd>
+              <dt>Alcance máximo</dt><dd>5.63 m</dd>
+            </dl>
+            <p class="blk-h">Incluye</p>
+            <ul class="inc">
+              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Línea húmeda instalada</b> (lista para martillo hidráulico sin costo adicional)</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b> (valorada en ~$7.000.000 en Colombia)</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Cuchilla y balde estándar incluidos</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Aire acondicionado</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Documentos al día</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>GPS instalado</span></li>
+            </ul>
+            <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
+            <div class="buy">
+              <div class="prices">
+                <span class="pl">Precio</span>
+                <div class="pp"><b>$190.000.000</b><span>sin IVA</span></div>
+              </div>
+              <div class="row"><a class="q" href="https://wa.me/573136763895" data-wa="Excavadora Caterpillar 305.5E2 (año 2018)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="exc" id="cat-308">
+          <div class="exc-gal" data-gal>
+            <a class="main zoomable" href="cat308-1.jpg" target="_blank" rel="noopener" aria-label="Ver foto en tamaño completo">
+              <img src="cat308-1.jpg" alt="Excavadora Caterpillar 308.5E2 vista lateral con el brazo recogido" width="900" height="1200" loading="lazy" decoding="async">
+              <span class="cnt"><b>1</b> / 13 fotos</span>
+            </a>
+            <div class="thumbs">
+              <a href="cat308-1.jpg" target="_blank" rel="noopener" data-alt="Excavadora Caterpillar 308.5E2 vista lateral con el brazo recogido" aria-current="true" aria-label="Ver foto 1 de 13"><img src="cat308-1.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-2.jpg" target="_blank" rel="noopener" data-alt="Cabina y puesto de mando de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 2 de 13"><img src="cat308-2.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-3.jpg" target="_blank" rel="noopener" data-alt="Sistema hidráulico de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 3 de 13"><img src="cat308-3.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-4.jpg" target="_blank" rel="noopener" data-alt="Excavadora Caterpillar 308.5E2 vista frontal lateral con balde" aria-label="Ver foto 4 de 13"><img src="cat308-4.jpg" alt="" width="675" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-5.jpg" target="_blank" rel="noopener" data-alt="Excavadora Caterpillar 308.5E2 con cuchilla y balde" aria-label="Ver foto 5 de 13"><img src="cat308-5.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-6.jpg" target="_blank" rel="noopener" data-alt="Brazo y balde de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 6 de 13"><img src="cat308-6.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-7.jpg" target="_blank" rel="noopener" data-alt="Excavadora Caterpillar 308.5E2 vista frontal con el balde apoyado" aria-label="Ver foto 7 de 13"><img src="cat308-7.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-8.jpg" target="_blank" rel="noopener" data-alt="Cabina y costado de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 8 de 13"><img src="cat308-8.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-9.jpg" target="_blank" rel="noopener" data-alt="Mangueras y conexiones hidráulicas de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 9 de 13"><img src="cat308-9.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-10.jpg" target="_blank" rel="noopener" data-alt="Motor Caterpillar de la Excavadora Caterpillar 308.5E2 con la tapa trasera abierta" aria-label="Ver foto 10 de 13"><img src="cat308-10.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-11.jpg" target="_blank" rel="noopener" data-alt="Contrapeso y parte trasera de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 11 de 13"><img src="cat308-11.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-12.jpg" target="_blank" rel="noopener" data-alt="Compartimiento lateral y orugas de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 12 de 13"><img src="cat308-12.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+              <a href="cat308-13.jpg" target="_blank" rel="noopener" data-alt="Compartimiento del motor de la Excavadora Caterpillar 308.5E2" aria-label="Ver foto 13 de 13"><img src="cat308-13.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></a>
+            </div>
+          </div>
+          <div class="top">
+            <div>
+              <div class="tags"><span class="tag lim">Última unidad · disponibilidad limitada</span><span class="tag neu">Excelente estado</span></div>
+              <h3>Excavadora Caterpillar 308.5E2</h3>
+              <p class="subt">8 toneladas — Año 2019, nacionalizada en Colombia en 2023 — 4.152 horas reales</p>
+            </div>
+          </div>
+          <div class="in">
+            <p class="desc">Excavadora en excelente estado, con horas de uso reales y verificadas mediante registro de mantenimiento del importador. Última unidad disponible de este lote. Ideal para obra civil, ingeniería y proyectos que requieren mayor capacidad que una mini excavadora.</p>
+            <p class="blk-h">Especificaciones principales</p>
+            <dl class="specs">
+              <dt>Año de fabricación</dt><dd>2019</dd>
+              <dt>Nacionalización en Colombia</dt><dd>2023</dd>
+              <dt>Horas de uso</dt><dd>4.152 horas reales, verificadas</dd>
+              <dt>Motor</dt><dd>Caterpillar C3.3B — 56.8 HP<br>origen japonés</dd>
+              <dt>Peso operativo</dt><dd>8.2 toneladas</dd>
+              <dt>Profundidad de excavación</dt><dd>4.15 m (brazo estándar)<br>4.69 m (brazo largo)</dd>
+              <dt>Alcance horizontal máximo</dt><dd>6.93 m</dd>
+            </dl>
+            <p class="blk-h">Incluye</p>
+            <ul class="inc">
+              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Línea húmeda instalada</b> (lista para martillo hidráulico sin costo adicional)</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b> (valorada en ~$7.000.000 en Colombia)</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Cuchilla y balde estándar incluidos</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Documentos al día</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>GPS instalado</span></li>
+            </ul>
+            <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
+            <div class="buy">
+              <div class="prices">
+                <span class="pl">Precio · última unidad</span>
+                <div class="pp"><b>$259.000.000</b><span>sin IVA</span></div>
+              </div>
+              <div class="row"><a class="q" href="https://wa.me/573136763895" data-wa="Excavadora Caterpillar 308.5E2 (año 2019, última unidad)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a></div>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
@@ -1317,7 +1658,7 @@
           <div class="r"><svg class="icon"><use href="#i-ig"/></svg><div><div class="lb">Instagram</div><div class="vl"><a href="https://www.instagram.com/tavoelimportador/" target="_blank" rel="noopener">@tavoelimportador</a></div></div></div>
           <div class="r"><svg class="icon"><use href="#i-truck"/></svg><div><div class="lb">Qué vendemos</div><div class="vl">Martillos hidráulicos, excavadoras y retroexcavadoras nuevas e importadas, con garantía real y entrega inmediata en Colombia</div></div></div>
           <a class="btn primary wa" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener">
-            <svg class="icon"><use href="#i-chat"/></svg>Escribir por WhatsApp
+            <svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Escribir por WhatsApp
           </a>
           <p class="note">Todos los precios publicados son SIN IVA. Si el cliente requiere factura con IVA (19%), se suma al valor final.</p>
         </div>
@@ -1345,7 +1686,7 @@
           </div>
           <div class="full"><label for="m">Mensaje</label><textarea id="m" name="mensaje" placeholder="Tipo y peso de su máquina, trabajo a realizar, ciudad de entrega…"></textarea></div>
           <div class="form-acts">
-            <button class="btn primary" type="submit"><svg class="icon"><use href="#i-chat"/></svg>Enviar por WhatsApp</button>
+            <button class="btn primary" type="submit"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Enviar por WhatsApp</button>
             <a class="link" href="tel:+573136763895">o llame al 313 676 3895</a>
           </div>
           <p class="form-note"><svg class="icon"><use href="#i-shield"/></svg>Al enviar se abre WhatsApp con su mensaje listo. Solo tiene que tocar enviar.</p>
@@ -1374,15 +1715,15 @@
       </div>
       <div>
         <h4>Maquinaria</h4>
+        <a href="#retro">Retroexcavadora TALA RE4CX</a>
         <a href="#cat-305">Excavadora CAT 305.5E2</a>
         <a href="#cat-308">Excavadora CAT 308.5E2</a>
-        <a href="#retro">Retroexcavadora TALA RE4CX</a>
         <a href="#guia">Guía para elegir martillo</a>
         <a href="#obra">En obra</a>
       </div>
       <div>
         <h4>Contacto</h4>
-        <a href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="wa-link" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
         <a href="tel:+573136763895">Llamar</a>
         <a href="https://www.instagram.com/tavoelimportador/" target="_blank" rel="noopener">Instagram</a>
         <a href="#contacto">Cotizar</a>
@@ -1395,7 +1736,7 @@
   </div>
 </footer>
 
-<a class="fab" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg class="icon"><use href="#i-chat"/></svg><span>WhatsApp</span></a>
+<a class="fab" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
 
 <script>
   var WA='https://wa.me/573136763895';
@@ -1502,6 +1843,51 @@
       if(!cur)cur=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
       r.setAttribute('data-theme',cur==='dark'?'light':'dark');
     });
+  })();
+
+  /* Galería de la excavadora: tocar una miniatura la muestra en grande */
+  (function(){
+    [].forEach.call(document.querySelectorAll('[data-gal]'),function(g){
+      var main=g.querySelector('.main'),img=main.querySelector('img'),cnt=main.querySelector('.cnt b'),
+          th=[].slice.call(g.querySelectorAll('.thumbs a'));
+      th.forEach(function(a,i){
+        a.addEventListener('click',function(e){
+          e.preventDefault();
+          img.src=a.getAttribute('href');img.alt=a.dataset.alt||'';main.href=a.getAttribute('href');
+          if(cnt)cnt.textContent=i+1;
+          th.forEach(function(t){t.removeAttribute('aria-current');});
+          a.setAttribute('aria-current','true');
+        });
+      });
+    });
+  })();
+
+  /* En celular la tabla comparativa se vuelve una tarjeta por modelo (mismos datos) */
+  (function(){
+    var tw=document.querySelector('.tbl-wrap'),tb=tw&&tw.querySelector('table');
+    if(!tb)return;
+    var heads=[].slice.call(tb.querySelectorAll('thead th')),
+        rows=[].slice.call(tb.querySelectorAll('tbody tr')),
+        box=document.createElement('div');
+    box.className='tbl-cards';
+    box.setAttribute('aria-label','Comparación de los martillos, modelo por modelo');
+    heads.slice(1).forEach(function(h,i){
+      var art=document.createElement('article'),t=document.createElement('h4');
+      t.innerHTML=h.innerHTML;
+      art.appendChild(t);
+      var dl=document.createElement('dl');
+      rows.forEach(function(r){
+        var lb=r.querySelector('th'),cell=r.querySelectorAll('td')[i];
+        if(!lb||!cell)return;
+        var dt=document.createElement('dt');dt.textContent=lb.textContent.trim();
+        var dd=document.createElement('dd');dd.innerHTML=cell.innerHTML;
+        if(r.classList.contains('pr'))dd.className='destacado';
+        dl.appendChild(dt);dl.appendChild(dd);
+      });
+      art.appendChild(dl);
+      box.appendChild(art);
+    });
+    tw.parentNode.insertBefore(box,tw.nextSibling);
   })();
 
   /* Menú móvil */
