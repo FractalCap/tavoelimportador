@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tavo El Importador</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' fill='%23ffd400'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAO0lEQVR42u3QMREAIAwEwQc9+FeCn1CCAtLsdal+J4maG+9RO/VldN3d2f0BAAAAAAAAAAAAAAAAtXcATdADNFmVXA8AAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAABf0lEQVR42u3UsRHAIAwEQWAcSf3Qf+x+iKEIEht2O+C5UY3IWeAQzQQIGgQNggZBI2gQNAgaBA2CRtAgaBA0CBoEjaBB0CBoEDQIGkGDoEHQIGgQNIIGQYOgQdAgaAQNggZBg6BB0AgaBA2CBkEjaBA0CBoEDYJG0CBoEDQIGgTNbZ5THjLe4Tc3ZE8XGgQNggZBI2gQNAgaBA2CRtAgaBA0CBoEjaBB0CBoEDQIGkGDoEHQIGgQNIIGQYOgQdAgaAQNggZBg6ARNAgaBA2CBkEjaBA0CBoEDYJG0CBoEDQIGgSNoEHQIGgQNAgaQYOgQdAgaBA0ggZBg6BB0CBoBA2CBkGDoEHQCBoEDYIGQSNoEDQIGgQNgkbQIGj4jhqR0wy40CBoEDQIGkGDoEHQIGgQNIIGQYOgQdAgaAQNggZBg6BB0AgaBA2CBkGDoBE0CBoEDYIGQSNoEDQIGgSNoE2AoEHQIGgQNIIGQYOgQdAgaAQNggZBg6BB0AgafmoBjXAGpVOTSe4AAAAASUVORK5CYII=">
 <meta name="description" content="Tavo El Importador: maquinaria pesada nueva e importada en Barranquilla, Colombia. Martillos hidráulicos TALA, excavadoras Caterpillar y retroexcavadora TALA RE4CX con garantía real y entrega inmediata en Colombia. WhatsApp 313 676 3895.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -867,20 +870,20 @@
      a la izquierda (sobre la zona vacía del video) y las dos tarjetas en una fila debajo, sin taparlo. */
   @media(min-width:981px){
     .hero{background:#fff;color:#0c0c0d}
-    .hero-grid{--hero-drop:clamp(20px,4.2vh,84px);--hero-rise:30px;
+    .hero-grid{--hero-drop:clamp(20px,4.2vh,84px);--hero-rise:64px;
       grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}
     .hero-copy{grid-column:1;grid-row:1;position:relative;z-index:1}
     .hero-media{grid-column:2;grid-row:1;z-index:0;pointer-events:none}
-    /* sube --hero-rise sobre el texto y baja (--hero-drop, el espacio sobre los datos) hasta la línea
+    /* sube --hero-rise sobre el texto (el soporte del martillo se desvanece arriba) y baja (--hero-drop, el espacio sobre los datos) hasta la línea
        de "5 modelos · 6 meses…", donde la punta del cincel se desvanece */
     .hero-media video{position:absolute;right:0;bottom:calc(-1*var(--hero-drop));
       height:calc(100% + var(--hero-drop) + var(--hero-rise));width:auto;max-width:none;aspect-ratio:752/416;
       transform:translate3d(19%,0,0);filter:brightness(1.03);
       -webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),
-                         linear-gradient(to bottom,#000 86%,transparent 97%);
+                         linear-gradient(to bottom,transparent,#000 6%,#000 86%,transparent 97%);
       -webkit-mask-composite:source-in;
       mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),
-                 linear-gradient(to bottom,#000 86%,transparent 97%);
+                 linear-gradient(to bottom,transparent,#000 6%,#000 86%,transparent 97%);
       mask-composite:intersect}
     .hero-media .flag{display:none}
 
@@ -901,7 +904,7 @@
 
   }
   /* pantallas bajitas: el martillo sube menos para no quedar debajo de la barra del menú */
-  @media(min-width:981px) and (max-height:880px){.hero-grid{--hero-rise:10px;--hero-drop:16px}}
+  @media(min-width:981px) and (max-height:880px){.hero-grid{--hero-rise:40px;--hero-drop:16px}}
   /* modo oscuro: la barra del menú va oscura y sólida sobre la portada blanca */
   @media(min-width:981px) and (prefers-color-scheme:dark){
     :root:not([data-theme="light"]) header .bar{background:color-mix(in srgb,var(--bg) 88%,transparent)}
