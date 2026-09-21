@@ -32,7 +32,7 @@
     --ok:#1c7a52;
     --warn:#946300;
     --lim:#b3401a;
-    --hot:#d42a1d;--hot-text:#c0261a;--hot-wash:#fff1ef;
+    --hot:#ffd400;--on-hot:#0c0c0d;--hot-text:#0c0c0d;--hot-wash:#fffbe0;
     --shadow:0 1px 2px rgba(12,12,13,.04),0 8px 24px -12px rgba(12,12,13,.10);
   }
   @media (prefers-color-scheme:dark){
@@ -44,7 +44,7 @@
       --hair:#232326;--hair-2:#313135;
       --accent:#ffd400;--accent-ink:#0c0c0d;--accent-deep:#d6b53a;--accent-wash:#1e1a05;
       --ok:#4faa7c;--warn:#e0ad3e;--lim:#ef8a5c;
-      --hot:#d42a1d;--hot-text:#ff6b5b;--hot-wash:#2a0f0c;
+      --hot:#ffd400;--on-hot:#0c0c0d;--hot-text:#ffd400;--hot-wash:#1e1a05;
       --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
     }
   }
@@ -56,7 +56,7 @@
     --hair:#232326;--hair-2:#313135;
     --accent:#ffd400;--accent-ink:#0c0c0d;--accent-deep:#d6b53a;--accent-wash:#1e1a05;
     --ok:#4faa7c;--warn:#e0ad3e;--lim:#ef8a5c;
-    --hot:#d42a1d;--hot-text:#ff6b5b;--hot-wash:#2a0f0c;
+    --hot:#ffd400;--on-hot:#0c0c0d;--hot-text:#ffd400;--hot-wash:#1e1a05;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
   }
 
@@ -216,10 +216,12 @@
   .spec-card .ph{display:block;aspect-ratio:16/10;position:relative;overflow:hidden;border-bottom:1px solid #1e1e21;background:#111}
   .spec-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
   .spec-card:hover .ph img{transform:scale(1.035)}
-  .spec-card .flag{position:absolute;top:12px;left:12px;z-index:2;display:inline-flex;align-items:center;gap:7px;
-    font-family:"IBM Plex Mono",monospace;font-size:.62rem;background:rgba(7,7,8,.82);padding:5px 9px;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-  .spec-card .flag::before{content:"";width:5px;height:5px;background:var(--accent);flex:none}
+  /* "Nuevo · Solo 5 unidades": sobre el video en celular, dentro de la tarjeta TALA 680 en computador */
+  .hero-media .flag,.spec-card .flag{display:inline-flex;align-items:center;gap:7px;
+    font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .hero-media .flag::before,.spec-card .flag::before{content:"";width:5px;height:5px;background:var(--accent);flex:none}
+  .hero-media .flag{position:absolute;top:12px;left:12px;z-index:2;background:rgba(7,7,8,.82);padding:5px 9px}
+  .spec-card .flag{display:none;margin-bottom:7px}
   .spec-card .body{padding:20px 22px 18px}
   .spec-card h3{font-size:1.02rem;color:#f4f4f2;letter-spacing:-.02em}
   .spec-card .mdl{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
@@ -307,16 +309,16 @@
   .hm.hot{border:2px solid var(--hot);box-shadow:0 24px 60px -30px color-mix(in srgb,var(--hot) 70%,transparent)}
   .hm.hot::before{background:var(--hot);height:4px;transform:none}
   .st.hot{top:0;left:0;right:0;border-radius:0;border:0;justify-content:center;padding:11px 12px;gap:10px;
-    background:var(--hot);color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.08em}
-  .st.hot::before{width:8px;height:8px;background:#fff;animation:pulseHot 1.4s infinite}
-  @keyframes pulseHot{0%{box-shadow:0 0 0 0 rgba(255,255,255,.8)}70%{box-shadow:0 0 0 9px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+    background:var(--hot);color:var(--on-hot);font-size:.8rem;font-weight:700;letter-spacing:.08em}
+  .st.hot::before{width:8px;height:8px;background:var(--on-hot);animation:pulseHot 1.4s infinite}
+  @keyframes pulseHot{0%{box-shadow:0 0 0 0 rgba(12,12,13,.55)}70%{box-shadow:0 0 0 9px rgba(12,12,13,0)}100%{box-shadow:0 0 0 0 rgba(12,12,13,0)}}
   .urg{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 18px;padding:14px 16px;
     background:var(--hot-wash);border:1px solid color-mix(in srgb,var(--hot) 45%,transparent);border-left:5px solid var(--hot)}
   .urg .ut{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1 1 220px}
   .urg .ut b{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:var(--hot-text);line-height:1.2;text-transform:uppercase}
   .urg .ut span{font-size:.9rem;color:var(--text);line-height:1.35}
   .urg .units{display:flex;gap:5px;flex:none}
-  .urg .units i{width:14px;height:26px;background:var(--hot);display:block;animation:unitBlink 2.6s infinite}
+  .urg .units i{width:14px;height:26px;background:var(--hot);box-shadow:inset 0 0 0 1.5px rgba(12,12,13,.55);display:block;animation:unitBlink 2.6s infinite}
   .urg .units i:nth-child(2){animation-delay:.15s}.urg .units i:nth-child(3){animation-delay:.3s}
   .urg .units i:nth-child(4){animation-delay:.45s}.urg .units i:nth-child(5){animation-delay:.6s}
   @keyframes unitBlink{0%,80%,100%{opacity:1}90%{opacity:.35}}
@@ -330,10 +332,10 @@
   .hm.hot .row .q[href*="wa.me"]{padding:15px 22px;font-size:1rem;animation:ctaNudge 3s infinite}
   .hm.hot .row .q .icon.wa-ic{width:20px;height:20px}
   @keyframes ctaNudge{0%,86%,100%{transform:none}90%{transform:scale(1.05)}94%{transform:scale(.98)}}
-  .spec-card.hm-feat dt .hot-mini,.hot-mini{display:inline-block;margin-left:8px;background:var(--hot);color:#fff;
+  .spec-card.hm-feat dt .hot-mini,.hot-mini{display:inline-block;margin-left:8px;background:var(--hot);color:var(--on-hot);
     font-size:.6rem;font-weight:700;letter-spacing:.04em;padding:2px 6px;text-transform:uppercase;vertical-align:1px}
   .spec-card.hm-feat dd.row-hot{color:var(--accent);font-weight:700}
-  .tag.hot{color:#fff;background:var(--hot);border-color:var(--hot);font-weight:700}
+  .tag.hot{color:var(--on-hot);background:var(--hot);border-color:var(--hot);font-weight:700}
   @media (prefers-reduced-motion:reduce){.urg .units i,.hm.hot .row .q,.st.hot::before{animation:none}}
 
   /* Tarjetas de martillo compactas y todas del mismo tamaño en computador */
@@ -372,6 +374,13 @@
     .hm .row .q[href*="wa.me"]{padding:13px 20px;justify-content:center}
   }
   @media(max-width:560px){.hm .in{padding:22px 20px 24px}}
+  /* fichas sin precios: descripción de una línea, especificaciones clave y solo el botón verde */
+  .hm .hm-specs{margin-top:18px;max-width:560px}
+  .hm .buy,.hm.hot .buy{margin-top:22px;padding:18px 0 0;border:0;border-top:1px solid var(--hair);background:none}
+  @media(min-width:901px){
+    .hm .hm-specs{margin-top:12px}
+    .hm .buy,.hm.hot .buy{margin-top:auto;padding:14px 0 0}
+  }
   .kicker{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:.64rem;
     letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:10px}
   .kicker::before{content:"";width:14px;height:1px;background:var(--accent);flex:none}
@@ -536,12 +545,30 @@
 
   /* hero: martillos primero, retroexcavadora debajo */
   .hero-stack{display:flex;flex-direction:column;gap:16px;min-width:0}
-  .spec-card.hm-feat .ph{aspect-ratio:2/1;background:#f7f7f7}
-  .spec-card.hm-feat .ph img{object-fit:contain;padding:10px 0}
-  /* el video se ve completo: el recuadro toma la proporción del video (752×416) */
-  .spec-card.hm-feat .ph.vid{background:#000;aspect-ratio:752/416;height:auto}
-  .spec-card .ph.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;
+  /* tarjetas de la portada: nombre, dato clave y solo el botón verde para cotizar */
+  .spec-card h3 a{color:inherit;text-decoration:none;transition:color .18s}
+  .spec-card h3 a:hover{color:var(--accent)}
+  .spec-card .sc-cta{padding:0 22px 20px}
+  .spec-card .sc-cta .btn{width:100%;justify-content:center;font-size:.95rem}
+
+  /* Video del martillo desarmándose (TALA 680). Celular y tableta: recuadro arriba de todo, igual que
+     se veía en la tarjeta. Computador: fondo de la portada (ver "Portada en computador" más abajo). */
+  .hero-media{position:relative;min-width:0}
+  .hero-media video{display:block;width:100%;height:100%;object-fit:contain;
     transform:translateZ(0);backface-visibility:hidden}
+  @media(max-width:980px){
+    .hero{padding-top:0}
+    .hero .hero-inner{padding-top:86px}
+    .hero-media{aspect-ratio:752/416;border:1px solid #1e1e21;background:#000;margin-bottom:-16px;
+      box-shadow:0 30px 70px -40px rgba(0,0,0,.9)}
+    .hero-media::before,.hero-media::after{content:"";position:absolute;width:12px;height:12px;
+      border:1px solid var(--accent);pointer-events:none;z-index:3}
+    .hero-media::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+    .hero-media::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  }
+  @media(max-width:640px){.hero .hero-inner{padding-top:82px}}
+  /* "Martillos hidráulicos" cabe en una línea también en celulares angostos */
+  @media(max-width:380px){.hero h1{font-size:2.2rem}}
   .spec-card.hm-feat dt a{color:#e4e4e0;text-decoration:none}
   .spec-card.hm-feat dt a:hover{color:var(--accent)}
   .spec-card.hm-feat dt small{color:#85857f;font-size:.7rem;margin-left:6px}
@@ -791,8 +818,6 @@
     .trust{margin-top:clamp(18px,3.6vh,42px);padding-top:clamp(14px,2.4vh,26px);gap:10px clamp(18px,2.4vw,30px)}
     .hero-grid{gap:clamp(28px,3.4vw,64px)}
     .hero-stack{gap:clamp(10px,1.6vh,16px)}
-    .spec-card.hm-feat .ph{aspect-ratio:auto;height:clamp(96px,19vh,210px)}
-    .spec-card.hm-feat .ph img{padding:6px 0}
     .spec-card .body{padding:clamp(12px,1.8vh,20px) 22px clamp(10px,1.6vh,18px)}
     .spec-card .sc-sub{margin-top:4px;font-size:clamp(.72rem,1.3vh,.8rem)}
     .spec-card dl{margin-top:clamp(8px,1.4vh,16px);font-size:clamp(.72rem,1.3vh,.78rem)}
@@ -823,7 +848,6 @@
     .trust{margin-top:16px;padding-top:12px;gap:8px 22px;font-size:.8rem}
     .trust div{font-size:.8rem}
     .hero-stack{gap:10px}
-    .spec-card.hm-feat .ph{height:92px}
     .spec-card .body{padding:10px 18px 8px}
     .spec-card h3{font-size:.96rem}
     .spec-card dl{margin-top:8px}
@@ -846,11 +870,70 @@
     .spec-card.retro-mini .rm-foot{gap:4px 10px;margin-top:5px}
   }
 
+  /* ===== Portada en computador: el video del martillo desarmándose es el fondo =====
+     El video tiene fondo blanco, así que la portada usa ese mismo blanco y no se ve ningún borde:
+     brightness(1.03) deja el blanco del video en blanco puro en cualquier navegador y la máscara
+     difumina las orillas del recuadro y la punta del cincel. El martillo queda a la derecha, el texto
+     a la izquierda (sobre la zona vacía del video) y las dos tarjetas en una fila debajo, sin taparlo. */
+  @media(min-width:981px){
+    .hero{background:#fff;color:#0c0c0d}
+    .hero-grid{--hero-gap:clamp(18px,3.2vh,34px);--hero-rise:30px;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:var(--hero-gap);align-items:stretch}
+    .hero-copy{grid-column:1;grid-row:1;position:relative;z-index:1}
+    .hero-media{grid-column:2;grid-row:1;z-index:0;pointer-events:none}
+    /* sube --hero-rise sobre el texto y baja detrás de las tarjetas, donde la punta del cincel se desvanece */
+    .hero-media video{position:absolute;right:0;bottom:calc(-1*var(--hero-gap) - 26px);
+      height:calc(100% + var(--hero-gap) + 26px + var(--hero-rise));width:auto;max-width:none;aspect-ratio:752/416;
+      transform:translate3d(19%,0,0);filter:brightness(1.03);
+      -webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),
+                         linear-gradient(to bottom,#000 86%,transparent 97%);
+      -webkit-mask-composite:source-in;
+      mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),
+                 linear-gradient(to bottom,#000 86%,transparent 97%);
+      mask-composite:intersect}
+    .hero-media .flag{display:none}
+
+    /* textos oscuros sobre el blanco; el WhatsApp sigue verde */
+    .hero .eyebrow{color:#4a4a48;border-color:#d5d4ce}
+    .hero h1 em{color:inherit;background:linear-gradient(transparent 62%,var(--accent) 62%,var(--accent) 92%,transparent 92%)}
+    .hero .lead{color:#4a4a48}
+    .hero .btn{border-color:#c9c8c2;color:#0c0c0d}
+    .hero .btn:hover{border-color:#0c0c0d;background:rgba(12,12,13,.04)}
+    .trust{border-top-color:#e2e1dc}
+    .trust div{color:#4a4a48}
+    .trust .icon{color:#8a7000}
+    .hero-bay{border-top-color:#e2e1dc}
+    .hero-bay>div+div{border-left-color:#e2e1dc}
+    .hero-bay .n{color:#0c0c0d}
+    .hero-bay .n i{color:#8a7000}
+    .hero-bay .k{color:#6f6f68}
+
+    /* tarjetas TALA 680 y RE4CX: una al lado de la otra, debajo del martillo */
+    .hero-stack{grid-column:1/-1;grid-row:2;flex-direction:row;position:relative;z-index:1}
+    .hero-stack>.spec-card{flex:1 1 0;min-width:0}
+    .hero .spec-card{background:#0c0c0d;border-color:#0c0c0d;-webkit-backdrop-filter:none;backdrop-filter:none}
+    .spec-card .sc-sub{text-wrap:balance}
+    .hero-stack>.spec-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+    .spec-card.hm-feat .flag{display:inline-flex}
+    .spec-card.hm-feat .mdl{display:none}
+    .spec-card .sc-cta{padding:12px 22px 12px 0}
+    .spec-card .sc-cta .btn{width:auto}
+  }
+  /* pantallas bajitas: el martillo sube menos para no quedar debajo de la barra del menú */
+  @media(min-width:981px) and (max-height:880px){.hero-grid{--hero-rise:10px}}
+  /* modo oscuro: la barra del menú va oscura y sólida sobre la portada blanca */
+  @media(min-width:981px) and (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) header .bar{background:color-mix(in srgb,var(--bg) 88%,transparent)}
+  }
+  @media(min-width:981px){
+    :root[data-theme="dark"] header .bar{background:color-mix(in srgb,var(--bg) 88%,transparent)}
+  }
+
   /* ===== Ajustes para celular: texto legible y botones grandes ===== */
   @media(max-width:760px){
     /* nada de texto por debajo de 12 px */
     .kicker{font-size:.72rem}
-    .st,.tag,.spec-card .flag,.spec-card .mdl,.hero-bay .k,.blk-h,.prices .pl,.rbuy .pl,
+    .st,.tag,.hero-media .flag,.spec-card .mdl,.hero-bay .k,.blk-h,.prices .pl,.rbuy .pl,
     .spec-card .sfoot .pr small,.retro-mini .rm-foot b small,.exc-gal .cnt,.price-flag{font-size:.72rem}
     .hot-mini{font-size:.68rem;padding:3px 7px}
     .specs{font-size:.8rem}
@@ -1040,49 +1123,48 @@
   <section class="hero" id="inicio">
     <div class="wrap hero-inner">
       <div class="hero-grid">
-        <div>
+        <!-- Video del martillo desarmándose: fondo de la portada en computador; arriba de todo en celular -->
+        <div class="hero-media">
+          <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="video1.mp4" type="video/mp4">
+          </video>
+          <span class="flag">Nuevo · Solo 5 unidades</span>
+        </div>
+        <div class="hero-copy">
           <span class="eyebrow"><i></i> Tavo El Importador · Barranquilla, Colombia</span>
-          <h1>Maquinaria pesada <em>nueva e importada</em></h1>
+          <h1><em>Martillos hidráulicos</em> y maquinaria pesada</h1>
           <p class="lead">Martillos hidráulicos, excavadoras y retroexcavadoras nuevas e importadas, con garantía real y entrega inmediata en Colombia.</p>
           <div class="acts">
             <a class="btn primary" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
-            <a class="btn" href="#martillos">Ver equipos y precios</a>
+            <a class="btn" href="#martillos">Ver equipos</a>
           </div>
           <div class="trust">
             <div><svg class="icon"><use href="#i-shield"/></svg>Garantía real</div>
             <div><svg class="icon"><use href="#i-truck"/></svg>Entrega inmediata en Colombia</div>
             <div><svg class="icon"><use href="#i-clock"/></svg>Lunes a domingo, 8:00 a.m. a 8:00 p.m.</div>
-            <div><svg class="icon"><use href="#i-tag"/></svg>Precios publicados sin IVA</div>
           </div>
         </div>
         <div class="hero-stack">
-          <a class="spec-card hm-feat link-card" href="#tala-680" aria-label="Ver el martillo hidráulico TALA 680">
-            <div class="ph vid">
-              <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
-                <source src="video1.mp4" type="video/mp4">
-              </video>
-              <span class="flag">Nuevo · Solo 5 unidades</span>
-            </div>
+          <div class="spec-card hm-feat">
             <div class="body">
+              <span class="flag">Nuevo · Solo 5 unidades</span>
               <p class="mdl">Martillo hidráulico · Nuevo</p>
-              <h3>Martillo hidráulico TALA 680</h3>
-              <p class="sc-sub">Para pajarita / miniretroexcavadora — 4 a 7 toneladas · Garantía 6 meses</p>
+              <h3><a href="#tala-680">Martillo hidráulico TALA 680</a></h3>
+              <p class="sc-sub">Para pajarita / miniretroexcavadora de 4 a 7 toneladas</p>
             </div>
-            <div class="sfoot">
-              <span class="pr num"><small>Sin IVA</small>$11.700.000</span>
-              <span class="go">Ver TALA 680 →</span>
+            <div class="sc-cta">
+              <a class="btn primary" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 680" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
             </div>
-          </a>
+          </div>
 
           <div class="spec-card retro-mini">
             <div class="body">
               <p class="mdl">Lanzamiento · Nueva</p>
-              <h3>Retroexcavadora TALA RE4CX</h3>
+              <h3><a href="#retro">Retroexcavadora TALA RE4CX</a></h3>
               <p class="sc-sub">4x4 · Garantía de 1 año contra defecto de fábrica</p>
-              <div class="rm-foot">
-                <b class="num">$420.000.000<small>sin IVA</small></b>
-                <a href="#retro">Ver detalles →</a>
-              </div>
+            </div>
+            <div class="sc-cta">
+              <a class="btn primary" href="https://wa.me/573136763895" data-wa="Retroexcavadora TALA RE4CX" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
             </div>
           </div>
         </div>
@@ -1106,7 +1188,6 @@
         </div>
         <p class="sub">Cinco modelos, del minicargador / Bobcat de 2.5 toneladas a la retroexcavadora / excavadora de 36 toneladas. Todos incluyen base de acople, 2 puntas de cincel, 2 mangueras hidráulicas, caja de herramientas, pipeta de gas y garantía real de 6 meses.</p>
       </div>
-      <p class="iva-note"><svg class="icon"><use href="#i-tag"/></svg><span>Todos los precios publicados son <b>SIN IVA</b>. Si el cliente requiere factura con IVA (19%), se suma al valor final.</span></p>
       <div class="hm-list">
 
         <article class="hm hot" id="tala-530">
@@ -1131,41 +1212,18 @@
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 530</h3>
             <p class="subt">Para minicargador / Bobcat — 2.5 a 4.5 toneladas</p>
-            <p class="desc">Martillo hidráulico nuevo, compacto y ágil, ideal para demolición de pavimento en obra urbana, trabajos en espacios reducidos, mantenimiento vial y remodelaciones. Es el modelo más rápido de la línea gracias a su alta frecuencia de impacto.</p>
-            <div class="cols">
-              <div>
-                <p class="blk-h">Especificaciones principales</p>
-                <dl class="specs">
-                  <dt>Peso operativo</dt><dd>138 kg (side/top) · 152 kg (box)</dd>
-                  <dt>Diámetro del cincel</dt><dd>53 mm</dd>
-                  <dt>Frecuencia de impacto</dt><dd>600 – 1000 golpes por minuto</dd>
-                  <dt>Flujo de aceite</dt><dd>25 – 50 l/min</dd>
-                  <dt>Presión de trabajo</dt><dd>90 – 120 kg/cm²</dd>
-                  <dt>Conexión de manguera</dt><dd>1/2 pulgada</dd>
-                  <dt>Portador compatible</dt><dd>Minicargador/Bobcat de 2.5 a 4.5 toneladas</dd>
-                </dl>
-              </div>
-              <div>
-                <p class="blk-h">Incluye</p>
-                <ul class="inc">
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Base de acople</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 puntas de cincel</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 mangueras hidráulicas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Caja de herramientas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Pipeta de gas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garantía real de 6 meses</b></span></li>
-                </ul>
-              </div>
+            <p class="desc">Ideal para demolición de pavimento, obra urbana y espacios reducidos.</p>
+            <div class="hm-specs">
+              <p class="blk-h">Especificaciones principales</p>
+              <dl class="specs">
+                <dt>Peso operativo</dt><dd>138 kg (side/top) · 152 kg (box)</dd>
+                <dt>Diámetro del cincel</dt><dd>53 mm</dd>
+                <dt>Flujo de aceite</dt><dd>25 – 50 l/min</dd>
+              </dl>
             </div>
             <div class="buy">
-              <div class="prices">
-                <span class="price-flag">★ Entrega inmediata en Colombia</span>
-                <span class="pl">Precio</span>
-                <div class="pp"><b>$15.600.000</b><span>sin IVA</span></div>
-                <div class="pp alt"><b>$18.564.000</b><span>con IVA</span></div>
-              </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 530 (quiero separar una de las 3 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 530 (solo 3 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
                 <a class="w" href="image_b00e9eac5d19e4939eceaf236d0c0caa.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
@@ -1189,46 +1247,23 @@
           <div class="in">
             <div class="urg" role="note">
               <span class="units" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-              <span class="ut"><b>Solo 5 unidades disponibles</b><span>El precio más bajo de toda la línea TALA.</span></span>
+              <span class="ut"><b>Solo 5 unidades disponibles</b><span>El punto intermedio de la línea TALA.</span></span>
             </div>
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 680</h3>
             <p class="subt">Para pajarita / miniretroexcavadora — 4 a 7 toneladas</p>
-            <p class="desc">Martillo hidráulico nuevo, pensado para trabajos de alcantarillado, redes de acueducto, obras urbanas y mantenimiento vial. Es el punto intermedio de la línea, ideal para pajaritas y retrocargadores.</p>
-            <div class="cols">
-              <div>
-                <p class="blk-h">Especificaciones principales</p>
-                <dl class="specs">
-                  <dt>Peso operativo</dt><dd>263 kg (side/top) · 299 kg (box)</dd>
-                  <dt>Diámetro del cincel</dt><dd>68 mm</dd>
-                  <dt>Frecuencia de impacto</dt><dd>500 – 900 golpes por minuto</dd>
-                  <dt>Flujo de aceite</dt><dd>40 – 70 l/min</dd>
-                  <dt>Presión de trabajo</dt><dd>110 – 140 kg/cm²</dd>
-                  <dt>Conexión de manguera</dt><dd>1/2 pulgada</dd>
-                  <dt>Portador compatible</dt><dd>Pajarita/miniretroexcavadora de 4 a 7 toneladas</dd>
-                </dl>
-              </div>
-              <div>
-                <p class="blk-h">Incluye</p>
-                <ul class="inc">
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Base de acople</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 puntas de cincel</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 mangueras hidráulicas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Caja de herramientas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Pipeta de gas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garantía real de 6 meses</b></span></li>
-                </ul>
-              </div>
+            <p class="desc">Ideal para alcantarillado, acueducto, obras urbanas y mantenimiento vial.</p>
+            <div class="hm-specs">
+              <p class="blk-h">Especificaciones principales</p>
+              <dl class="specs">
+                <dt>Peso operativo</dt><dd>263 kg (side/top) · 299 kg (box)</dd>
+                <dt>Diámetro del cincel</dt><dd>68 mm</dd>
+                <dt>Flujo de aceite</dt><dd>40 – 70 l/min</dd>
+              </dl>
             </div>
             <div class="buy">
-              <div class="prices">
-                <span class="price-flag">★ Precio más bajo de la línea</span>
-                <span class="pl">Precio</span>
-                <div class="pp"><b>$11.700.000</b><span>sin IVA</span></div>
-                <div class="pp alt"><b>$13.923.000</b><span>con IVA</span></div>
-              </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 680 (quiero separar una de las 5 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 680 (solo 5 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
                 <a class="w" href="image_a4a4286ec42523ea6e5447acf784ba63.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
@@ -1244,40 +1279,18 @@
             <p class="kicker">Martillo hidráulico · Nuevo · Disponible bajo pedido</p>
             <h3>Martillo hidráulico TALA 1000</h3>
             <p class="subt">Para excavadora — 12 a 15 toneladas</p>
-            <p class="desc">Martillo hidráulico nuevo para excavadoras medianas, ideal para demolición de estructuras, excavación en roca, obras civiles y construcción de vías. Buen balance entre potencia y versatilidad.</p>
-            <div class="cols">
-              <div>
-                <p class="blk-h">Especificaciones principales</p>
-                <dl class="specs">
-                  <dt>Peso operativo</dt><dd>761 kg (side) · 866 kg (top)</dd>
-                  <dt>Diámetro del cincel</dt><dd>100 mm</dd>
-                  <dt>Frecuencia de impacto</dt><dd>400 – 650 golpes por minuto</dd>
-                  <dt>Flujo de aceite</dt><dd>80 – 110 l/min</dd>
-                  <dt>Presión de trabajo</dt><dd>150 – 170 kg/cm²</dd>
-                  <dt>Conexión de manguera</dt><dd>3/4 pulgada</dd>
-                  <dt>Portador compatible</dt><dd>Excavadora de 12 a 15 toneladas</dd>
-                </dl>
-              </div>
-              <div>
-                <p class="blk-h">Incluye</p>
-                <ul class="inc">
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Base de acople</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 puntas de cincel</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 mangueras hidráulicas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Caja de herramientas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Pipeta de gas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garantía real de 6 meses</b></span></li>
-                </ul>
-              </div>
+            <p class="desc">Ideal para demolición de estructuras, roca, obras civiles y vías.</p>
+            <div class="hm-specs">
+              <p class="blk-h">Especificaciones principales</p>
+              <dl class="specs">
+                <dt>Peso operativo</dt><dd>761 kg (side) · 866 kg (top)</dd>
+                <dt>Diámetro del cincel</dt><dd>100 mm</dd>
+                <dt>Flujo de aceite</dt><dd>80 – 110 l/min</dd>
+              </dl>
             </div>
             <div class="buy">
-              <div class="prices">
-                <span class="pl">Precio · disponible bajo pedido</span>
-                <div class="pp"><b>$18.500.000</b><span>sin IVA</span></div>
-                <div class="pp alt"><b>$22.015.000</b><span>con IVA</span></div>
-              </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1000 (disponible bajo pedido)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Pedir bajo pedido</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1000 (disponible bajo pedido)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
                 <a class="w" href="523b3932f4c490fa7e7bfa47a5fc93a0_1_1778681504_3755.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
@@ -1297,41 +1310,18 @@
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 1400</h3>
             <p class="subt">Para excavadora — 20 a 25 toneladas</p>
-            <p class="desc">Martillo hidráulico nuevo de alta potencia, ideal para demolición de estructuras de gran volumen, excavación en roca dura, canteras y trabajos de fundación pesada. Rompe placas de concreto gruesas y roca donde martillos más chicos no rinden.</p>
-            <div class="cols">
-              <div>
-                <p class="blk-h">Especificaciones principales</p>
-                <dl class="specs">
-                  <dt>Peso operativo</dt><dd>1.774 kg (side) · 2.059 kg (top) · 1.866 kg (box)</dd>
-                  <dt>Diámetro del cincel</dt><dd>140 mm</dd>
-                  <dt>Frecuencia de impacto</dt><dd>350 – 500 golpes por minuto</dd>
-                  <dt>Flujo de aceite</dt><dd>120 – 180 l/min</dd>
-                  <dt>Presión de trabajo</dt><dd>160 – 185 kg/cm²</dd>
-                  <dt>Conexión de manguera</dt><dd>1 pulgada</dd>
-                  <dt>Portador compatible</dt><dd>Excavadora de 20 a 25 toneladas</dd>
-                </dl>
-              </div>
-              <div>
-                <p class="blk-h">Incluye</p>
-                <ul class="inc">
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Base de acople</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 puntas de cincel</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 mangueras hidráulicas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Caja de herramientas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Pipeta de gas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garantía real de 6 meses</b></span></li>
-                </ul>
-              </div>
+            <p class="desc">Ideal para demolición pesada, roca dura, canteras y fundaciones.</p>
+            <div class="hm-specs">
+              <p class="blk-h">Especificaciones principales</p>
+              <dl class="specs">
+                <dt>Peso operativo</dt><dd>1.774 kg (side) · 2.059 kg (top) · 1.866 kg (box)</dd>
+                <dt>Diámetro del cincel</dt><dd>140 mm</dd>
+                <dt>Flujo de aceite</dt><dd>120 – 180 l/min</dd>
+              </dl>
             </div>
             <div class="buy">
-              <div class="prices">
-                <span class="price-flag">★ Entrega inmediata en Colombia</span>
-                <span class="pl">Precio</span>
-                <div class="pp"><b>$31.600.000</b><span>sin IVA</span></div>
-                <div class="pp alt"><b>$37.604.000</b><span>con IVA</span></div>
-              </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1400 (quiero separar una de las 7 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1400 (solo 7 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
                 <a class="w" href="7fb544a84ebf3e6606e246bc0898699d_1_1778681701_4459.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
@@ -1351,41 +1341,18 @@
             <p class="kicker">Martillo hidráulico · Nuevo · El más grande de la línea</p>
             <h3>Martillo hidráulico TALA 1550</h3>
             <p class="subt">Para retroexcavadora / excavadora — 27 a 36 toneladas (el más grande de la línea)</p>
-            <p class="desc">El martillo más grande y potente de la línea Tala, diseñado para canteras de extracción de agregados, plantas de trituración, grandes obras viales y de infraestructura, demolición industrial de gran escala y minería formal a cielo abierto.</p>
-            <div class="cols">
-              <div>
-                <p class="blk-h">Especificaciones principales</p>
-                <dl class="specs">
-                  <dt>Peso operativo</dt><dd>2.577 kg (side) · 2.745 kg (top) · 2.968 kg (box)</dd>
-                  <dt>Diámetro del cincel</dt><dd>155 mm</dd>
-                  <dt>Frecuencia de impacto</dt><dd>300 – 450 golpes por minuto</dd>
-                  <dt>Flujo de aceite</dt><dd>180 – 240 l/min</dd>
-                  <dt>Presión de trabajo</dt><dd>170 – 200 kg/cm²</dd>
-                  <dt>Conexión de manguera</dt><dd>1 pulgada</dd>
-                  <dt>Portador compatible</dt><dd>Retroexcavadora/excavadora de 27 a 36 toneladas</dd>
-                </dl>
-              </div>
-              <div>
-                <p class="blk-h">Incluye</p>
-                <ul class="inc">
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Base de acople</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 puntas de cincel</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>2 mangueras hidráulicas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Caja de herramientas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span>Pipeta de gas</span></li>
-                  <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garantía real de 6 meses</b></span></li>
-                </ul>
-              </div>
+            <p class="desc">Ideal para canteras, trituración, grandes obras viales y minería a cielo abierto.</p>
+            <div class="hm-specs">
+              <p class="blk-h">Especificaciones principales</p>
+              <dl class="specs">
+                <dt>Peso operativo</dt><dd>2.577 kg (side) · 2.745 kg (top) · 2.968 kg (box)</dd>
+                <dt>Diámetro del cincel</dt><dd>155 mm</dd>
+                <dt>Flujo de aceite</dt><dd>180 – 240 l/min</dd>
+              </dl>
             </div>
             <div class="buy">
-              <div class="prices">
-                <span class="pl">Precio · disponibilidad limitada</span>
-                <span class="price-flag">★ El más potente de la línea</span>
-                <div class="pp"><b>$77.000.000</b><span>sin IVA</span></div>
-                <div class="pp alt"><b>$91.630.000</b><span>con IVA</span></div>
-              </div>
               <div class="row">
-                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1550 (quiero separar una de las 3 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Separar mi unidad por WhatsApp</a>
+                <a class="q" href="https://wa.me/573136763895" data-wa="Martillo hidráulico TALA 1550 (solo 3 unidades disponibles)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
                 <a class="w" href="image_d5c163bd06bf25e62ba40924513c99e6.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
               </div>
             </div>
@@ -1404,7 +1371,7 @@
           <p class="idx"><b>02</b> Guía rápida</p>
           <h2>Compare los cinco martillos lado a lado</h2>
         </div>
-        <p class="sub">Todas las especificaciones principales, precios y disponibilidad en una sola tabla. Ubique el peso de su máquina en la fila «Portador compatible».</p>
+        <p class="sub">Todas las especificaciones principales y la disponibilidad en una sola tabla. Ubique el peso de su máquina en la fila «Portador compatible».</p>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -1419,22 +1386,19 @@
             <tr><th scope="row">Flujo de aceite</th><td>25 – 50 l/min</td><td>40 – 70 l/min</td><td>80 – 110 l/min</td><td>120 – 180 l/min</td><td>180 – 240 l/min</td></tr>
             <tr><th scope="row">Presión de trabajo</th><td>90 – 120 kg/cm²</td><td>110 – 140 kg/cm²</td><td>150 – 170 kg/cm²</td><td>160 – 185 kg/cm²</td><td>170 – 200 kg/cm²</td></tr>
             <tr><th scope="row">Conexión de manguera</th><td>1/2 pulgada</td><td>1/2 pulgada</td><td>3/4 pulgada</td><td>1 pulgada</td><td>1 pulgada</td></tr>
-            <tr class="pr"><th scope="row">Precio sin IVA</th><td>$15.600.000</td><td>$11.700.000</td><td>$18.500.000</td><td>$31.600.000</td><td>$77.000.000</td></tr>
-            <tr><th scope="row">Precio con IVA</th><td>$18.564.000</td><td>$13.923.000</td><td>$22.015.000</td><td>$37.604.000</td><td>$91.630.000</td></tr>
             <tr><th scope="row">Incluye</th><td colspan="5">Base de acople, 2 puntas de cincel, 2 mangueras hidráulicas, caja de herramientas, pipeta de gas y garantía real de 6 meses.</td></tr>
             <tr><th scope="row">Disponibilidad</th><td><span class="tag hot">Solo 3 unidades disponibles</span></td><td><span class="tag hot">Solo 5 unidades disponibles</span></td><td><span class="tag wait">Disponible bajo pedido</span></td><td><span class="tag hot">Solo 7 unidades disponibles</span></td><td><span class="tag hot">Solo 3 unidades disponibles</span></td></tr>
           </tbody>
         </table>
       </div>
-      <p class="tbl-note">Todos los precios publicados son <b>SIN IVA</b>. Si el cliente requiere factura con IVA (19%), se suma al valor final.</p>
       <div class="compare rng">
         <h3>Portador compatible, en toneladas</h3>
-        <p class="cap">Cada barra marca el rango de máquina de un modelo. Pase el cursor para ver el tipo de portador y el precio.</p>
-        <div class="bar-row" tabindex="0"><span class="lb">TALA 530</span><span class="rng-track"><span class="bar-fill" data-w="5" style="left:6.25%"></span></span><span class="val">2.5 – 4.5 t</span><span class="tip">Minicargador/Bobcat de 2.5 a 4.5 toneladas · $15.600.000 sin IVA</span></div>
-        <div class="bar-row" tabindex="0"><span class="lb">TALA 680</span><span class="rng-track"><span class="bar-fill" data-w="7.5" style="left:10%"></span></span><span class="val">4 – 7 t</span><span class="tip">Pajarita/miniretroexcavadora de 4 a 7 toneladas · $11.700.000 sin IVA</span></div>
-        <div class="bar-row" tabindex="0"><span class="lb">TALA 1000</span><span class="rng-track"><span class="bar-fill" data-w="7.5" style="left:30%"></span></span><span class="val">12 – 15 t</span><span class="tip">Excavadora de 12 a 15 toneladas · $18.500.000 sin IVA · bajo pedido</span></div>
-        <div class="bar-row" tabindex="0"><span class="lb">TALA 1400</span><span class="rng-track"><span class="bar-fill" data-w="12.5" style="left:50%"></span></span><span class="val">20 – 25 t</span><span class="tip">Excavadora de 20 a 25 toneladas · $31.600.000 sin IVA</span></div>
-        <div class="bar-row" tabindex="0"><span class="lb">TALA 1550</span><span class="rng-track"><span class="bar-fill" data-w="22.5" style="left:67.5%"></span></span><span class="val">27 – 36 t</span><span class="tip">Retroexcavadora/excavadora de 27 a 36 toneladas · $77.000.000 sin IVA</span></div>
+        <p class="cap">Cada barra marca el rango de máquina de un modelo. Pase el cursor para ver el tipo de portador.</p>
+        <div class="bar-row" tabindex="0"><span class="lb">TALA 530</span><span class="rng-track"><span class="bar-fill" data-w="5" style="left:6.25%"></span></span><span class="val">2.5 – 4.5 t</span><span class="tip">Minicargador/Bobcat de 2.5 a 4.5 toneladas</span></div>
+        <div class="bar-row" tabindex="0"><span class="lb">TALA 680</span><span class="rng-track"><span class="bar-fill" data-w="7.5" style="left:10%"></span></span><span class="val">4 – 7 t</span><span class="tip">Pajarita/miniretroexcavadora de 4 a 7 toneladas</span></div>
+        <div class="bar-row" tabindex="0"><span class="lb">TALA 1000</span><span class="rng-track"><span class="bar-fill" data-w="7.5" style="left:30%"></span></span><span class="val">12 – 15 t</span><span class="tip">Excavadora de 12 a 15 toneladas · bajo pedido</span></div>
+        <div class="bar-row" tabindex="0"><span class="lb">TALA 1400</span><span class="rng-track"><span class="bar-fill" data-w="12.5" style="left:50%"></span></span><span class="val">20 – 25 t</span><span class="tip">Excavadora de 20 a 25 toneladas</span></div>
+        <div class="bar-row" tabindex="0"><span class="lb">TALA 1550</span><span class="rng-track"><span class="bar-fill" data-w="22.5" style="left:67.5%"></span></span><span class="val">27 – 36 t</span><span class="tip">Retroexcavadora/excavadora de 27 a 36 toneladas</span></div>
         <div class="bar-row axis" aria-hidden="true"><span></span><span class="ticks"><i style="left:0">0</i><i style="left:25%">10</i><i style="left:50%">20</i><i style="left:75%">30</i><i style="left:100%">40 t</i></span><span></span></div>
       </div>
     </div>
@@ -1464,7 +1428,7 @@
           <p class="gal-note">Toque cualquier foto para verla en tamaño completo</p>
         </div>
         <div class="retro-info">
-          <p class="lead2">Retroexcavadora nueva 4x4, con dirección en las 4 ruedas y modo cangrejo para desplazamiento lateral en espacios reducidos — ideal para vías urbanas, mantenimiento vial, obras en zonas estrechas y espacios de difícil acceso. Producto en fase de lanzamiento al mercado colombiano.</p>
+          <p class="lead2">Nueva 4x4, con dirección en las 4 ruedas y modo cangrejo. Ideal para vías urbanas y espacios reducidos.</p>
           <p class="blk-h">Especificaciones principales</p>
           <div class="comp">
             <div><span class="n">Motor</span><h4>Turbocargado, 75 kW (~102 HP)</h4></div>
@@ -1472,27 +1436,14 @@
             <div><span class="n">Balde frontal</span><h4>1.2 m³</h4></div>
             <div><span class="n">Balde trasero (excavación)</span><h4>0.3 m³</h4></div>
             <div><span class="n">Velocidad máxima</span><h4>38 km/h</h4></div>
-            <div><span class="n">Tanques</span><h4>150 L de combustible + 150 L de aceite hidráulico</h4></div>
-            <div><span class="n">Tracción</span><h4>4x4 con dirección en las 4 ruedas y modo cangrejo</h4></div>
             <div><span class="n">Garantía</span><h4>1 año contra defecto de fábrica</h4></div>
           </div>
           <div class="rbuy">
-            <div><span class="pl">Precio</span><b>$420.000.000</b><span class="sv">sin IVA · Si requiere factura con IVA (19%), se suma al valor final.</span></div>
             <div class="acts">
-              <a class="btn primary" href="https://wa.me/573136763895" data-wa="Retroexcavadora TALA RE4CX" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar</a>
-              <a class="btn" href="tel:+573136763895"><svg class="icon"><use href="#i-phone"/></svg>Llamar</a>
+              <a class="btn primary" href="https://wa.me/573136763895" data-wa="Retroexcavadora TALA RE4CX" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="compare mkt">
-        <h3>Comparación de mercado</h3>
-        <p class="cap">Una Caterpillar 420F nueva en distribuidor autorizado cuesta entre $607.000.000 y $640.000.000. Una CAT 420F usada, modelo 2020, cuesta alrededor de $460.000.000.</p>
-        <div class="bar-row" tabindex="0"><span class="lb">Caterpillar 420F nueva<small>En distribuidor autorizado</small></span><span class="bar-track"><span class="bar-fill rg" data-w="100"></span></span><span class="val">$607 – 640 M</span><span class="tip">Entre $607.000.000 y $640.000.000</span></div>
-        <div class="bar-row" tabindex="0"><span class="lb">CAT 420F usada<small>Modelo 2020</small></span><span class="bar-track"><span class="bar-fill neu" data-w="71.9"></span></span><span class="val">≈ $460 M</span><span class="tip">Alrededor de $460.000.000</span></div>
-        <div class="bar-row us" tabindex="0"><span class="lb">TALA RE4CX nueva<small>Tavo El Importador</small></span><span class="bar-track"><span class="bar-fill" data-w="65.6"></span></span><span class="val">$420 M</span><span class="tip">$420.000.000</span></div>
-        <p class="verdict">La TALA RE4CX nueva cuesta menos que una CAT 420F usada.</p>
       </div>
     </div>
   </section>
@@ -1507,7 +1458,6 @@
         </div>
         <p class="sub">En excelente estado, con horas de uso reales y verificadas. Ambas incluyen línea húmeda instalada (lista para martillo hidráulico sin costo adicional), garra, cuchilla y balde estándar, GPS y garantía real de 3 meses en motor y sistema hidráulico.</p>
       </div>
-      <p class="iva-note"><svg class="icon"><use href="#i-tag"/></svg><span>Todos los precios publicados son <b>SIN IVA</b>. Si el cliente requiere factura con IVA (19%), se suma al valor final.</span></p>
       <div class="exc-grid">
 
         <article class="exc" id="cat-305">
@@ -1534,21 +1484,17 @@
             </div>
           </div>
           <div class="in">
-            <p class="desc">Excavadora usada en excelente estado, con horas de uso reales y verificadas. Ideal para obra civil, movimiento de tierra, excavación de zanjas, instalación de tubería, redes de acueducto/alcantarillado y construcción de vías.</p>
+            <p class="desc">Ideal para obra civil, movimiento de tierra, zanjas, tubería y vías.</p>
             <p class="blk-h">Especificaciones principales</p>
             <dl class="specs">
-              <dt>Año</dt><dd>2018</dd>
-              <dt>Horas de uso</dt><dd>4.700 horas reales</dd>
               <dt>Motor</dt><dd>Caterpillar — origen japonés</dd>
-              <dt>Peso operativo</dt><dd>5.38 toneladas</dd>
-              <dt>Capacidad de balde</dt><dd>0.27 m³</dd>
               <dt>Profundidad de excavación</dt><dd>3.47 m</dd>
               <dt>Alcance máximo</dt><dd>5.63 m</dd>
             </dl>
             <p class="blk-h">Incluye</p>
             <ul class="inc">
               <li><svg class="icon"><use href="#i-check"/></svg><span><b>Línea húmeda instalada</b> (lista para martillo hidráulico sin costo adicional)</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b> (valorada en ~$7.000.000 en Colombia)</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b></span></li>
               <li><svg class="icon"><use href="#i-check"/></svg><span>Cuchilla y balde estándar incluidos</span></li>
               <li><svg class="icon"><use href="#i-check"/></svg><span>Aire acondicionado</span></li>
               <li><svg class="icon"><use href="#i-check"/></svg><span>Documentos al día</span></li>
@@ -1556,10 +1502,6 @@
             </ul>
             <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
             <div class="buy">
-              <div class="prices">
-                <span class="pl">Precio</span>
-                <div class="pp"><b>$190.000.000</b><span>sin IVA</span></div>
-              </div>
               <div class="row"><a class="q" href="https://wa.me/573136763895" data-wa="Excavadora Caterpillar 305.5E2 (año 2018)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a></div>
             </div>
           </div>
@@ -1595,31 +1537,23 @@
             </div>
           </div>
           <div class="in">
-            <p class="desc">Excavadora en excelente estado, con horas de uso reales y verificadas mediante registro de mantenimiento del importador. Última unidad disponible de este lote. Ideal para obra civil, ingeniería y proyectos que requieren mayor capacidad que una mini excavadora.</p>
+            <p class="desc">Última unidad de este lote. Ideal para obra civil y proyectos que necesitan más capacidad que una mini excavadora.</p>
             <p class="blk-h">Especificaciones principales</p>
             <dl class="specs">
-              <dt>Año de fabricación</dt><dd>2019</dd>
-              <dt>Nacionalización en Colombia</dt><dd>2023</dd>
-              <dt>Horas de uso</dt><dd>4.152 horas reales, verificadas</dd>
               <dt>Motor</dt><dd>Caterpillar C3.3B — 56.8 HP<br>origen japonés</dd>
-              <dt>Peso operativo</dt><dd>8.2 toneladas</dd>
               <dt>Profundidad de excavación</dt><dd>4.15 m (brazo estándar)<br>4.69 m (brazo largo)</dd>
               <dt>Alcance horizontal máximo</dt><dd>6.93 m</dd>
             </dl>
             <p class="blk-h">Incluye</p>
             <ul class="inc">
               <li><svg class="icon"><use href="#i-check"/></svg><span><b>Línea húmeda instalada</b> (lista para martillo hidráulico sin costo adicional)</span></li>
-              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b> (valorada en ~$7.000.000 en Colombia)</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><b>Garra incluida</b></span></li>
               <li><svg class="icon"><use href="#i-check"/></svg><span>Cuchilla y balde estándar incluidos</span></li>
               <li><svg class="icon"><use href="#i-check"/></svg><span>Documentos al día</span></li>
               <li><svg class="icon"><use href="#i-check"/></svg><span>GPS instalado</span></li>
             </ul>
             <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
             <div class="buy">
-              <div class="prices">
-                <span class="pl">Precio · última unidad</span>
-                <div class="pp"><b>$259.000.000</b><span>sin IVA</span></div>
-              </div>
               <div class="row"><a class="q" href="https://wa.me/573136763895" data-wa="Excavadora Caterpillar 308.5E2 (año 2019, última unidad)" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a></div>
             </div>
           </div>
@@ -1671,7 +1605,7 @@
           <p class="idx"><b>06</b> Por qué Tavo</p>
           <h2>Lo que recibe con cada equipo</h2>
         </div>
-        <p class="sub">Garantía real, entrega inmediata en Colombia y precios publicados.</p>
+        <p class="sub">Garantía real, entrega inmediata en Colombia y atención todos los días.</p>
       </div>
       <div class="why-vid">
         <span class="tag-l">Martillo TALA · en video</span>
@@ -1683,7 +1617,7 @@
         <div><div class="n num">7<i>días</i></div><h3>Horario de atención</h3><p>Lunes a domingo, 8:00 a.m. a 8:00 p.m. Teléfono / WhatsApp: 313 676 3895.</p></div>
         <div><div class="n num">Kit<i>completo</i></div><h3>Martillos listos para trabajar</h3><p>Base de acople, 2 puntas de cincel, 2 mangueras hidráulicas, caja de herramientas, pipeta de gas y garantía real de 6 meses.</p></div>
         <div><div class="n num">~$7<i>millones</i></div><h3>Garra incluida en excavadoras</h3><p>Garra valorada en ~$7.000.000 en Colombia, más línea húmeda instalada, lista para martillo hidráulico sin costo adicional.</p></div>
-        <div><div class="n num">Sin<i>IVA</i></div><h3>Precios publicados</h3><p>Todos los precios publicados son SIN IVA. Si el cliente requiere factura con IVA (19%), se suma al valor final.</p></div>
+        <div><div class="n num">Directo<i>WhatsApp</i></div><h3>Cotice su equipo</h3><p>Escríbale a Tavo por WhatsApp al 313 676 3895 y reciba la cotización de su equipo directo.</p></div>
       </div>
     </div>
   </section>
@@ -1710,7 +1644,6 @@
           <a class="btn primary wa" href="https://wa.me/573136763895" data-wa="" target="_blank" rel="noopener">
             <svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Escribir por WhatsApp
           </a>
-          <p class="note">Todos los precios publicados son SIN IVA. Si el cliente requiere factura con IVA (19%), se suma al valor final.</p>
         </div>
         <form id="fq">
           <div><label for="n">Nombre <span style="color:var(--accent-deep)">*</span></label><input id="n" name="nombre" autocomplete="name" required></div>
@@ -1780,7 +1713,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Tavo El Importador · Maquinaria pesada nueva e importada · Precios en pesos colombianos, sin IVA</span>
+      <span>© 2026 Tavo El Importador · Maquinaria pesada nueva e importada</span>
       <button class="tt" id="tt" type="button">Cambiar tema</button>
     </div>
   </div>
@@ -1797,7 +1730,7 @@
     if(!l)return;
     var p=document.getElementById('lpct'),fill=document.getElementById('lfill'),
         ring=document.getElementById('lring'),st=document.getElementById('lstat'),
-        pasos=['Iniciando','Cargando martillos TALA','Cargando excavadoras','Preparando precios','Listo'],
+        pasos=['Iniciando','Cargando martillos TALA','Cargando excavadoras','Preparando catálogo','Listo'],
         r=document.documentElement,prev=r.style.overflow,n=0;
     r.style.overflow='hidden';
     function set(v){
