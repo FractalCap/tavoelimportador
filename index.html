@@ -182,11 +182,7 @@
   @media(max-width:400px){.head-cta .tel span{display:none}}
 
   /* ================= HERO ================= */
-  .hero{position:relative;overflow:hidden;background:#070708;color:#f4f4f2;isolation:isolate}
-  .hero #bg,.hero #bgfx{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block;object-fit:cover}
-  .hero #bg:not([hidden])~#bgfx{display:none}
-  .hero .veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(100deg,rgba(7,7,8,.94) 0%,rgba(7,7,8,.72) 46%,rgba(7,7,8,.86) 100%)}
+  .hero{position:relative;overflow:hidden;background:#000;color:#f4f4f2;isolation:isolate}
   .hero .wrap{position:relative;z-index:2}
   .hero-inner{padding:104px 32px 0}
   @media(max-width:760px){.hero-inner{padding:64px 20px 0}}
@@ -237,6 +233,11 @@
   .spec-card .sfoot a{font-size:.82rem;font-weight:500;text-decoration:none;color:var(--accent);white-space:nowrap;
     border-bottom:1px solid rgba(255,212,0,.34);padding-bottom:2px;transition:border-color .18s}
   .spec-card .sfoot a:hover{border-bottom-color:var(--accent)}
+  .spec-card.link-card{display:block;color:inherit;text-decoration:none;cursor:pointer}
+  .spec-card.link-card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .spec-card .sfoot .go{font-size:.82rem;font-weight:500;color:var(--accent);white-space:nowrap;
+    border-bottom:1px solid rgba(255,212,0,.34);padding-bottom:2px;transition:border-color .18s}
+  .spec-card.link-card:hover .sfoot .go{border-bottom-color:var(--accent)}
 
   .hero-bay{margin-top:84px;border-top:1px solid #1c1c1f;display:grid;grid-template-columns:repeat(4,1fr)}
   @media(max-width:760px){.hero-bay{grid-template-columns:repeat(2,1fr);margin-top:56px}}
@@ -271,6 +272,23 @@
   .hm .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:18px;
     transition:transform .5s cubic-bezier(.16,1,.3,1)}
   .hm:hover .ph img{transform:scale(1.04)}
+  /* carrusel video/foto (TALA 680) */
+  .slider .sl{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;visibility:hidden;
+    transition:opacity .5s ease,visibility 0s .5s}
+  .slider .sl.on{opacity:1;visibility:visible;transition:opacity .5s ease}
+  /* video más pequeño y completo, centrado sobre el mismo fondo claro que la foto */
+  .slider video.sl{inset:auto;left:50%;top:50%;width:calc(100% - 28px);height:auto;
+    max-height:calc(100% - 110px);aspect-ratio:752/416;transform:translate(-50%,-50%);
+    object-fit:contain;background:transparent;mix-blend-mode:multiply}
+  /* multiply: el blanco del video toma exactamente el color de fondo del recuadro */
+  .slider{isolation:isolate}
+  .slider .dots{position:absolute;left:0;right:0;bottom:10px;z-index:3;display:flex;justify-content:center;gap:2px}
+  .slider .dots button{width:26px;height:26px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+  .slider .dots button::before{content:"";width:10px;height:10px;border-radius:50%;
+    background:rgba(12,12,13,.45);border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(12,12,13,.35);
+    transition:background .25s,transform .25s}
+  .slider .dots button.on::before{background:var(--accent);transform:scale(1.25)}
+  .slider .dots button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
   @media(max-width:900px){
     .hm{grid-template-columns:minmax(0,1fr)}
     .hm .ph{min-height:0;aspect-ratio:4/3;border-right:0;border-bottom:1px solid var(--hair)}
@@ -520,11 +538,15 @@
   .hero-stack{display:flex;flex-direction:column;gap:16px;min-width:0}
   .spec-card.hm-feat .ph{aspect-ratio:2/1;background:#f7f7f7}
   .spec-card.hm-feat .ph img{object-fit:contain;padding:10px 0}
+  /* el video se ve completo: el recuadro toma la proporción del video (752×416) */
+  .spec-card.hm-feat .ph.vid{background:#000;aspect-ratio:752/416;height:auto}
+  .spec-card .ph.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;
+    transform:translateZ(0);backface-visibility:hidden}
   .spec-card.hm-feat dt a{color:#e4e4e0;text-decoration:none}
   .spec-card.hm-feat dt a:hover{color:var(--accent)}
   .spec-card.hm-feat dt small{color:#85857f;font-size:.7rem;margin-left:6px}
   .spec-card.hm-feat dd small{display:block;color:#85857f;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase}
-  .spec-card.retro-mini{display:grid;grid-template-columns:132px minmax(0,1fr)}
+  .spec-card.retro-mini{display:grid;grid-template-columns:minmax(0,1fr)}
   .spec-card.retro-mini .ph{aspect-ratio:auto;height:100%;min-height:112px;border-bottom:0;border-right:1px solid #1e1e21}
   .spec-card.retro-mini .body{padding:14px 18px;display:flex;flex-direction:column;justify-content:center;min-width:0}
   .spec-card.retro-mini .mdl{margin-bottom:5px;font-size:.64rem}
@@ -649,6 +671,24 @@
   .why>div:hover::before{width:60px}
   .why>div+div{padding-left:28px;border-left:1px solid var(--hair)}
   .why>div+div::before{left:28px}
+  /* cuadrícula con video (sección Por qué Tavo) */
+  .why-vid{position:relative;margin:0 0 36px;border:1px solid var(--hair-2);padding:clamp(18px,4vw,44px);
+    background-color:var(--surface-2);
+    background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px);
+    background-size:24px 24px;background-position:-1px -1px;isolation:isolate}
+  .why-vid::before,.why-vid::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--accent);pointer-events:none}
+  .why-vid::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .why-vid::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  /* el video ocupa todo el recuadro, de borde a borde */
+  .why-vid{padding:0;overflow:hidden}
+  .why-vid video{display:block;width:100%;aspect-ratio:752/416;height:auto;
+    object-fit:cover;background:#fff;mix-blend-mode:normal}
+  .why-vid .tag-l{z-index:2;background:rgba(255,255,255,.88);padding:5px 9px;color:#4a4a46}
+  .why-vid::before,.why-vid::after{z-index:2}
+  .why-vid .tag-l{position:absolute;top:12px;left:14px;font-family:"IBM Plex Mono",monospace;font-size:.62rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:7px}
+  .why-vid .tag-l::before{content:"";width:5px;height:5px;background:var(--accent)}
+  @media(max-width:640px){.why-vid{margin-bottom:24px}}
   @media(max-width:900px){.why>div:nth-child(odd){padding-left:0;border-left:0}.why>div:nth-child(odd)::before{left:0}}
   @media(max-width:520px){.why>div{padding-left:0!important;border-left:0!important}.why>div::before{left:0!important}}
   .why .n{font-size:2.1rem;font-weight:600;letter-spacing:-.05em;color:var(--text);line-height:1}
@@ -790,7 +830,7 @@
     .spec-card dt,.spec-card dd{padding:3px 0}
     .spec-card .sfoot{padding:8px 18px 10px}
     .spec-card .sfoot .pr{font-size:1.15rem}
-    .spec-card.retro-mini{grid-template-columns:104px minmax(0,1fr)}
+    .spec-card.retro-mini{grid-template-columns:minmax(0,1fr)}
     .spec-card.retro-mini .ph{min-height:76px}
     .spec-card.retro-mini .body{padding:8px 14px}
     .spec-card.retro-mini .rm-foot{margin-top:6px}
@@ -798,7 +838,6 @@
     .hero-bay>div{padding:12px 16px 14px 0}
     .hero-bay .n{font-size:1.4rem}
     .hero-bay .k{margin-top:6px;font-size:.62rem}
-    .spec-card.hm-feat .ph{display:none}
     .spec-card.hm-feat dt{white-space:nowrap}
     .spec-card.hm-feat dt small{margin-left:5px}
     .spec-card.hm-feat .hot-mini{margin-left:5px;font-size:.56rem;padding:1px 5px}
@@ -999,11 +1038,6 @@
 <main>
   <!-- ══════════ HERO ══════════ -->
   <section class="hero" id="inicio">
-    <video id="bg" autoplay muted loop playsinline aria-hidden="true" hidden>
-      <!-- En hosting propio: quita [hidden] y añade  <source src="obra.mp4" type="video/mp4">  -->
-    </video>
-    <canvas id="bgfx" aria-hidden="true"></canvas>
-    <div class="veil"></div>
     <div class="wrap hero-inner">
       <div class="hero-grid">
         <div>
@@ -1022,33 +1056,25 @@
           </div>
         </div>
         <div class="hero-stack">
-          <div class="spec-card hm-feat">
-            <a class="ph zoomable" href="martillo2.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo hidráulico TALA 1400">
-              <img src="martillo2.jpg" alt="Martillo hidráulico TALA 1400 nuevo" width="1080" height="1350" decoding="async">
-              <span class="flag">Nuevos · Garantía 6 meses</span>
-            </a>
+          <a class="spec-card hm-feat link-card" href="#tala-680" aria-label="Ver el martillo hidráulico TALA 680">
+            <div class="ph vid">
+              <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
+                <source src="video1.mp4" type="video/mp4">
+              </video>
+              <span class="flag">Nuevo · Solo 5 unidades</span>
+            </div>
             <div class="body">
-              <p class="mdl">Línea TALA · 5 modelos</p>
-              <h3>Martillos hidráulicos TALA</h3>
-              <p class="sc-sub">Del minicargador / Bobcat de 2.5 toneladas a la retroexcavadora / excavadora de 36 toneladas</p>
-              <dl>
-                <dt class="row-hot"><a href="#tala-530">TALA 530</a><small>2.5 – 4.5 t</small><span class="hot-mini">Solo 3</span></dt><dd>$15.600.000</dd>
-                <dt class="row-hot"><a href="#tala-680">TALA 680</a><small>4 – 7 t</small><span class="hot-mini">Solo 5</span></dt><dd class="row-hot">$11.700.000</dd>
-                <dt><a href="#tala-1000">TALA 1000</a><small>12 – 15 t</small></dt><dd>$18.500.000<small>Bajo pedido</small></dd>
-                <dt class="row-hot"><a href="#tala-1400">TALA 1400</a><small>20 – 25 t</small><span class="hot-mini">Solo 7</span></dt><dd>$31.600.000</dd>
-                <dt class="row-hot"><a href="#tala-1550">TALA 1550</a><small>27 – 36 t</small><span class="hot-mini">Solo 3</span></dt><dd>$77.000.000</dd>
-              </dl>
+              <p class="mdl">Martillo hidráulico · Nuevo</p>
+              <h3>Martillo hidráulico TALA 680</h3>
+              <p class="sc-sub">Para pajarita / miniretroexcavadora — 4 a 7 toneladas · Garantía 6 meses</p>
             </div>
             <div class="sfoot">
-              <span class="pr num"><small>Desde · sin IVA</small>$11.700.000</span>
-              <a href="#martillos">Ver los 5 modelos →</a>
+              <span class="pr num"><small>Sin IVA</small>$11.700.000</span>
+              <span class="go">Ver TALA 680 →</span>
             </div>
-          </div>
+          </a>
 
           <div class="spec-card retro-mini">
-            <a class="ph zoomable" href="imagen%20cliente%2012.jpg" target="_blank" rel="noopener" aria-label="Ver foto de la retroexcavadora TALA RE4CX">
-              <img src="imagen%20cliente%2012.jpg" alt="Retroexcavadora TALA RE4CX 4x4 nueva" width="1387" height="773" decoding="async">
-            </a>
             <div class="body">
               <p class="mdl">Lanzamiento · Nueva</p>
               <h3>Retroexcavadora TALA RE4CX</h3>
@@ -1084,10 +1110,19 @@
       <div class="hm-list">
 
         <article class="hm hot" id="tala-530">
-          <a class="ph zoomable" href="martillo4.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 530">
-            <img src="martillo4.jpg" alt="Martillo hidráulico TALA 530 con base de acople para minicargador" width="1080" height="1350" loading="lazy" decoding="async">
+          <div class="ph slider" data-slider role="group" aria-roledescription="carrusel" aria-label="Video y foto del martillo TALA 530">
+            <video class="sl on" muted loop playsinline preload="metadata" aria-label="Video del martillo hidráulico TALA 530">
+              <source src="vi2.mp4" type="video/mp4">
+            </video>
+            <a class="sl zoomable" href="martillo4.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 530" tabindex="-1">
+              <img src="martillo4.jpg" alt="Martillo hidráulico TALA 530 con base de acople para minicargador" width="1080" height="1350" loading="lazy" decoding="async">
+            </a>
             <span class="st hot">¡Solo 3 unidades disponibles!</span>
-          </a>
+            <div class="dots">
+              <button type="button" class="on" aria-label="Ver video" aria-pressed="true"></button>
+              <button type="button" aria-label="Ver foto" aria-pressed="false"></button>
+            </div>
+          </div>
           <div class="in">
             <div class="urg" role="note">
               <span class="units" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -1138,10 +1173,19 @@
         </article>
 
         <article class="hm hot" id="tala-680">
-          <a class="ph zoomable" href="martillo1.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 680">
-            <img src="martillo1.jpg" alt="Martillo hidráulico TALA 680" width="1080" height="1350" loading="lazy" decoding="async">
+          <div class="ph slider" data-slider role="group" aria-roledescription="carrusel" aria-label="Video y foto del martillo TALA 680">
+            <video class="sl on" muted loop playsinline preload="metadata" aria-label="Video del martillo hidráulico TALA 680">
+              <source src="video1.mp4" type="video/mp4">
+            </video>
+            <a class="sl zoomable" href="martillo1.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 680" tabindex="-1">
+              <img src="martillo1.jpg" alt="Martillo hidráulico TALA 680" width="1080" height="1350" loading="lazy" decoding="async">
+            </a>
             <span class="st hot">¡Solo 5 unidades disponibles!</span>
-          </a>
+            <div class="dots">
+              <button type="button" class="on" aria-label="Ver video" aria-pressed="true"></button>
+              <button type="button" aria-label="Ver foto" aria-pressed="false"></button>
+            </div>
+          </div>
           <div class="in">
             <div class="urg" role="note">
               <span class="units" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
@@ -1629,6 +1673,12 @@
         </div>
         <p class="sub">Garantía real, entrega inmediata en Colombia y precios publicados.</p>
       </div>
+      <div class="why-vid">
+        <span class="tag-l">Martillo TALA · en video</span>
+        <video autoplay muted loop playsinline preload="metadata" aria-label="Video del martillo hidráulico TALA">
+          <source src="vi2.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="why">
         <div><div class="n num">7<i>días</i></div><h3>Horario de atención</h3><p>Lunes a domingo, 8:00 a.m. a 8:00 p.m. Teléfono / WhatsApp: 313 676 3895.</p></div>
         <div><div class="n num">Kit<i>completo</i></div><h3>Martillos listos para trabajar</h3><p>Base de acople, 2 puntas de cincel, 2 mangueras hidráulicas, caja de herramientas, pipeta de gas y garantía real de 6 meses.</p></div>
@@ -1805,34 +1855,33 @@
     addEventListener('scroll',u,{passive:true});u();
   })();
 
-  /* Fondo del hero — respaldo en canvas.
-     En hosting propio, quita [hidden] del <video id="bg"> y añade tu <source>: el canvas se apaga solo. */
+  /* Carrusel video/foto: cambia solo cada 3 s; los puntos cambian a mano */
   (function(){
-    var c=document.getElementById('bgfx'),v=document.getElementById('bg');
-    if(!c||(v&&!v.hidden))return;
-    var x=c.getContext('2d'),W,H,dust=[],
-        reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,
-        dpr=Math.min(devicePixelRatio||1,2);
-    function size(){W=c.width=c.offsetWidth*dpr;H=c.height=c.offsetHeight*dpr;}
-    size();addEventListener('resize',size);
-    for(var i=0;i<70;i++)dust.push({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.25,s:Math.random()*.4+.1});
-    function frame(t){
-      x.fillStyle='#070708';x.fillRect(0,0,W,H);
-      x.strokeStyle='rgba(255,255,255,.022)';x.lineWidth=1;
-      var g=48*dpr,off=reduce?0:(t*.004)%g;
-      for(var gx=-off;gx<W;gx+=g){x.beginPath();x.moveTo(gx,0);x.lineTo(gx,H);x.stroke();}
-      for(var gy=-off;gy<H;gy+=g){x.beginPath();x.moveTo(0,gy);x.lineTo(W,gy);x.stroke();}
-      var sw=reduce?.45:((t*.000028)%1),lx=sw*W*1.5-W*.25;
-      var lg=x.createLinearGradient(lx-200*dpr,0,lx+200*dpr,H);
-      lg.addColorStop(0,'rgba(255,212,0,0)');lg.addColorStop(.5,'rgba(255,212,0,.055)');lg.addColorStop(1,'rgba(255,212,0,0)');
-      x.fillStyle=lg;x.fillRect(0,0,W,H);
-      for(var d=0;d<dust.length;d++){var p=dust[d];
-        if(!reduce){p.x+=p.s*.0005;p.y-=p.s*.0003;if(p.x>1)p.x=0;if(p.y<0)p.y=1;}
-        x.beginPath();x.fillStyle='rgba(228,224,210,'+(.07+p.s*.16)+')';
-        x.arc(p.x*W,p.y*H,p.r*dpr,0,7);x.fill();}
-      if(!reduce)requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    [].forEach.call(document.querySelectorAll('[data-slider]'),function(s){
+      var slides=[].slice.call(s.querySelectorAll('.sl')),
+          dots=[].slice.call(s.querySelectorAll('.dots button')),
+          cur=0,t;
+      function show(i){
+        cur=i;
+        slides.forEach(function(el,k){
+          var on=k===i;
+          el.classList.toggle('on',on);
+          if(el.tagName==='A')el.tabIndex=on?0:-1;
+          if(el.tagName==='VIDEO'){
+            if(on){var p=el.play();if(p&&p.catch)p.catch(function(){});}
+            else el.pause();
+          }
+        });
+        dots.forEach(function(d,k){d.classList.toggle('on',k===i);d.setAttribute('aria-pressed',k===i?'true':'false');});
+      }
+      function start(){
+        clearInterval(t);
+        if(!reduce)t=setInterval(function(){show((cur+1)%slides.length);},3000);
+      }
+      dots.forEach(function(d,k){d.addEventListener('click',function(){show(k);start();});});
+      show(0);start();
+    });
   })();
 
   /* Tema */
