@@ -13,7 +13,7 @@
 <meta property="og:title" content="Excavadora CAT 305.5E2 · Año 2018 · 4.700 horas reales">
 <meta property="og:description" content="Unidad única. Antes $205.000.000, ahora $190.000.000. Con garra, línea húmeda para martillo, GPS y garantía de 3 meses.">
 <meta property="og:image" content="cat305-1.jpg">
-<link rel="preload" as="image" type="image/webp" href="img/cat-305/cat305-animacion-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="excavadora-cat-305-animacion-portada.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -23,6 +23,9 @@
      BORRADOR     true  = se ven los recuadros amarillos "PENDIENTE" y, abajo a la izquierda, la lista de lo que falta.
                   false = página publicada: lo que siga marcado como pendiente se oculta solo.
      Para activar algo pendiente: ponga el dato real y quite la clase "pend" de ese elemento.
+
+     FOTOS Y VIDEOS: todos los de esta página empiezan por "excavadora-cat-305-" y van en la MISMA carpeta que index.html
+     (nada de subcarpetas: así se ven en Vercel). Además usa cat305-1.jpg … cat305-7.jpg, las mismas de index.html.
 
      PENDIENTE (oculto en la web mientras BORRADOR = false; buscar "pend" en este archivo):
        - IVA del precio (portada y combo)            - Video de la máquina encendida (sección 2)
@@ -605,10 +608,10 @@
         <span class="v-note">Animación ilustrativa</span>
         <div class="h-vwrap">
           <video class="h-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback data-autoplay
-                 poster="img/cat-305/cat305-animacion-poster.webp" width="1248" height="832"
+                 poster="excavadora-cat-305-animacion-portada.webp" width="1248" height="832"
                  aria-label="Animación de la excavadora CAT 305.5E2 abriéndose para mostrar sus piezas: cabina, motor y paneles">
-            <source src="img/cat-305/cat305-animacion-960.mp4" type="video/mp4" media="(max-width:899px)">
-            <source src="img/cat-305/cat305-animacion-1248.mp4" type="video/mp4">
+            <source src="excavadora-cat-305-animacion-960.mp4" type="video/mp4" media="(max-width:899px)">
+            <source src="excavadora-cat-305-animacion-1248.mp4" type="video/mp4">
           </video>
           <button class="v-toggle" type="button" aria-label="Pausar animación"><svg class="icon" aria-hidden="true"><use href="#i-pause"/></svg></button>
         </div>
@@ -636,18 +639,18 @@
   </section>
 
   <!-- ═══════════ 2 · VIDEO (máquina encendida) ═══════════
-       Guardar el video (30–60 s, comprimido, idealmente menos de 8 MB) en img/cat-305/cat305-video.mp4 y quitar la clase pend.
-       Sin audio: al prepararlo, quitarle la pista de sonido (ffmpeg -i original.mp4 -c:v copy -an img/cat-305/cat305-video.mp4).
+       Guardar el video (30–60 s, comprimido, idealmente menos de 8 MB) con el nombre excavadora-cat-305-video.mp4, junto a index.html, y quitar la clase pend.
+       Sin audio: al prepararlo, quitarle la pista de sonido (ffmpeg -i original.mp4 -c:v copy -an excavadora-cat-305-video.mp4).
        Si el video es vertical, cambiar aspect-ratio:16/9 por 9/16 en ".vid video". -->
-  <section class="sec pend" id="video" data-name="Video" data-pend="Video de 30–60 s encendida: arranque en frío, brazo, giro y oruga → img/cat-305/cat305-video.mp4">
+  <section class="sec pend" id="video" data-name="Video" data-pend="Video de 30–60 s encendida: arranque en frío, brazo, giro y oruga → excavadora-cat-305-video.mp4">
     <div class="wrap">
       <div class="head" data-fx="up">
         <h2>Véala funcionando</h2>
         <p class="sub">Arranque en frío, brazo, giro y oruga.</p>
       </div>
       <div class="vid" data-fx="blur">
-        <video controls muted playsinline preload="none" poster="img/cat-305/cat305-hero-movil.webp">
-          <source src="img/cat-305/cat305-video.mp4" type="video/mp4">
+        <video controls muted playsinline preload="none" poster="excavadora-cat-305-video-portada.webp">
+          <source src="excavadora-cat-305-video.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -674,7 +677,7 @@
   <section class="sec combo pend" id="combo" data-name="Combo" data-pend="Combo: publicar solo si Tavo confirma que el TALA 680 sirve para la CAT 305">
     <div class="wrap">
       <div class="cb" data-fx="zoom">
-        <div class="cb-img"><img src="img/cat-305/tala-680-480.webp" alt="Martillo hidráulico TALA 680" width="480" height="600" loading="lazy" decoding="async"></div>
+        <div class="cb-img"><img src="excavadora-cat-305-combo-tala-680.webp" alt="Martillo hidráulico TALA 680" width="480" height="600" loading="lazy" decoding="async"></div>
         <div class="cb-top" data-fx="up">
           <p class="eyebrow">Combo con martillo</p>
           <h2>Llévela lista para romper.</h2>
@@ -703,44 +706,44 @@
         <p class="sub">Deslice de lado. Toque una foto para ampliarla.</p>
       </div>
       <div class="gal" data-gallery>
-        <a class="g-item big" href="img/cat-305/cat305-1.webp" data-cap="Vista de tres cuartos: brazo, garra, balde y cuchilla." data-fx="right">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-1-600.webp 600w, img/cat-305/cat305-1.webp 900w" sizes="(min-width:760px) 720px, 100vw">
+        <a class="g-item big" href="excavadora-cat-305-foto-1.webp" data-cap="Vista de tres cuartos: brazo, garra, balde y cuchilla." data-fx="right">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-1-600.webp 600w, excavadora-cat-305-foto-1.webp 900w" sizes="(min-width:760px) 720px, 100vw">
             <img src="cat305-1.jpg" alt="Excavadora CAT 305.5E2 de tres cuartos, con garra y balde" width="900" height="1200" loading="lazy" decoding="async"></picture>
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
-        <!-- Foto del horómetro: guardarla en img/cat-305/cat305-horometro.webp y quitar la clase pend -->
-        <a class="g-item pend" href="img/cat-305/cat305-horometro.webp" data-cap="Horómetro: 4.700 horas." data-pend="Foto del horómetro con las 4.700 horas → img/cat-305/cat305-horometro.webp" data-fx="right">
+        <!-- Foto del horómetro: guardarla como excavadora-cat-305-horometro.webp, junto a index.html, y quitar la clase pend -->
+        <a class="g-item pend" href="excavadora-cat-305-horometro.webp" data-cap="Horómetro: 4.700 horas." data-pend="Foto del horómetro con las 4.700 horas → excavadora-cat-305-horometro.webp" data-fx="right">
           <span class="g-ph"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Horómetro · 4.700 horas</span>
-          <img src="img/cat-305/cat305-horometro.webp" alt="Horómetro de la excavadora CAT 305.5E2 marcando 4.700 horas" loading="lazy" decoding="async" onerror="this.parentNode.setAttribute('data-missing','');this.remove()">
+          <img src="excavadora-cat-305-horometro.webp" alt="Horómetro de la excavadora CAT 305.5E2 marcando 4.700 horas" loading="lazy" decoding="async" onerror="this.parentNode.setAttribute('data-missing','');this.remove()">
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
-        <a class="g-item" href="img/cat-305/cat305-2.webp" data-cap="Costado completo, con la cuchilla adelante." data-fx="right">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-2-400.webp 400w, img/cat-305/cat305-2-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
+        <a class="g-item" href="excavadora-cat-305-foto-2.webp" data-cap="Costado completo, con la cuchilla adelante." data-fx="right">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-2-400.webp 400w, excavadora-cat-305-foto-2-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
             <img src="cat305-2.jpg" alt="Excavadora CAT 305.5E2 vista de costado con cuchilla" width="900" height="1200" loading="lazy" decoding="async"></picture>
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
-        <a class="g-item" href="img/cat-305/cat305-3.webp" data-cap="El otro costado, con la garra y el balde." data-fx="right">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-3-400.webp 400w, img/cat-305/cat305-3-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
+        <a class="g-item" href="excavadora-cat-305-foto-3.webp" data-cap="El otro costado, con la garra y el balde." data-fx="right">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-3-400.webp 400w, excavadora-cat-305-foto-3-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
             <img src="cat305-3.jpg" alt="Excavadora CAT 305.5E2 vista del otro costado con garra y balde" width="900" height="1200" loading="lazy" decoding="async"></picture>
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
-        <a class="g-item" href="img/cat-305/cat305-4.webp" data-cap="Brazo, garra y balde de cerca." data-fx="right">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-4-400.webp 400w, img/cat-305/cat305-4-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
+        <a class="g-item" href="excavadora-cat-305-foto-4.webp" data-cap="Brazo, garra y balde de cerca." data-fx="right">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-4-400.webp 400w, excavadora-cat-305-foto-4-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
             <img src="cat305-4.jpg" alt="Brazo, garra y balde de la excavadora CAT 305.5E2" width="900" height="1200" loading="lazy" decoding="async"></picture>
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
-        <a class="g-item" href="img/cat-305/cat305-5.webp" data-cap="Cabina y parte trasera." data-fx="right">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-5-400.webp 400w, img/cat-305/cat305-5-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
+        <a class="g-item" href="excavadora-cat-305-foto-5.webp" data-cap="Cabina y parte trasera." data-fx="right">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-5-400.webp 400w, excavadora-cat-305-foto-5-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
             <img src="cat305-5.jpg" alt="Cabina y contrapeso trasero de la excavadora CAT 305.5E2" width="900" height="1200" loading="lazy" decoding="async"></picture>
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
-        <a class="g-item" href="img/cat-305/cat305-6.webp" data-cap="Costado de la cabina y la oruga." data-fx="right">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-6-400.webp 400w, img/cat-305/cat305-6-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
+        <a class="g-item" href="excavadora-cat-305-foto-6.webp" data-cap="Costado de la cabina y la oruga." data-fx="right">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-6-400.webp 400w, excavadora-cat-305-foto-6-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
             <img src="cat305-6.jpg" alt="Costado de la excavadora CAT 305.5E2 con cabina y oruga" width="675" height="1200" loading="lazy" decoding="async"></picture>
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
-        <a class="g-item" href="img/cat-305/cat305-7.webp" data-cap="Compartimiento de batería y aire acondicionado." data-fx="right">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-7-400.webp 400w, img/cat-305/cat305-7-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
+        <a class="g-item" href="excavadora-cat-305-foto-7.webp" data-cap="Compartimiento de batería y aire acondicionado." data-fx="right">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-7-400.webp 400w, excavadora-cat-305-foto-7-600.webp 600w" sizes="(min-width:760px) 400px, 60vw">
             <img src="cat305-7.jpg" alt="Compartimiento de batería y aire acondicionado de la excavadora CAT 305.5E2" width="675" height="1200" loading="lazy" decoding="async"></picture>
           <span class="g-zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"/></svg></span>
         </a>
@@ -759,7 +762,7 @@
       <div class="head" data-fx="up"><h2>Datos rápidos</h2></div>
       <div class="d-grid">
         <figure class="d-photo" data-fx="wipe">
-          <picture><source type="image/webp" srcset="img/cat-305/cat305-2-600.webp 600w, img/cat-305/cat305-2.webp 900w" sizes="(min-width:760px) 480px, 100vw">
+          <picture><source type="image/webp" srcset="excavadora-cat-305-foto-2-600.webp 600w, excavadora-cat-305-foto-2.webp 900w" sizes="(min-width:760px) 480px, 100vw">
             <img src="cat305-2.jpg" alt="Excavadora CAT 305.5E2 vista de costado completo" width="900" height="1200" loading="lazy" decoding="async"></picture>
         </figure>
         <dl class="facts">
@@ -818,10 +821,10 @@
     <div class="wrap">
       <div class="head" data-fx="up"><h2>Quién vende</h2></div>
       <div class="seller">
-        <!-- Foto de Tavo: guardarla en img/cat-305/tavo.webp (cuadrada, 400×400) y quitar la clase pend -->
+        <!-- Foto de Tavo: guardarla como excavadora-cat-305-tavo.webp (cuadrada, 400×400), junto a index.html, y quitar la clase pend -->
         <div class="s-photo pend" data-pend="Foto de Tavo" data-fx="pop">
           <span aria-hidden="true">T</span>
-          <img src="img/cat-305/tavo.webp" alt="Tavo, de Tavo El Importador" width="400" height="400" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="excavadora-cat-305-tavo.webp" alt="Tavo, de Tavo El Importador" width="400" height="400" loading="lazy" decoding="async" onerror="this.remove()">
         </div>
         <div>
           <p class="s-name" data-fx="left">Tavo El Importador</p>
