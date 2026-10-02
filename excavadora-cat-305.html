@@ -32,9 +32,10 @@
        - Combo con TALA 680 (sección 4 y enlace en la pregunta del martillo): solo si Tavo confirma compatibilidad
        - Foto del horómetro (galería)                - Preguntas: envío y formas de pago
        - Foto de Tavo y NIT (Quién vende y pie)      - Testimonios reales de clientes
-       - CLAVE_KOMMO y medición de Google Ads (GTM_ID o ADS_ID), aquí abajo
+       - Medición de Google Ads (GTM_ID o ADS_ID), aquí abajo
 
-     CLAVE_KOMMO  palabra clave de Kommo para EXCAVADORAS. Se agrega al mensaje de WhatsApp.
+     WHATSAPP: todos los botones mandan el mensaje OFICIAL de Kommo para la CAT 305 (ver MSG_OFICIAL más abajo).
+     Ese mensaje completo es lo que Kommo reconoce: no se le agrega ni se le cambia nada.
 
      MEDICIÓN (Google Ads). Use UNA de las dos opciones:
      A) GTM_ID = 'GTM-XXXXXXX'. En Google Tag Manager, activadores de tipo "Evento personalizado":
@@ -47,7 +48,6 @@
      B) ADS_ID = 'AW-XXXXXXXXXX' y las etiquetas de conversión en ADS_CONV
         (Google Ads › Objetivos › Conversiones: la etiqueta es lo que va después de la barra en send_to). */
   var BORRADOR = false;
-  var CLAVE_KOMMO = '';
   var GTM_ID = '';
   var ADS_ID = '';
   var ADS_CONV = { whatsapp: '', llamar: '', combo: '' };
@@ -879,12 +879,11 @@
 <script>
   var WA='https://wa.me/573136763895';
 
-  /* Mensajes de WhatsApp para Kommo (textos del brief) */
-  var K=CLAVE_KOMMO?' '+CLAVE_KOMMO:'';
-  var MSG={
-    info: 'Hola Tavo, vi en Google la excavadora CAT 305'+K+'. Quiero información.',
-    combo:'Hola Tavo, vi en Google la CAT 305 y quiero el combo con martillo'+K+'.'
-  };
+  /* Mensaje de WhatsApp: el OFICIAL de Kommo para la CAT 305 (documento "Optimización página web", 29 sep 2026).
+     Copiarlo exacto, sin cambiar ni una coma, tilde o mayúscula: si cambia, Kommo no reconoce al cliente.
+     El botón del combo manda el mismo mensaje (Kommo no reconocería uno nuevo); el clic se mide aparte como click_combo. */
+  var MSG_OFICIAL='Hola Tavo, vi en Google la excavadora CAT 305. Quiero información.';
+  var MSG={info:MSG_OFICIAL,combo:MSG_OFICIAL};
   [].forEach.call(document.querySelectorAll('[data-wa]'),function(a){
     a.href=WA+'?text='+encodeURIComponent(MSG[a.getAttribute('data-wa')]||MSG.info);
   });
@@ -1059,7 +1058,6 @@
     [].forEach.call(document.querySelectorAll('.pend[data-pend]'),function(el){
       var t=el.getAttribute('data-pend');if(!seen[t]){seen[t]=1;list.push(t);}
     });
-    if(!CLAVE_KOMMO)list.push('Palabra clave de Kommo para EXCAVADORAS (CLAVE_KOMMO, al inicio del archivo)');
     if(!GTM_ID&&!ADS_ID)list.push('Etiqueta de Google Ads: GTM_ID, o ADS_ID + ADS_CONV (al inicio del archivo)');
     var ol=document.getElementById('draft-list');
     list.forEach(function(t){var li=document.createElement('li');li.textContent=t;ol.appendChild(li);});
