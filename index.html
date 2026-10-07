@@ -2,6 +2,32 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18462392205"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18462392205');
+
+  // Conversion "Clic WhatsApp"
+  function tavoConversionWhatsApp() {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18462392205/fwtyCK3Y1o4dEI3_xuNE',
+      'transport_type': 'beacon'
+    });
+  }
+
+  // Se activa con cualquier enlace a WhatsApp de la pagina
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) {
+      tavoConversionWhatsApp();
+    }
+  }, true);
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Martillos hidráulicos para minicargador, pajarita y excavadora | Tavo El Importador</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' fill='%23ffd400'/%3E%3C/svg%3E">
@@ -56,6 +82,8 @@
   };
   var MSG_GENERAL = 'Hola Tavo, quiero información sobre sus equipos.';
   var GTM_ID = '';
+  /* ADS_ID se deja VACÍO: la conversión "Clic WhatsApp" de Google Ads (AW-18462392205) ya está en el código
+     "Google tag" al inicio del <head>. Si se llena aquí también, Google contaría dos veces cada clic. */
   var ADS_ID = '';
   var ADS_CONV = { whatsapp: '', llamar: '', formulario: '' };
 
@@ -2094,6 +2122,7 @@
               'Factura con IVA: '+v('iva')+'.'+
               (v('m')?'\n\n'+v('m'):'');
       medir('envio_formulario',{ubicacion:'contacto',equipo:eq,cuando:v('cu')});
+      tavoConversionWhatsApp();
       window.open(WA+'?text='+encodeURIComponent(msg),'_blank','noopener');
       document.getElementById('ok').hidden=false;
     });

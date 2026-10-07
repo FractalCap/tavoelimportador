@@ -2,6 +2,32 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18462392205"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18462392205');
+
+  // Conversion "Clic WhatsApp"
+  function tavoConversionWhatsApp() {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18462392205/fwtyCK3Y1o4dEI3_xuNE',
+      'transport_type': 'beacon'
+    });
+  }
+
+  // Se activa con cualquier enlace a WhatsApp de la pagina
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) {
+      tavoConversionWhatsApp();
+    }
+  }, true);
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Excavadora CAT 305.5E2 usada, 2018, 4.700 horas | Tavo El Importador</title>
 <meta name="description" content="Excavadora Caterpillar 305.5E2 usada, año 2018, 4.700 horas reales. Con garra, línea húmeda para martillo, GPS y garantía de 3 meses. Unidad única en Barranquilla. Cotice por WhatsApp.">
@@ -49,6 +75,8 @@
         (Google Ads › Objetivos › Conversiones: la etiqueta es lo que va después de la barra en send_to). */
   var BORRADOR = false;
   var GTM_ID = '';
+  /* ADS_ID se deja VACÍO: la conversión "Clic WhatsApp" de Google Ads (AW-18462392205) ya está en el código
+     "Google tag" al inicio del <head>. Si se llena aquí también, Google contaría dos veces cada clic. */
   var ADS_ID = '';
   var ADS_CONV = { whatsapp: '', llamar: '', combo: '' };
 
