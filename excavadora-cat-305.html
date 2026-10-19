@@ -37,7 +37,7 @@
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="Tavo El Importador">
 <meta property="og:title" content="Excavadora CAT 305.5E2 · Año 2018 · 4.700 horas reales">
-<meta property="og:description" content="Unidad única. Antes $205.000.000, ahora $190.000.000. Con garra, línea húmeda para martillo, GPS y garantía de 3 meses.">
+<meta property="og:description" content="Unidad única. $190.000.000 + IVA. Con garra, línea húmeda para martillo, GPS y garantía de 3 meses.">
 <meta property="og:image" content="cat305-1.jpg">
 <link rel="preload" as="image" type="image/webp" href="excavadora-cat-305-animacion-portada.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,11 +54,11 @@
      (nada de subcarpetas: así se ven en Vercel). Además usa cat305-1.jpg … cat305-7.jpg, las mismas de index.html.
 
      PENDIENTE (oculto en la web mientras BORRADOR = false; buscar "pend" en este archivo):
-       - IVA del precio (portada y combo)            - Video de la máquina encendida (sección 2)
+       - Video de la máquina encendida (sección 2)   - Foto del horómetro (galería)
        - Combo con TALA 680 (sección 4 y enlace en la pregunta del martillo): solo si Tavo confirma compatibilidad
-       - Foto del horómetro (galería)                - Preguntas: envío y formas de pago
-       - Foto de Tavo y NIT (Quién vende y pie)      - Testimonios reales de clientes
-       - Medición de Google Ads (GTM_ID o ADS_ID), aquí abajo
+       - Foto de Tavo (Quién vende)                  - Medición de Google Ads (GTM_ID o ADS_ID), aquí abajo
+     SE QUITARON hasta que Tavo envíe el dato (en la página no puede quedar texto entre corchetes):
+       - Preguntas "¿Me la envían?" y "¿Cómo pago?"  - NIT (Quién vende y pie)   - Testimonios de clientes
 
      WHATSAPP: todos los botones mandan el mensaje OFICIAL de Kommo para la CAT 305 (ver MSG_OFICIAL más abajo).
      Ese mensaje completo es lo que Kommo reconoce: no se le agrega ni se le cambia nada.
@@ -67,7 +67,7 @@
      A) GTM_ID = 'GTM-XXXXXXX'. En Google Tag Manager, activadores de tipo "Evento personalizado":
           click_whatsapp   clic en cualquier botón de WhatsApp (flotante, portada, cierre, vendedor)
           click_llamar     clic en "Llamar" o en el número
-          click_combo      clic en "Quiero el combo" (no se cuenta además como click_whatsapp)
+          click_combo      clic en el botón verde del combo (no se cuenta además como click_whatsapp)
           view_video       reproducción del video
           click_ver_productos  clic en "Todos los productos" (el cliente sale a la página inicial)
         Cada evento lleva "ubicacion" (portada, flotante, combo, cierre, vendedor) y "link_url".
@@ -109,7 +109,8 @@
   "category":"Excavadora usada",
   "image":["cat305-1.jpg","cat305-2.jpg","cat305-3.jpg"],
   "description":"Excavadora Caterpillar 305.5E2, año 2018, 4.700 horas reales, 5,38 toneladas. Incluye garra, línea húmeda instalada lista para martillo, cuchilla y balde estándar, GPS, aire acondicionado, documentos al día y garantía de 3 meses en motor y sistema hidráulico.",
-  "offers":{"@type":"Offer","priceCurrency":"COP","price":"190000000",
+  "offers":{"@type":"Offer","priceCurrency":"COP","price":"226100000",
+    "priceSpecification":{"@type":"UnitPriceSpecification","price":"226100000","priceCurrency":"COP","valueAddedTaxIncluded":true},
     "itemCondition":"https://schema.org/UsedCondition","availability":"https://schema.org/InStock",
     "seller":{"@type":"Organization","name":"Tavo El Importador"}}
 }
@@ -584,6 +585,27 @@
   .calm .hero .h-video,.calm .hero .unit{opacity:1!important;clip-path:none!important}
   .calm .hero .h-video,.calm .hero .unit,.calm .inc .ic,.calm .cb-img img,.calm .price .save,.calm .g-item img{transform:none!important;transition:none!important}
   .calm .unit::before,.calm .unit-in::before,.calm .next .icon,.calm .btn,.calm .btn::after,.calm .s-photo::after,.calm .price .save,.calm .faq .ans,.calm .lb[open]{animation:none!important}
+
+  /* ===== Botones de WhatsApp (pedido del cliente, oct 2026) =====
+     "Cotizar con un asesor por WhatsApp" y, justo debajo, la nota "Respuesta en minutos · Lunes a domingo" (.wa-note) */
+  .wa-note{grid-column:1;margin:0;font-size:.84rem;line-height:1.35;color:#4a4a48;text-align:center}
+  .final .wa-note{margin:8px auto 0;max-width:420px;color:var(--panel-dim)}
+  .cb .wa-cta{display:grid;justify-items:stretch;gap:6px;margin-top:18px}
+  .cb .wa-cta .btn{margin-top:0}
+  .cb .wa-note{color:var(--text-2)}
+  @media(min-width:760px){.cb .wa-cta{justify-content:start}}
+  .now .tx{align-self:center;font-style:normal;font-size:.34em;font-weight:700;letter-spacing:0;color:#8a7000}
+  .cb .now .tx{color:var(--accent-deep)}
+  /* celular: botones compactos para que el verde y "Llamar" quepan lado a lado; la nota va debajo de los dos */
+  @media(max-width:599px){
+    .h-acts .btn{font-size:.94rem;padding:10px}
+    .h-acts .wa-note{grid-column:1/-1}
+  }
+  @media(max-width:359px){.h-acts .btn.call{order:2}}
+  /* computador: la columna del texto de la portada es angosta, así el botón verde cabe en una línea con "Llamar" al lado */
+  @media(min-width:900px){.h-acts .btn,.h-acts .btn.call{padding:12px 14px;font-size:.92rem}}
+  /* portada en celular: espacio abajo para el botón flotante "Cotizar", que ahora siempre está visible */
+  @media(max-width:899px){.h-copy{padding-bottom:88px}}
 </style>
 </head>
 <body>
@@ -649,17 +671,16 @@
         <p class="h-brand" data-fx="up">Tavo El Importador · Barranquilla</p>
         <h1 data-fx="up"><span class="k">Excavadora</span> <span class="m">CAT 305.5E2</span> <span class="f">Año 2018 <i aria-hidden="true"></i> 4.700 horas reales</span></h1>
         <div class="price" data-fx="up">
-          <p class="was">Antes <s>$205.000.000</s></p>
+          <!-- Lista de precios de oct 2026: la CAT 305 no tiene precio "antes" ni "ahorra" -->
           <div class="now-row">
-            <p class="now"><small>Ahora</small><span data-count data-from="205000000" data-to="190000000" data-pre="$" data-delay="1050">$190.000.000</span></p>
-            <p class="save">Ahorra $15.000.000</p>
+            <p class="now"><small>Precio</small><span>$190.000.000</span><em class="tx">+ IVA</em></p>
           </div>
-          <!-- Cuando Tavo confirme: "Precio + IVA" o "IVA incluido", y quitar la clase pend -->
-          <p class="iva pend in" data-pend="¿El precio incluye IVA?">[¿Incluye IVA o es + IVA? Dato pendiente de Tavo]</p>
+          <p class="iva">Con factura (IVA 19%): <b>$226.100.000</b></p>
         </div>
         <div class="h-acts" data-fx="up">
-          <a class="btn wa xl shine" href="https://wa.me/573136763895" data-wa="info" data-track="whatsapp" data-ubic="portada" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+          <a class="btn wa xl shine" href="https://wa.me/573136763895" data-wa="info" data-track="whatsapp" data-ubic="portada" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
           <a class="btn call xl" href="tel:+573136763895" data-track="llamar" data-ubic="portada"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+          <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
         </div>
         <button class="next" type="button" data-next data-fx="up"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Deslice para ver más</button>
       </div>
@@ -713,14 +734,18 @@
         <div class="cb-body" data-fx="up">
           <p class="cb-t">Si compra la excavadora, se lleva el <b>martillo hidráulico TALA 680</b> con descuento.</p>
           <div class="price">
-            <p class="was">Antes <s>$13.900.000</s></p>
+            <!-- Mismos precios del TALA 680 en index.html (lista de precios de oct 2026) -->
+            <p class="was">Antes <s>$11.700.000</s></p>
             <div class="now-row">
-              <p class="now"><small>Ahora</small><span data-count data-from="13900000" data-to="10900000" data-pre="$" data-delay="1250">$10.900.000</span></p>
-              <p class="save">Ahorra $3.000.000</p>
+              <p class="now"><small>Ahora</small><span data-count data-from="11700000" data-to="10900000" data-pre="$" data-delay="1250">$10.900.000</span><em class="tx">+ IVA</em></p>
+              <p class="save">Ahorra $800.000</p>
             </div>
-            <p class="iva pend in" data-pend="¿El precio incluye IVA?">[¿Incluye IVA o es + IVA? Dato pendiente de Tavo]</p>
+            <p class="iva">Con factura (IVA 19%): <b>$12.971.000</b></p>
           </div>
-          <a class="btn xl pulse" href="https://wa.me/573136763895" data-wa="combo" data-track="combo" data-ubic="combo" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>Quiero el combo</a>
+          <div class="wa-cta">
+            <a class="btn xl pulse" href="https://wa.me/573136763895" data-wa="combo" data-track="combo" data-ubic="combo" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
+            <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+          </div>
         </div>
       </div>
     </div>
@@ -824,18 +849,8 @@
           <summary>¿Tiene garantía?</summary>
           <div class="ans">Sí, 3 meses en motor y sistema hidráulico.</div>
         </details>
-        <div class="pend" data-pend="Envío: ciudades y costo (dato de Tavo)" data-fx="up">
-          <details name="faq">
-            <summary>¿Me la envían?</summary>
-            <div class="ans">[Ciudades y costo del envío. Dato pendiente de Tavo]</div>
-          </details>
-        </div>
-        <div class="pend" data-pend="Pago: formas de pago, con o sin factura (dato de Tavo)" data-fx="up">
-          <details name="faq">
-            <summary>¿Cómo pago?</summary>
-            <div class="ans">[Formas de pago, con o sin factura. Dato pendiente de Tavo]</div>
-          </details>
-        </div>
+        <!-- Preguntas "¿Me la envían?" (ciudades y costo del envío) y "¿Cómo pago?" (formas de pago, con o sin factura):
+             se quitaron hasta que Tavo envíe esos datos. Para volver a ponerlas, copie un <details name="faq"> de los de arriba. -->
         <details name="faq" data-fx="up">
           <summary>¿Le puedo poner martillo?</summary>
           <div class="ans">Sí, ya tiene línea húmeda instalada. <span class="pend in" data-pend="Combo: publicar solo si Tavo confirma que el TALA 680 sirve para la CAT 305"><a href="#combo">Pregunte por el combo con descuento.</a></span></div>
@@ -858,17 +873,14 @@
           <p class="s-name" data-fx="left">Tavo El Importador</p>
           <ul class="s-data">
             <li data-fx="left"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Barranquilla, Atlántico</li>
-            <li class="pend in" data-pend="NIT de Tavo El Importador" data-fx="left"><svg class="icon" aria-hidden="true"><use href="#i-id"/></svg>NIT [dato pendiente]</li>
             <li data-fx="left"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+573136763895" data-track="llamar" data-ubic="vendedor">313 676 3895</a></li>
           </ul>
         </div>
       </div>
-      <!-- Testimonios: solo REALES, con permiso del cliente. Frase corta + nombre + ciudad. Nunca inventados. -->
-      <div class="quotes pend" data-pend="2 o 3 testimonios reales de clientes (con permiso): frase corta, nombre y ciudad">
-        <figure class="quote" data-fx="right"><blockquote>[Frase corta del cliente 1]</blockquote><figcaption>[Nombre] · [Ciudad] · [Máquina que compró]</figcaption></figure>
-        <figure class="quote" data-fx="right"><blockquote>[Frase corta del cliente 2]</blockquote><figcaption>[Nombre] · [Ciudad] · [Máquina que compró]</figcaption></figure>
-        <figure class="quote" data-fx="right"><blockquote>[Frase corta del cliente 3]</blockquote><figcaption>[Nombre] · [Ciudad] · [Máquina que compró]</figcaption></figure>
-      </div>
+      <!-- Testimonios: la sección se quitó hasta que Tavo envíe testimonios REALES, con permiso del cliente (frase corta,
+           nombre y ciudad; nunca inventados). Para volver a ponerla: <div class="quotes"> con un
+           <figure class="quote"><blockquote>frase</blockquote><figcaption>nombre · ciudad · máquina</figcaption></figure> por cliente.
+           NIT: se vuelve a poner como un <li> más en la lista de arriba cuando Tavo lo envíe. -->
     </div>
   </section>
 
@@ -878,24 +890,24 @@
       <div class="wrap">
         <p class="unit-in" data-fx="drop">Unidad única</p>
         <h2 data-words>Es la única unidad. <em>Escríbanos antes de que se venda.</em></h2>
-        <p class="recap" data-fx="up">CAT 305.5E2 · 2018 · 4.700 horas · <b>$190.000.000</b></p>
+        <p class="recap" data-fx="up">CAT 305.5E2 · 2018 · 4.700 horas · <b>$190.000.000 + IVA</b></p>
         <div data-fx="up">
-          <a class="btn xl" href="https://wa.me/573136763895" data-wa="info" data-track="whatsapp" data-ubic="cierre" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
-          <br>
+          <a class="btn xl" href="https://wa.me/573136763895" data-wa="info" data-track="whatsapp" data-ubic="cierre" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
+          <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
           <a class="tel2" href="tel:+573136763895" data-track="llamar" data-ubic="cierre"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>o llame al <b>313 676 3895</b></a>
         </div>
       </div>
     </div>
     <footer>
       <div class="wrap foot">
-        <span>© 2026 Tavo El Importador · Barranquilla, Atlántico, Colombia<span class="pend in" data-pend="NIT de Tavo El Importador"> · NIT [dato pendiente]</span></span>
+        <span>© 2026 Tavo El Importador · Barranquilla, Atlántico, Colombia</span>
         <button class="tt" id="tt" type="button">Cambiar tema</button>
       </div>
     </footer>
   </section>
 </main>
 
-<a class="fab" href="https://wa.me/573136763895" data-wa="info" data-track="whatsapp" data-ubic="flotante" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+<a class="fab" href="https://wa.me/573136763895" data-wa="info" data-track="whatsapp" data-ubic="flotante" target="_blank" rel="noopener" aria-label="Cotizar con un asesor por WhatsApp"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar</a>
 
 <dialog class="lb" id="lb" aria-label="Foto ampliada">
   <figure><img id="lb-img" src="data:," alt=""><figcaption id="lb-cap"></figcaption></figure>
@@ -916,7 +928,7 @@
     a.href=WA+'?text='+encodeURIComponent(MSG[a.getAttribute('data-wa')]||MSG.info);
   });
 
-  /* Medición: WhatsApp, Llamar y "Quiero el combo" (ver CONFIGURACIÓN al inicio) */
+  /* Medición: WhatsApp, Llamar y el botón del combo (ver CONFIGURACIÓN al inicio) */
   var EV={whatsapp:'click_whatsapp',llamar:'click_llamar',combo:'click_combo',productos:'click_ver_productos'};
   document.addEventListener('click',function(e){
     var el=e.target.closest('[data-track]');if(!el)return;
@@ -1067,17 +1079,8 @@
     g.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);addEventListener('load',upd);upd();
   })();
 
-  /* Botón flotante: siempre visible, salvo mientras quedaría encima de los botones de la portada
-     (en ese momento el botón verde de la portada ya está a la vista) */
-  (function(){
-    var fab=document.querySelector('.fab'),acts=document.querySelector('.h-acts');
-    if(!fab||!acts)return;
-    function u(){
-      var a=acts.getBoundingClientRect(),f=fab.getBoundingClientRect();
-      fab.classList.toggle('off',a.bottom>f.top-8&&a.top<f.bottom+8&&a.right>f.left);
-    }
-    addEventListener('scroll',u,{passive:true});addEventListener('resize',u);addEventListener('load',u);u();
-  })();
+  /* Botón flotante "Cotizar": visible siempre, también en la portada (pedido del cliente, oct 2026).
+     Antes se ocultaba mientras quedaba encima de los botones de la portada. */
 
   /* Modo borrador: lista automática de lo que falta */
   (function(){

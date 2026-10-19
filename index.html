@@ -43,18 +43,17 @@
      Para activar algo pendiente: ponga el dato real y quite la clase "pend" de ese elemento.
 
      PENDIENTE (datos de Tavo · buscar "pend" en este archivo):
-       - NIT de GG Industrial Supply Colombia (pie de página)
-       - Opiniones de 3 a 6 clientes reales: frase corta, nombre, ciudad, martillo comprado y foto del equipo trabajando ("En obra")
-       - Envíos: a qué ciudades y en cuánto tiempo ("Cómo comprar", paso 4)
-       - Formas de pago: transferencia, anticipo, otras ("Cómo comprar", paso 3)
+       - NIT de GG Industrial Supply Colombia: se quitó del pie de página; se vuelve a poner cuando Tavo lo envíe
+       - Opiniones de clientes: la sección se quitó; se vuelve a poner cuando Tavo envíe testimonios reales
+         (frase corta, nombre, ciudad, martillo comprado y foto del equipo trabajando)
+       - Envíos y formas de pago ("Cómo comprar", pasos 4 y 3): Tavo los completa
        - Frase del combo excavadora + TALA 680: solo si Tavo confirma la compatibilidad técnica
        - Foto del TALA 680 "en minicargador" ("En obra"): confirmar si el 680 sirve para minicargador; si no, borrarla
        - MSG_GENERAL (aquí abajo): Tavo confirma qué mensaje usa Kommo para el botón general. No inventar otro.
        - Medición de Google Ads (GTM_ID o ADS_ID, aquí abajo) y verificación de Google Search Console (arriba)
 
-     STOCK  unidades disponibles de cada martillo. Cambie el número el mismo día que se vende una unidad y la página
-            actualiza sola la franja amarilla, los cuadritos, la tabla y el aviso de la portada.
-            1 = "Última unidad disponible" · 0 = "Agotado por ahora". El TALA 1000 es bajo pedido y no va aquí.
+     STOCK  disponibilidad de cada martillo. true = "Stock disponible · Entrega inmediata" · false = "Agotado por ahora".
+            La página actualiza sola la etiqueta de la foto, la franja amarilla, la tabla y el aviso de la portada.
 
      WHATSAPP  OFICIAL = mensajes oficiales de Kommo (documento "Optimización página web", 29 sep 2026).
                Copiarlos EXACTOS, sin cambiar ni una coma, tilde o mayúscula: si cambian, Kommo no reconoce al cliente.
@@ -69,7 +68,7 @@
        B) ADS_ID = 'AW-XXXXXXXXXX' y las etiquetas de conversión en ADS_CONV
           (Google Ads › Objetivos › Conversiones: la etiqueta es lo que va después de la barra en send_to). */
   var BORRADOR = false;
-  var STOCK = { 'tala-530': 3, 'tala-680': 5, 'tala-1400': 7, 'tala-1550': 3 };
+  var STOCK = { 'tala-530': true, 'tala-680': true, 'tala-1000': true, 'tala-1400': true, 'tala-1550': true };
   var OFICIAL = {
     'tala-530':  'Hola Tavo, vi en Google el martillo hidráulico Tala 530. Quiero información.',
     'tala-680':  'Hola Tavo, vi en Google el martillo hidráulico Tala 680. Quiero información.',
@@ -311,7 +310,7 @@
   .spec-card .ph{display:block;aspect-ratio:16/10;position:relative;overflow:hidden;border-bottom:1px solid #1e1e21;background:#111}
   .spec-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
   .spec-card:hover .ph img{transform:scale(1.035)}
-  /* "Nuevo · Solo 5 unidades": sobre el video en celular */
+  /* "TALA 680 · Stock disponible": sobre el video en celular */
   .hero-media .flag{display:inline-flex;align-items:center;gap:7px;
     font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
   .hero-media .flag::before{content:"";width:5px;height:5px;background:var(--accent);flex:none}
@@ -885,7 +884,8 @@
     transition:transform .2s,box-shadow .2s,background .2s}
   .fab:hover{transform:translateY(-2px);background:#1b9a4d;box-shadow:0 18px 36px -12px rgba(0,0,0,.5)}
   .fab .icon{width:20px;height:20px;stroke-width:1.8}
-  @media(max-width:520px){.fab{padding:13px}.fab span{display:none}}
+  /* en celular el botón flotante siempre muestra "Cotizar" (pedido del cliente, oct 2026) */
+  @media(max-width:520px){.fab{right:14px;bottom:14px;padding:12px 18px 12px 14px;font-size:.95rem}}
 
   /* WhatsApp: todo lo que abre WhatsApp va en verde, para reconocerlo de un vistazo */
   :root{--wa:#15803d;--wa-hover:#116932}
@@ -1255,6 +1255,52 @@
 
   /* Pie: datos legales */
   .legal{display:flex;flex-wrap:wrap;gap:4px 14px}
+
+  /* ================= MÁS CLICS A WHATSAPP (pedido del cliente, oct 2026) =================
+     Cada botón verde dice "Cotizar con un asesor por WhatsApp", tiene "Llamar" al lado y, justo debajo,
+     la nota "Respuesta en minutos · Lunes a domingo" (.wa-note). En las tarjetas el botón va inmediatamente
+     debajo del precio: columna derecha = precio + botones (.hm-buy); columna izquierda = especificaciones + qué incluye. */
+  .wa-cta,.hero .acts.wa-cta,.rbuy .acts.wa-cta,.steps-acts.wa-cta,.form-acts.wa-cta,.hm .buy .row.wa-cta,.row.wa-cta{
+    display:grid;grid-template-columns:minmax(0,max-content) max-content;justify-content:start;align-items:stretch;gap:6px 12px}
+  .wa-cta.solo{grid-template-columns:minmax(0,max-content)}
+  .wa-cta>.btn,.wa-cta>.q{justify-content:center;text-align:center}
+  .wa-cta>.link{align-self:center;justify-self:start}
+  .wa-note{grid-column:1;margin:0;font-size:.8rem;line-height:1.35;color:var(--text-3);text-align:center}
+  .hero .wa-note{color:#a5a5a0}
+  .detail .wa-note{color:var(--panel-dim)}
+  .cinfo .wa-cta{margin-top:26px}
+  .form-acts.wa-cta{align-items:center}
+  /* celular: botón verde a todo lo ancho, la nota debajo y después "Llamar" */
+  @media(max-width:560px){
+    .wa-cta,.hero .acts.wa-cta,.rbuy .acts.wa-cta,.steps-acts.wa-cta,.form-acts.wa-cta,.hm .buy .row.wa-cta,.row.wa-cta{grid-template-columns:minmax(0,1fr);width:100%}
+    .wa-cta>.call,.wa-cta>.link{order:2}
+    .wa-cta>.link{justify-self:center}
+    .rbuy .acts.wa-cta{flex:1 1 100%}
+    /* que "Cotizar con un asesor por WhatsApp" quepa en una línea dentro de la tarjeta */
+    .hm .row.wa-cta .q[href*="wa.me"]{padding:14px 10px;font-size:.875rem;gap:7px}
+    .hm .row.wa-cta .q .icon.wa-ic{width:18px;height:18px}
+  }
+  @media(min-width:981px){.hero .wa-note{color:#6f6f68}}
+
+  /* Tarjetas de martillo: precio y botones juntos */
+  .hm .hm-buy .buy,.hm.hot .hm-buy .buy{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:12px;padding:0;border:0;background:none}
+  .hm .hm-buy .buy .row{flex:none}
+  .hm .hm-buy .buy .row:not(.wa-cta){gap:8px 18px}
+  .row.wa-cta .q{min-height:46px}
+  @media(min-width:901px){
+    .hm .hm-mid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+    .hm .row.wa-cta .q[href*="wa.me"]{padding:12px 16px;font-size:.92rem}
+    .hm .hm-buy .buy,.hm.hot .hm-buy .buy{margin-top:10px;gap:8px}
+  }
+  @media(min-width:901px) and (max-width:1100px){.hm .hm-mid{grid-template-columns:minmax(0,1fr)}}
+  /* "Stock disponible · Entrega inmediata" cabe en la etiqueta de la foto (en dos líneas si hace falta) */
+  .st.hot,.hm .st.hot{white-space:normal;text-align:center;line-height:1.3}
+  @media(min-width:901px){.hm .ph img{padding-top:58px}}
+
+  /* Excavadoras: precio publicado y botones justo debajo */
+  .exc .deal{margin-top:auto}
+  .exc .deal .now small{letter-spacing:.1em}
+  .exc .buy{flex-direction:column;align-items:flex-start;gap:10px;margin-top:12px;padding-top:0;border-top:0}
 </style>
 </head>
 <body>
@@ -1340,8 +1386,8 @@
           <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
             <source src="video1.mp4" type="video/mp4">
           </video>
-          <!-- el video es del TALA 680: el aviso dice de qué martillo es (antes decía solo "Nuevo · Solo 5 unidades") -->
-          <span class="flag" data-stock="tala-680" data-fmt="short" data-pre="TALA 680 · ">TALA 680 · Solo 5 unidades</span>
+          <!-- el video es del TALA 680: el aviso dice de qué martillo es -->
+          <span class="flag" data-stock="tala-680" data-fmt="short" data-pre="TALA 680 · ">TALA 680 · Stock disponible</span>
         </div>
         <div class="hero-copy">
           <span class="eyebrow"><i></i> Tavo El Importador · Barranquilla<span class="eb-co">, Colombia</span></span>
@@ -1356,9 +1402,10 @@
               <a href="#tala-1550"><b>Tengo excavadora 27-36 t</b><span>TALA 1550 →</span></a>
             </div>
           </nav>
-          <div class="acts">
-            <a class="btn primary" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" data-ubic="portada" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+          <div class="acts wa-cta">
+            <a class="btn primary" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" data-ubic="portada" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
             <a class="btn call" href="tel:+573136763895" data-ubic="portada"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar ahora</a>
+            <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
           </div>
           <div class="trust">
             <div><svg class="icon"><use href="#i-shield"/></svg>Garantía real</div>
@@ -1396,7 +1443,7 @@
             <a class="sl zoomable" href="martillo4.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 530" tabindex="-1">
               <img src="martillo4.jpg" alt="Martillo hidráulico TALA 530 con base de acople para minicargador" width="1080" height="1350" loading="lazy" decoding="async">
             </a>
-            <span class="st hot" data-stock="tala-530" data-fmt="badge">¡Solo 3 unidades disponibles!</span>
+            <span class="st hot" data-stock="tala-530">Stock disponible · Entrega inmediata</span>
             <div class="dots">
               <button type="button" class="on" aria-label="Ver video" aria-pressed="true"></button>
               <button type="button" aria-label="Ver foto" aria-pressed="false"></button>
@@ -1404,8 +1451,7 @@
           </div>
           <div class="in">
             <div class="urg" role="note">
-              <span class="units" aria-hidden="true" data-stock="tala-530" data-fmt="units"><i></i><i></i><i></i></span>
-              <span class="ut"><b data-stock="tala-530" data-fmt="line">Solo 3 unidades disponibles</b><span>Incluye base instalada para minicargador</span></span>
+              <span class="ut"><b data-stock="tala-530">Stock disponible · Entrega inmediata</b><span>Incluye base instalada para minicargador</span></span>
             </div>
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 530</h3>
@@ -1419,21 +1465,26 @@
                   <dt>Diámetro del cincel</dt><dd>53 mm</dd>
                   <dt>Flujo de aceite</dt><dd>25 – 50 l/min</dd>
                 </dl>
+                <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
               </div>
-              <div class="deal">
-                <p class="was">Antes <s>$15.600.000</s></p>
-                <p class="now"><small>Ahora</small><b>$14.200.000</b><span>+ IVA</span></p>
-                <p class="save">Ahorras $1.400.000</p>
-                <p class="fac">Con factura (IVA 19%): $16.898.000</p>
-                <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
-              </div>
-            </div>
-            <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
-            <div class="buy">
-              <div class="row">
-                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%20530.%20Quiero%20informaci%C3%B3n." data-wa="tala-530" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar este martillo por WhatsApp</a>
-                <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
-                <a class="w" href="image_b00e9eac5d19e4939eceaf236d0c0caa.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+              <div class="hm-buy">
+                <div class="deal">
+                  <p class="was">Antes <s>$15.600.000</s></p>
+                  <p class="now"><small>Ahora</small><b>$14.900.000</b><span>+ IVA</span></p>
+                  <p class="save">Ahorras $700.000</p>
+                  <p class="fac">Con factura (IVA 19%): $17.731.000</p>
+                  <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
+                </div>
+                <div class="buy">
+                  <div class="row wa-cta">
+                    <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%20530.%20Quiero%20informaci%C3%B3n." data-wa="tala-530" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
+                    <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+                    <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+                  </div>
+                  <div class="row">
+                    <a class="w" href="image_b00e9eac5d19e4939eceaf236d0c0caa.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1447,7 +1498,7 @@
             <a class="sl zoomable" href="martillo1.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 680" tabindex="-1">
               <img src="martillo1.jpg" alt="Martillo hidráulico TALA 680" width="1080" height="1350" loading="lazy" decoding="async">
             </a>
-            <span class="st hot" data-stock="tala-680" data-fmt="badge">¡Solo 5 unidades disponibles!</span>
+            <span class="st hot" data-stock="tala-680">Stock disponible · Entrega inmediata</span>
             <div class="dots">
               <button type="button" class="on" aria-label="Ver video" aria-pressed="true"></button>
               <button type="button" aria-label="Ver foto" aria-pressed="false"></button>
@@ -1455,8 +1506,7 @@
           </div>
           <div class="in">
             <div class="urg" role="note">
-              <span class="units" aria-hidden="true" data-stock="tala-680" data-fmt="units"><i></i><i></i><i></i><i></i><i></i></span>
-              <span class="ut"><b data-stock="tala-680" data-fmt="line">Solo 5 unidades disponibles</b><span>Ideal para alcantarillado, acueducto y vías</span></span>
+              <span class="ut"><b data-stock="tala-680">Stock disponible · Entrega inmediata</b><span>Ideal para alcantarillado, acueducto y vías</span></span>
             </div>
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 680</h3>
@@ -1470,33 +1520,41 @@
                   <dt>Diámetro del cincel</dt><dd>68 mm</dd>
                   <dt>Flujo de aceite</dt><dd>40 – 70 l/min</dd>
                 </dl>
+                <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
               </div>
-              <div class="deal">
-                <p class="was">Antes <s>$11.700.000</s></p>
-                <p class="now"><small>Ahora</small><b>$10.500.000</b><span>+ IVA</span></p>
-                <p class="save">Ahorras $1.200.000</p>
-                <p class="fac">Con factura (IVA 19%): $12.495.000</p>
-                <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
-              </div>
-            </div>
-            <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
-            <div class="buy">
-              <div class="row">
-                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%20680.%20Quiero%20informaci%C3%B3n." data-wa="tala-680" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar este martillo por WhatsApp</a>
-                <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
-                <a class="w" href="image_a4a4286ec42523ea6e5447acf784ba63.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+              <div class="hm-buy">
+                <div class="deal">
+                  <p class="was">Antes <s>$11.700.000</s></p>
+                  <p class="now"><small>Ahora</small><b>$10.900.000</b><span>+ IVA</span></p>
+                  <p class="save">Ahorras $800.000</p>
+                  <p class="fac">Con factura (IVA 19%): $12.971.000</p>
+                  <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
+                </div>
+                <div class="buy">
+                  <div class="row wa-cta">
+                    <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%20680.%20Quiero%20informaci%C3%B3n." data-wa="tala-680" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
+                    <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+                    <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+                  </div>
+                  <div class="row">
+                    <a class="w" href="image_a4a4286ec42523ea6e5447acf784ba63.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="hm" id="tala-1000">
+        <article class="hm hot" id="tala-1000">
           <a class="ph zoomable" href="martillo3.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 1000">
             <img src="martillo3.jpg" alt="Martillo hidráulico TALA 1000" width="1080" height="1350" loading="lazy" decoding="async">
-            <span class="st wait">Disponible bajo pedido</span>
+            <span class="st hot" data-stock="tala-1000">Stock disponible · Entrega inmediata</span>
           </a>
           <div class="in">
-            <p class="kicker">Martillo hidráulico · Nuevo · Disponible bajo pedido</p>
+            <div class="urg" role="note">
+              <span class="ut"><b data-stock="tala-1000">Stock disponible · Entrega inmediata</b><span>Para excavadoras de 12 a 15 toneladas</span></span>
+            </div>
+            <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 1000</h3>
             <p class="subt"><b>Compatible con:</b> excavadoras de 12 a 15 toneladas, cualquier marca</p>
             <p class="desc">Ideal para demolición de estructuras, roca, obras civiles y vías.</p>
@@ -1508,22 +1566,26 @@
                   <dt>Diámetro del cincel</dt><dd>100 mm</dd>
                   <dt>Flujo de aceite</dt><dd>80 – 110 l/min</dd>
                 </dl>
+                <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
               </div>
-              <div class="deal">
-                <p class="was">Antes <s>$18.500.000</s></p>
-                <p class="now"><small>Ahora</small><b>$17.900.000</b><span>+ IVA</span></p>
-                <p class="save">Ahorras $600.000</p>
-                <p class="fac">Con factura (IVA 19%): $21.301.000</p>
-                <!-- bajo pedido: por eso no dice "Entrega inmediata" como los demás -->
-                <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Bajo pedido · Kit completo · Garantía 6 meses</p>
-              </div>
-            </div>
-            <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
-            <div class="buy">
-              <div class="row">
-                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%201000.%20Quiero%20informaci%C3%B3n." data-wa="tala-1000" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar este martillo por WhatsApp</a>
-                <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
-                <a class="w" href="523b3932f4c490fa7e7bfa47a5fc93a0_1_1778681504_3755.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+              <div class="hm-buy">
+                <div class="deal">
+                  <p class="was">Antes <s>$18.500.000</s></p>
+                  <p class="now"><small>Ahora</small><b>$17.900.000</b><span>+ IVA</span></p>
+                  <p class="save">Ahorras $600.000</p>
+                  <p class="fac">Con factura (IVA 19%): $21.301.000</p>
+                  <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
+                </div>
+                <div class="buy">
+                  <div class="row wa-cta">
+                    <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%201000.%20Quiero%20informaci%C3%B3n." data-wa="tala-1000" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
+                    <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+                    <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+                  </div>
+                  <div class="row">
+                    <a class="w" href="523b3932f4c490fa7e7bfa47a5fc93a0_1_1778681504_3755.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1532,12 +1594,11 @@
         <article class="hm hot" id="tala-1400">
           <a class="ph zoomable" href="martillo2.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 1400">
             <img src="martillo2.jpg" alt="Martillo hidráulico TALA 1400" width="1080" height="1350" loading="lazy" decoding="async">
-            <span class="st hot" data-stock="tala-1400" data-fmt="badge">¡Solo 7 unidades disponibles!</span>
+            <span class="st hot" data-stock="tala-1400">Stock disponible · Entrega inmediata</span>
           </a>
           <div class="in">
             <div class="urg" role="note">
-              <span class="units" aria-hidden="true" data-stock="tala-1400" data-fmt="units"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-              <span class="ut"><b data-stock="tala-1400" data-fmt="line">Solo 7 unidades disponibles</b><span>Rompe roca dura y concreto grueso</span></span>
+              <span class="ut"><b data-stock="tala-1400">Stock disponible · Entrega inmediata</b><span>Rompe roca dura y concreto grueso</span></span>
             </div>
             <p class="kicker">Martillo hidráulico · Nuevo</p>
             <h3>Martillo hidráulico TALA 1400</h3>
@@ -1551,21 +1612,26 @@
                   <dt>Diámetro del cincel</dt><dd>140 mm</dd>
                   <dt>Flujo de aceite</dt><dd>120 – 180 l/min</dd>
                 </dl>
+                <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
               </div>
-              <div class="deal">
-                <p class="was">Antes <s>$31.600.000</s></p>
-                <p class="now"><small>Ahora</small><b>$29.900.000</b><span>+ IVA</span></p>
-                <p class="save">Ahorras $1.700.000</p>
-                <p class="fac">Con factura (IVA 19%): $35.581.000</p>
-                <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
-              </div>
-            </div>
-            <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
-            <div class="buy">
-              <div class="row">
-                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%201400.%20Quiero%20informaci%C3%B3n." data-wa="tala-1400" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar este martillo por WhatsApp</a>
-                <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
-                <a class="w" href="7fb544a84ebf3e6606e246bc0898699d_1_1778681701_4459.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+              <div class="hm-buy">
+                <div class="deal">
+                  <p class="was">Antes <s>$31.600.000</s></p>
+                  <p class="now"><small>Ahora</small><b>$30.600.000</b><span>+ IVA</span></p>
+                  <p class="save">Ahorras $1.000.000</p>
+                  <p class="fac">Con factura (IVA 19%): $36.414.000</p>
+                  <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
+                </div>
+                <div class="buy">
+                  <div class="row wa-cta">
+                    <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%201400.%20Quiero%20informaci%C3%B3n." data-wa="tala-1400" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
+                    <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+                    <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+                  </div>
+                  <div class="row">
+                    <a class="w" href="7fb544a84ebf3e6606e246bc0898699d_1_1778681701_4459.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1574,12 +1640,11 @@
         <article class="hm hot" id="tala-1550">
           <a class="ph dk zoomable" href="martillo5.jpg" target="_blank" rel="noopener" aria-label="Ver foto del martillo TALA 1550">
             <img src="martillo5.jpg" alt="Martillo hidráulico TALA 1550, el más grande de la línea" width="1288" height="1600" loading="lazy" decoding="async">
-            <span class="st hot" data-stock="tala-1550" data-fmt="badge">¡Solo 3 unidades disponibles!</span>
+            <span class="st hot" data-stock="tala-1550">Stock disponible · Entrega inmediata</span>
           </a>
           <div class="in">
             <div class="urg" role="note">
-              <span class="units" aria-hidden="true" data-stock="tala-1550" data-fmt="units"><i></i><i></i><i></i></span>
-              <span class="ut"><b data-stock="tala-1550" data-fmt="line">Solo 3 unidades disponibles</b><span>El más potente de la línea, para canteras y minería</span></span>
+              <span class="ut"><b data-stock="tala-1550">Stock disponible · Entrega inmediata</b><span>El más potente de la línea, para canteras y minería</span></span>
             </div>
             <p class="kicker">Martillo hidráulico · Nuevo · El más grande de la línea</p>
             <h3>Martillo hidráulico TALA 1550</h3>
@@ -1593,22 +1658,27 @@
                   <dt>Diámetro del cincel</dt><dd>155 mm</dd>
                   <dt>Flujo de aceite</dt><dd>180 – 240 l/min</dd>
                 </dl>
+                <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
               </div>
-              <div class="deal">
-                <p class="was">Antes <s>$77.000.000</s></p>
-                <p class="now"><small>Ahora</small><b>$72.000.000</b><span>+ IVA</span></p>
-                <p class="save">Ahorras $5.000.000</p>
-                <p class="fac">Con factura (IVA 19%): $85.680.000</p>
-                <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
-              </div>
-            </div>
-            <p class="incl"><b>Qué incluye:</b> base de acople, 2 cinceles, 2 mangueras, caja de herramientas, pipeta de gas, garantía de 6 meses.</p>
-            <div class="buy">
-              <div class="row">
-                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%201550.%20Quiero%20informaci%C3%B3n." data-wa="tala-1550" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar este martillo por WhatsApp</a>
-                <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
-                <a class="more" href="martillo-hidraulico-tala-1550.html">Saber más<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-                <a class="w" href="image_d5c163bd06bf25e62ba40924513c99e6.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+              <div class="hm-buy">
+                <div class="deal">
+                  <p class="was">Antes <s>$77.000.000</s></p>
+                  <p class="now"><small>Ahora</small><b>$69.900.000</b><span>+ IVA</span></p>
+                  <p class="save">Ahorras $7.100.000</p>
+                  <p class="fac">Con factura (IVA 19%): $83.181.000</p>
+                  <p class="perks"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entrega inmediata · Kit completo · Garantía 6 meses</p>
+                </div>
+                <div class="buy">
+                  <div class="row wa-cta">
+                    <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20el%20martillo%20hidr%C3%A1ulico%20Tala%201550.%20Quiero%20informaci%C3%B3n." data-wa="tala-1550" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
+                    <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+                    <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+                  </div>
+                  <div class="row">
+                    <a class="more" href="martillo-hidraulico-tala-1550.html">Saber más<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    <a class="w" href="image_d5c163bd06bf25e62ba40924513c99e6.png" target="_blank" rel="noopener">Ficha técnica ↗</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1635,7 +1705,7 @@
           </thead>
           <tbody>
             <tr><th scope="row">Portador compatible</th><td>Minicargadores de 2.5 a 4.5 toneladas, cualquier marca</td><td>Pajaritas y miniretroexcavadoras de 4 a 7 toneladas, cualquier marca</td><td>Excavadoras de 12 a 15 toneladas, cualquier marca</td><td>Excavadoras de 20 a 25 toneladas, cualquier marca</td><td>Excavadoras de 27 a 36 toneladas, cualquier marca</td></tr>
-            <tr class="pr"><th scope="row">Precio ahora (+ IVA)</th><td>$14.200.000 <small>Antes <s>$15.600.000</s></small></td><td>$10.500.000 <small>Antes <s>$11.700.000</s></small></td><td>$17.900.000 <small>Antes <s>$18.500.000</s></small></td><td>$29.900.000 <small>Antes <s>$31.600.000</s></small></td><td>$72.000.000 <small>Antes <s>$77.000.000</s></small></td></tr>
+            <tr class="pr"><th scope="row">Precio ahora (+ IVA)</th><td>$14.900.000 <small>Antes <s>$15.600.000</s> · Ahorras $700.000</small><small>Con factura: $17.731.000</small></td><td>$10.900.000 <small>Antes <s>$11.700.000</s> · Ahorras $800.000</small><small>Con factura: $12.971.000</small></td><td>$17.900.000 <small>Antes <s>$18.500.000</s> · Ahorras $600.000</small><small>Con factura: $21.301.000</small></td><td>$30.600.000 <small>Antes <s>$31.600.000</s> · Ahorras $1.000.000</small><small>Con factura: $36.414.000</small></td><td>$69.900.000 <small>Antes <s>$77.000.000</s> · Ahorras $7.100.000</small><small>Con factura: $83.181.000</small></td></tr>
             <tr><th scope="row">Peso operativo</th><td>138 kg (side/top)<br>152 kg (box)</td><td>263 kg (side/top)<br>299 kg (box)</td><td>761 kg (side)<br>866 kg (top)</td><td>1.774 kg (side)<br>2.059 kg (top)<br>1.866 kg (box)</td><td>2.577 kg (side)<br>2.745 kg (top)<br>2.968 kg (box)</td></tr>
             <tr><th scope="row">Diámetro del cincel</th><td>53 mm</td><td>68 mm</td><td>100 mm</td><td>140 mm</td><td>155 mm</td></tr>
             <tr><th scope="row">Frecuencia de impacto</th><td>600 – 1000 golpes por minuto</td><td>500 – 900 golpes por minuto</td><td>400 – 650 golpes por minuto</td><td>350 – 500 golpes por minuto</td><td>300 – 450 golpes por minuto</td></tr>
@@ -1643,7 +1713,7 @@
             <tr><th scope="row">Presión de trabajo</th><td>90 – 120 kg/cm²</td><td>110 – 140 kg/cm²</td><td>150 – 170 kg/cm²</td><td>160 – 185 kg/cm²</td><td>170 – 200 kg/cm²</td></tr>
             <tr><th scope="row">Conexión de manguera</th><td>1/2 pulgada</td><td>1/2 pulgada</td><td>3/4 pulgada</td><td>1 pulgada</td><td>1 pulgada</td></tr>
             <tr><th scope="row">Incluye</th><td colspan="5">Base de acople, 2 puntas de cincel, 2 mangueras hidráulicas, caja de herramientas, pipeta de gas y garantía real de 6 meses.</td></tr>
-            <tr><th scope="row">Disponibilidad</th><td><span class="tag hot" data-stock="tala-530" data-fmt="line">Solo 3 unidades disponibles</span></td><td><span class="tag hot" data-stock="tala-680" data-fmt="line">Solo 5 unidades disponibles</span></td><td><span class="tag wait">Disponible bajo pedido</span></td><td><span class="tag hot" data-stock="tala-1400" data-fmt="line">Solo 7 unidades disponibles</span></td><td><span class="tag hot" data-stock="tala-1550" data-fmt="line">Solo 3 unidades disponibles</span></td></tr>
+            <tr><th scope="row">Disponibilidad</th><td><span class="tag hot" data-stock="tala-530">Stock disponible · Entrega inmediata</span></td><td><span class="tag hot" data-stock="tala-680">Stock disponible · Entrega inmediata</span></td><td><span class="tag hot" data-stock="tala-1000">Stock disponible · Entrega inmediata</span></td><td><span class="tag hot" data-stock="tala-1400">Stock disponible · Entrega inmediata</span></td><td><span class="tag hot" data-stock="tala-1550">Stock disponible · Entrega inmediata</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1652,7 +1722,7 @@
         <p class="cap">Cada barra marca el rango de máquina de un modelo. Pase el cursor para ver el tipo de portador.</p>
         <div class="bar-row" tabindex="0"><span class="lb">TALA 530</span><span class="rng-track"><span class="bar-fill" data-w="5" style="left:6.25%"></span></span><span class="val">2.5 – 4.5 t</span><span class="tip">Minicargadores de 2.5 a 4.5 toneladas, cualquier marca</span></div>
         <div class="bar-row" tabindex="0"><span class="lb">TALA 680</span><span class="rng-track"><span class="bar-fill" data-w="7.5" style="left:10%"></span></span><span class="val">4 – 7 t</span><span class="tip">Pajaritas y miniretroexcavadoras de 4 a 7 toneladas, cualquier marca</span></div>
-        <div class="bar-row" tabindex="0"><span class="lb">TALA 1000</span><span class="rng-track"><span class="bar-fill" data-w="7.5" style="left:30%"></span></span><span class="val">12 – 15 t</span><span class="tip">Excavadoras de 12 a 15 toneladas, cualquier marca · bajo pedido</span></div>
+        <div class="bar-row" tabindex="0"><span class="lb">TALA 1000</span><span class="rng-track"><span class="bar-fill" data-w="7.5" style="left:30%"></span></span><span class="val">12 – 15 t</span><span class="tip">Excavadoras de 12 a 15 toneladas, cualquier marca</span></div>
         <div class="bar-row" tabindex="0"><span class="lb">TALA 1400</span><span class="rng-track"><span class="bar-fill" data-w="12.5" style="left:50%"></span></span><span class="val">20 – 25 t</span><span class="tip">Excavadoras de 20 a 25 toneladas, cualquier marca</span></div>
         <div class="bar-row" tabindex="0"><span class="lb">TALA 1550</span><span class="rng-track"><span class="bar-fill" data-w="22.5" style="left:67.5%"></span></span><span class="val">27 – 36 t</span><span class="tip">Excavadoras de 27 a 36 toneladas, cualquier marca</span></div>
         <div class="bar-row axis" aria-hidden="true"><span></span><span class="ticks"><i style="left:0">0</i><i style="left:25%">10</i><i style="left:50%">20</i><i style="left:75%">30</i><i style="left:100%">40 t</i></span><span></span></div>
@@ -1695,9 +1765,10 @@
             <div><span class="n">Garantía</span><h4>1 año contra defecto de fábrica</h4></div>
           </div>
           <div class="rbuy">
-            <div class="acts">
-              <a class="btn primary" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20la%20retroexcavadora%20TALA%20RE4CX.%20Quiero%20informaci%C3%B3n." data-wa="re4cx" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+            <div class="acts wa-cta">
+              <a class="btn primary" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20la%20retroexcavadora%20TALA%20RE4CX.%20Quiero%20informaci%C3%B3n." data-wa="re4cx" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
               <a class="btn call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+              <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
             </div>
           </div>
         </div>
@@ -1760,11 +1831,17 @@
             <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
             <!-- Publicar SOLO si Tavo confirma que el TALA 680 es compatible con la CAT 305 (quitar la clase pend) -->
             <p class="combo-line pend" data-pend="Combo: solo si Tavo confirma que el TALA 680 sirve para la CAT 305">Llévela con martillo Tala 680 listo para trabajar: la línea húmeda ya está instalada.</p>
+            <div class="deal">
+              <p class="now"><small>Precio</small><b>$190.000.000</b><span>+ IVA</span></p>
+              <p class="fac">Con factura (IVA 19%): $226.100.000</p>
+            </div>
             <div class="buy">
-              <p class="fast"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Precio en minutos por WhatsApp</p>
-              <div class="row">
-                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20la%20excavadora%20CAT%20305.%20Quiero%20informaci%C3%B3n." data-wa="cat-305" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+              <div class="row wa-cta">
+                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20la%20excavadora%20CAT%20305.%20Quiero%20informaci%C3%B3n." data-wa="cat-305" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
                 <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+                <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+              </div>
+              <div class="row">
                 <a class="more" href="excavadora-cat-305.html">Ver página exclusiva<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
@@ -1819,11 +1896,15 @@
             <p class="warranty"><svg class="icon"><use href="#i-shield"/></svg>Garantía real de 3 meses en motor y sistema hidráulico</p>
             <!-- Publicar SOLO si Tavo confirma que el TALA 680 es compatible con la CAT 308 (8 t; el 680 es para 4 a 7 t) -->
             <p class="combo-line pend" data-pend="Combo: solo si Tavo confirma que el TALA 680 sirve para la CAT 308">Llévela con martillo Tala 680 listo para trabajar: la línea húmeda ya está instalada.</p>
+            <div class="deal">
+              <p class="now"><small>Precio</small><b>$265.000.000</b><span>+ IVA</span></p>
+              <p class="fac">Con factura (IVA 19%): $315.350.000</p>
+            </div>
             <div class="buy">
-              <p class="fast"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Precio en minutos por WhatsApp</p>
-              <div class="row">
-                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20la%20excavadora%20CAT%20308.%20Quiero%20informaci%C3%B3n." data-wa="cat-308" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+              <div class="row wa-cta">
+                <a class="q" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20vi%20en%20Google%20la%20excavadora%20CAT%20308.%20Quiero%20informaci%C3%B3n." data-wa="cat-308" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
                 <a class="q call" href="tel:+573136763895"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+                <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
               </div>
             </div>
           </div>
@@ -1866,17 +1947,10 @@
         <figure class="pend" data-pend="¿El TALA 680 sirve para minicargador? Si no, borrar esta foto"><a class="zoomable" href="imagen%20cliente%205.jpg" target="_blank" rel="noopener"><img src="imagen%20cliente%205.jpg" alt="Martillo TALA 680 en minicargador" width="750" height="993" loading="lazy" decoding="async"></a><figcaption><b>TALA 680</b>En minicargador</figcaption></figure>
         <figure><a class="zoomable" href="imagen%20cliente%206.jpg" target="_blank" rel="noopener"><img src="imagen%20cliente%206.jpg" alt="Martillo TALA 680 junto a miniexcavadora" width="720" height="935" loading="lazy" decoding="async"></a><figcaption><b>TALA 680</b>Listo para instalar en miniexcavadora</figcaption></figure>
       </div>
-      <!-- Opiniones de clientes: SOLO reales y con permiso del cliente (los 6 compradores de septiembre son la mejor fuente).
-           Frase corta + nombre + ciudad + martillo comprado + foto del equipo trabajando. Nunca inventadas.
-           Cuando estén: reemplace los textos entre [ ], agregue la foto y quite la clase pend. -->
-      <div class="opinions pend" data-pend="3 a 6 opiniones de clientes reales: frase corta, nombre, ciudad, martillo y foto del equipo trabajando">
-        <h3>Lo que dicen nuestros clientes</h3>
-        <div class="op-grid">
-          <figure><blockquote>[Frase corta del cliente 1]</blockquote><figcaption>[Nombre] · [Ciudad] · [Martillo comprado]</figcaption></figure>
-          <figure><blockquote>[Frase corta del cliente 2]</blockquote><figcaption>[Nombre] · [Ciudad] · [Martillo comprado]</figcaption></figure>
-          <figure><blockquote>[Frase corta del cliente 3]</blockquote><figcaption>[Nombre] · [Ciudad] · [Martillo comprado]</figcaption></figure>
-        </div>
-      </div>
+      <!-- Opiniones de clientes: la sección se quitó hasta que Tavo envíe testimonios reales (con permiso del cliente:
+           frase corta, nombre, ciudad, martillo comprado y foto del equipo trabajando). Nunca inventadas.
+           Para volver a ponerla: <div class="opinions"><h3>Lo que dicen nuestros clientes</h3><div class="op-grid">
+           y un <figure><blockquote>frase</blockquote><figcaption>nombre · ciudad · martillo</figcaption></figure> por cliente. -->
     </div>
   </section>
 
@@ -1919,14 +1993,15 @@
       <ol class="steps">
         <li><span class="sn" aria-hidden="true">1</span><h3>Escríbanos con el modelo de su máquina</h3><p>Por WhatsApp o por el formulario: marca, modelo y peso de su máquina.</p></li>
         <li><span class="sn" aria-hidden="true">2</span><h3>Reciba precio y disponibilidad en minutos</h3></li>
-        <li><span class="sn" aria-hidden="true">3</span><h3>Pague con o sin factura</h3>
-          <p class="pend" data-pend="Formas de pago: transferencia, anticipo, otras (dato de Tavo)">[Formas de pago: transferencia, anticipo, otras. Dato pendiente de Tavo]</p></li>
-        <li><span class="sn" aria-hidden="true">4</span><h3>Reciba su martillo en su obra</h3>
-          <p class="pend" data-pend="Envíos: a qué ciudades y en cuánto tiempo (dato de Tavo)">[A qué ciudades enviamos y en cuánto tiempo. Dato pendiente de Tavo]</p></li>
+        <!-- Pasos 3 y 4: Tavo completa las formas de pago y a qué ciudades se envía (y en cuánto tiempo).
+             Se escriben en un <p> debajo del título de cada paso, como en el paso 1. -->
+        <li><span class="sn" aria-hidden="true">3</span><h3>Pague con o sin factura</h3></li>
+        <li><span class="sn" aria-hidden="true">4</span><h3>Reciba su martillo en su obra</h3></li>
       </ol>
-      <div class="steps-acts">
-        <a class="btn primary" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" data-ubic="como_comprar" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+      <div class="steps-acts wa-cta">
+        <a class="btn primary" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" data-ubic="como_comprar" target="_blank" rel="noopener"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</a>
         <a class="btn call" href="tel:+573136763895" data-ubic="como_comprar"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</a>
+        <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
       </div>
     </div>
   </section>
@@ -1950,9 +2025,12 @@
           <div class="r"><svg class="icon"><use href="#i-clock"/></svg><div><div class="lb">Horario de atención</div><div class="vl">Lunes a domingo, 8:00 a.m. a 8:00 p.m.</div></div></div>
           <div class="r"><svg class="icon"><use href="#i-ig"/></svg><div><div class="lb">Instagram</div><div class="vl"><a href="https://www.instagram.com/tavoelimportador/" target="_blank" rel="noopener">@tavoelimportador</a></div></div></div>
           <div class="r"><svg class="icon"><use href="#i-truck"/></svg><div><div class="lb">Qué vendemos</div><div class="vl">Martillos hidráulicos, excavadoras y retroexcavadoras nuevas e importadas, con garantía real y entrega inmediata en Colombia</div></div></div>
-          <a class="btn primary wa" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" target="_blank" rel="noopener">
-            <svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Escribir por WhatsApp
-          </a>
+          <div class="wa-cta solo">
+            <a class="btn primary" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" target="_blank" rel="noopener">
+              <svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp
+            </a>
+            <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
+          </div>
         </div>
         <form id="fq">
           <div><label for="n">Nombre <span style="color:var(--accent-deep)">*</span></label><input id="n" name="nombre" autocomplete="name" required></div>
@@ -1962,7 +2040,7 @@
             <select id="p" name="equipo">
               <option value="tala-530">Martillo hidráulico TALA 530</option>
               <option value="tala-680">Martillo hidráulico TALA 680</option>
-              <option value="tala-1000">Martillo hidráulico TALA 1000 (disponible bajo pedido)</option>
+              <option value="tala-1000">Martillo hidráulico TALA 1000</option>
               <option value="tala-1400">Martillo hidráulico TALA 1400</option>
               <option value="tala-1550">Martillo hidráulico TALA 1550</option>
               <option value="cat-305">Excavadora Caterpillar 305.5E2</option>
@@ -1986,9 +2064,10 @@
             </select>
           </div>
           <div class="full"><label for="m">Mensaje</label><textarea id="m" name="mensaje" placeholder="Tipo y peso de su máquina, trabajo a realizar, ciudad de entrega…"></textarea></div>
-          <div class="form-acts">
-            <button class="btn primary" type="submit"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Enviar por WhatsApp</button>
+          <div class="form-acts wa-cta">
+            <button class="btn primary" type="submit"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar con un asesor por WhatsApp</button>
             <a class="link" href="tel:+573136763895" data-ubic="formulario">o llame al 313 676 3895</a>
+            <p class="wa-note">Respuesta en minutos · Lunes a domingo</p>
           </div>
           <p class="form-note"><svg class="icon"><use href="#i-shield"/></svg>Al enviar se abre WhatsApp con su mensaje listo. Solo tiene que tocar enviar.</p>
           <p id="ok" hidden>✓ Abrimos WhatsApp con su solicitud. Si no se abrió, escríbanos al 313 676 3895.</p>
@@ -2032,14 +2111,14 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <!-- Datos legales. NIT: dato pendiente de Tavo (cuando esté, escríbalo y quite la clase pend) -->
-      <span class="legal"><span>© 2026 GG Industrial Supply Colombia · Tavo El Importador</span><span class="pend" data-pend="NIT de GG Industrial Supply Colombia">NIT [dato pendiente]</span><span>Barranquilla, Atlántico, Colombia</span></span>
+      <!-- Datos legales. NIT: se vuelve a poner cuando Tavo lo envíe, como un <span> más dentro de "legal" -->
+      <span class="legal"><span>© 2026 GG Industrial Supply Colombia · Tavo El Importador</span><span>Barranquilla, Atlántico, Colombia</span></span>
       <button class="tt" id="tt" type="button">Cambiar tema</button>
     </div>
   </div>
 </footer>
 
-<a class="fab" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" data-ubic="flotante" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+<a class="fab" href="https://wa.me/573136763895?text=Hola%20Tavo%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20equipos." data-wa="general" data-ubic="flotante" target="_blank" rel="noopener" aria-label="Cotizar con un asesor por WhatsApp"><svg class="icon wa-ic" aria-hidden="true"><use href="#i-wa"/></svg><span>Cotizar</span></a>
 
 <script>
   var WA='https://wa.me/573136763895';
@@ -2128,21 +2207,18 @@
     });
   })();
 
-  /* Stock de cada martillo (STOCK, al inicio del archivo): franja amarilla, cuadritos, tabla y aviso de la portada.
+  /* Stock de cada martillo (STOCK, al inicio del archivo): etiqueta de la foto, franja amarilla, tabla y aviso de la portada.
      Va antes de armar las tarjetas de la tabla en celular, que copian estos textos. */
   (function(){
     var TXT={
-      badge:['¡Solo {n} unidades disponibles!','¡Última unidad disponible!','Agotado por ahora'],
-      line: ['Solo {n} unidades disponibles','Última unidad disponible','Agotado por ahora'],
-      short:['Solo {n} unidades','Última unidad','Agotado']
+      line: ['Stock disponible · Entrega inmediata','Agotado por ahora'],
+      short:['Stock disponible','Agotado']
     };
     [].forEach.call(document.querySelectorAll('[data-stock]'),function(el){
-      var n=STOCK[el.getAttribute('data-stock')];
-      if(typeof n!=='number'||n<0)return;
-      var fmt=el.getAttribute('data-fmt');
-      if(fmt==='units'){el.innerHTML=new Array(Math.min(n,12)+1).join('<i></i>');return;}
-      var t=TXT[fmt]||TXT.line;
-      el.textContent=(el.getAttribute('data-pre')||'')+(n>1?t[0].replace('{n}',n):n===1?t[1]:t[2]);
+      var k=el.getAttribute('data-stock');
+      if(!(k in STOCK))return;
+      var t=TXT[el.getAttribute('data-fmt')]||TXT.line;
+      el.textContent=(el.getAttribute('data-pre')||'')+(STOCK[k]?t[0]:t[1]);
     });
   })();
 
